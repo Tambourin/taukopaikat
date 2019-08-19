@@ -1,18 +1,26 @@
 import React, { useState, useEffect } from "react";
 import placesService from "./services/placesService";
-import ResultsList from "./components/ResultsList";
+import PlacesList from "./components/PlacesList";
+import SearchBox from "./components/SearchBox";
 
 const App = () => {
-  const [state, setState] = useState([]);
+  const [ places, setPlaces ] = useState([]);
+  const [ filter, setFilter ] = useState({
+    highway: "4",
+    doesNotBelongToChain: false,
+    isOpenTwentyFourHours: false
+  });
 
-  useEffect(() => {
-    placesService.getAll().then(results => setState(results));
+  useEffect(() => {    
+    placesService.getAll().then(results => {
+      setPlaces(results);      
+    });
   }, []);
 
   return (
     <div>
-      <ResultsList state={state} />
-      jeou
+      <SearchBox filter={filter} setFilter={setFilter} />
+      <PlacesList places={places} filter={filter} />
     </div>
   );
 };
