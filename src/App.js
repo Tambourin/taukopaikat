@@ -1,28 +1,29 @@
-import React, { useState, useEffect } from "react";
-import placesService from "./services/placesService";
+import React, { useEffect } from "react";
+import { connect } from "react-redux";
 import PlacesList from "./components/PlacesList";
 import SearchBox from "./components/SearchBox";
+import { Container } from "semantic-ui-react";
+import { initializePlaces } from "./reducers/placesReducer";
 
-const App = () => {
-  const [ places, setPlaces ] = useState([]);
-  const [ filter, setFilter ] = useState({
-    highway: "4",
-    doesNotBelongToChain: false,
-    isOpenTwentyFourHours: false
-  });
+
+const App = ({ initializePlaces, places }) => {
 
   useEffect(() => {    
-    placesService.getAll().then(results => {
-      setPlaces(results);      
-    });
-  }, []);
-
+    initializePlaces();    
+  }, [initializePlaces]);
+ 
   return (
-    <div>
-      <SearchBox filter={filter} setFilter={setFilter} />
-      <PlacesList places={places} filter={filter} />
-    </div>
+    <Container>
+      <SearchBox />   
+      <PlacesList />   
+    </Container>
   );
 };
 
-export default App;
+const mapStateToProps = (state) => {
+  return {
+    places: state.places
+  }
+}
+
+export default connect(mapStateToProps, { initializePlaces })(App);

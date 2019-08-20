@@ -1,36 +1,27 @@
 import React from "react";
+import { connect } from "react-redux";
 import PlaceCard from "./PlaceCard";
+import { Item } from "semantic-ui-react";
+import { getFilteredPlaces } from "../reducers/placesReducer";
 
-const style = {
-  width: "80%",
-  display: "flex",
-  backgroundColor: "tomato",
-  flexDirection: "column",
-  alignItems: "center",
-  padding: "20px",
-  margin: "auto"
-};
-
-const PlacesList = ({ places, filter }) => {
-  const placeFilter = place => {
-    return (
-      (place.highway === filter.highway || filter.highway === "all") &&
-      (place.services.doesNotBelongToChain === filter.doesNotBelongToChain ||
-        filter.doesNotBelongToChain === false) &&
-      (place.services.isOpenTwentyFourHours === filter.isOpenTwentyFourHours ||
-        filter.isOpenTwentyFourHours === false)
-    );
-  };
+const PlacesList = ({ places }) => {
+  if(!places) {
+    return null;
+  }
 
   return (
-    <div style={style}>
-      {places
-        .filter(place => placeFilter(place))
-        .map(place => (
+    <Item.Group divided>
+      {places.map(place => (
           <PlaceCard key={place.id} place={place} />
-        ))}
-    </div>
+      ))}
+    </Item.Group>
   );
 };
 
-export default PlacesList;
+const mapStateToProps = (state) => {
+  return {
+    places: getFilteredPlaces(state.places, state.filter)
+  }
+}
+
+export default connect(mapStateToProps)(PlacesList);
