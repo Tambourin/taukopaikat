@@ -1,20 +1,20 @@
 import React from "react";
 import { connect } from "react-redux";
-import { Checkbox, Segment, Dropdown } from "semantic-ui-react";
-import { setHighway } from "../reducers/filterReducer";
+import { Checkbox, Segment, Dropdown, Grid } from "semantic-ui-react";
+import { setHighway, setDoesNotBelongToChain } from "../reducers/filterReducer";
 
 const highwayOptions = [
   { value: "all", text:"Kaikki" },
-  { value: "1", text:"1", image: { avatar: true, src: "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d5/Route_E75-FIN.png/970px-Route_E75-FIN.png" }},
+  { value: "1", text:"1" },
   { value: "2", text:"2" },
   { value: "3", text:"3" },
   { value: "4", text:"4" },
   { value: "5", text:"5" }
 ]
 
-const SearchBox = ({ setHighway, filter }) => {   
+const SearchBox = ({ setHighway, setDoesNotBelongToChain, filter }) => {   
   return (
-    <Segment>
+    <Segment raised>
       Valtatie
       <Dropdown        
         fluid
@@ -25,10 +25,36 @@ const SearchBox = ({ setHighway, filter }) => {
       />
       
       <Segment>
-        Näiden pitää toteutua
-        <Checkbox label="Ei kuulu ketjuun" /> 
-        <Checkbox label="Auki 24 h" /> 
-        <Checkbox label="Leikkipaikka" />
+        Näiden pitää toteutua:
+        <Grid columns={2} divided>
+          <Grid.Row>
+            <Grid.Column>
+              <Checkbox 
+                label="Ei kuulu ketjuun"
+                checked={filter.doesNotBelongToChain}
+                onClick={setDoesNotBelongToChain} />
+            </Grid.Column>
+            <Grid.Column>
+              <Checkbox label="Auki 24 h" />
+            </Grid.Column>
+          </Grid.Row>
+          <Grid.Row>
+            <Grid.Column>
+              <Checkbox label="Leikkipaikka" />
+            </Grid.Column>
+            <Grid.Column>
+            <Checkbox label="Ravintola" />
+            </Grid.Column>
+          </Grid.Row>
+          <Grid.Row>
+            <Grid.Column>
+              <Checkbox label="Kahvila" />
+            </Grid.Column>
+            <Grid.Column>
+              <Checkbox label="Nähtävyys" />
+            </Grid.Column>
+          </Grid.Row>
+        </Grid>
       </Segment>
     </Segment>      
   );
@@ -40,4 +66,4 @@ const mapStateToProps = (state) => {
   }
 }
 
-export default connect(mapStateToProps, { setHighway })(SearchBox);
+export default connect(mapStateToProps, { setHighway, setDoesNotBelongToChain })(SearchBox);

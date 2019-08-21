@@ -1,6 +1,7 @@
 const SET_HIGHWAY = "SET_HIGHWAY";
+const SET_DOES_NOT_BELONG_TO_CHAIN = "SET_DOES_NOT_BELONG_TO_CHAIN";
 
-const initialFilter = {
+const defaultState = {
   highway: "all",
   doesNotBelongToChain: false,
   isOpenTwentyFourHours: false,
@@ -10,11 +11,12 @@ const initialFilter = {
   isAttraction: false
 }
 
-const filterReducer = (state=initialFilter, action) => {
+const filterReducer = (state=defaultState, action) => {
   switch(action.type) {
     case(SET_HIGHWAY):
-      console.log(action.highway);
-      return { ...state, highway: action.highway };
+      return ({ ...state, highway: action.highway });
+    case(SET_DOES_NOT_BELONG_TO_CHAIN):    
+      return ({...state, doesNotBelongToChain: !state.doesNotBelongToChain });
     default:
       return state;
   }
@@ -24,6 +26,12 @@ export const setHighway = (highway) => {
   return {
     type: SET_HIGHWAY,
     highway: highway
+  }
+}
+
+export const setDoesNotBelongToChain = () => {
+  return {
+    type: SET_DOES_NOT_BELONG_TO_CHAIN,
   }
 }
 

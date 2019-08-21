@@ -1,22 +1,25 @@
 import React from "react";
-import { Item, Icon, Button } from "semantic-ui-react";
+import { Icon, Button, Image, Card } from "semantic-ui-react";
+import RoadNumber from "../components/RoadNumber";
 
 const PlaceCard = ({ place }) => {
-  return (
-    <Item>      
+  return (    
+    <Card>        
       {
-        place.images.length > 0 ? (<Item.Image size='tiny' src={place.images[0]} alt="kuva taukopaikasta" />) : 
-        (<img src="https://static.thenounproject.com/png/340719-200.png" alt="Kuvaa ei saatavilla" />) 
-      }
-      <Item.Content>
-        <Item.Header>{place.name}</Item.Header>
-        <Item.Meta>Valtatie: ${place.highway}</Item.Meta>           
+        place.images.length > 0 ? (<Image wrapped ui={false} src={place.images[0]} alt="kuva taukopaikasta" />) : 
+        (<Image src="https://static.thenounproject.com/png/340719-200.png" alt="Kuvaa ei saatavilla" />) 
+      }  
+      <Card.Content>        
+        <Card.Header>{place.name}</Card.Header>      
+      </Card.Content>
+      <Card.Content extra>
+        <RoadNumber roadNumber={place.highway} floated="left"/>
         <Button icon floated="right" labelPosition='left'>
           <Icon name="like" />
           Äänestä parhaaksi
         </Button>
-      </Item.Content>
-    </Item>
+      </Card.Content>
+    </Card>
   )
 }
 
