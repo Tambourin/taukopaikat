@@ -8,9 +8,9 @@ import road5 from "../static/road-numbers/5.png";
 
 const roadNumbers = [ road1, road2, road3, road4, road5 ];
 
-const RoadNumber = ({ roadNumber, floated }) => {   
+const RoadNumber = ({ roadNumber }) => {   
   return (
-    <Image floated={floated} size="mini" src={roadNumbers[roadNumber - 1]} />      
+    <Image verticalAlign='middle' size="mini" src={roadNumbers[roadNumber - 1]} />      
   )
 }
 

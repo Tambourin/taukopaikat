@@ -1,7 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import PlaceCard from "./PlaceCard";
-import { Card, Segment, Loader } from "semantic-ui-react";
+import { Card, Segment, Loader, Label } from "semantic-ui-react";
 import { getFilteredPlaces } from "../reducers/placesReducer";
 
 const PlacesList = ({ places, isLoading }) => {
@@ -17,7 +17,7 @@ const PlacesList = ({ places, isLoading }) => {
   }
 
   return (
-    <Segment>
+    <Segment>      
       <Card.Group centered stackable>
         {places.map(place => (
           <PlaceCard key={place.id} place={place} />

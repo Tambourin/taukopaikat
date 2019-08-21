@@ -7,10 +7,12 @@ import './index.css';
 import App from './App';
 import placesReducer from "./reducers/placesReducer";
 import filterReducer from "./reducers/filterReducer";
+import votesReducer from "./reducers/votesReducer";
 
 const reducer = combineReducers({
   places: placesReducer,
-  filter: filterReducer
+  filter: filterReducer,
+  votes: votesReducer
 });
 const store = createStore(reducer, applyMiddleware(thunk));
 
