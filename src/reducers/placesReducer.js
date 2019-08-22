@@ -14,11 +14,9 @@ const placesReducer = (state = defaultState, action) => {
   switch (action.type) {
     case INIT_PLACES:
       return { ...state, data: action.places };
-    case START_LOADING:
-      console.log("start");
+    case START_LOADING:      
       return { ...state, isLoading: true };
-    case LOADING_DONE:
-      console.log("done");
+    case LOADING_DONE:     
       return { ...state, isLoading: false };
     case UPDATE_PLACE:
       return {
@@ -57,37 +55,39 @@ const updatePlace = place => {
   }
 }
 
-export const votePlace = (place) => {
-  return async dispatch => {
-    const previouslyVotedId = window.localStorage.getItem(place.highway);
-    if(previouslyVotedId === place.id.toString()) {
-      return null;
-    }    
-    
-
-    const previouslyVotedPlace = await placesService.getOneById(previouslyVotedId);  
-    const decreasedPlace = await placesService.update({
-      ...previouslyVotedPlace,
-      votes: previouslyVotedPlace.votes - 1
-    });
-    dispatch(updatePlace(decreasedPlace));        
-    
-    const updatedPlace = await placesService.update({
-      ...place, 
+export const addVoteToPlace = (place) => {
+  return async (dispatch) => {
+    const updatedPlace = {
+      ...place,
       votes: place.votes + 1
-    });    
-    window.localStorage.setItem(place.highway, place.id);
-    
-    dispatch(updatePlace(updatedPlace));
-    
-  }
+    }
+    const response = await placesService.update(updatedPlace);
+    dispatch(updatePlace(response));
+    return response;
+  }  
+}
+
+export const removeVoteFromPlace = (place) => {
+  return async dispatch => {
+    const updatedPlace = {
+      ...place,
+      votes: place.votes - 1
+    }
+    const response = await placesService.update(updatedPlace);
+    dispatch(updatePlace(response));
+    return response;
+  }  
 }
 
 export const initializePlaces = () => {
   return async dispatch => {
     dispatch(startLoading());
-    const places = await placesService.getAll();
-    dispatch(initPlaces(places));
+    try{
+      const places = await placesService.getAll();
+      dispatch(initPlaces(places));
+    } catch {
+      console.log("InitializePlaces: Tietojen lataus ei onnistunut");
+    }    
     dispatch(loadingDone());
   };
 };

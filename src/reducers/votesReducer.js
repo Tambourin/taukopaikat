@@ -1,29 +1,53 @@
-const SET_VOTE = "SET_VOTE";
+import votesService from "../services/votesService";
 
-const defaultState = {
-  1: "2",
-  2: "2",
-  3: "2",
-  4: "2",
-  5: "2",
-  6: "2",
-}
+const ADD_VOTE = "ADD_VOTE";
+const REMOVE_VOTE = "REMOVE_VOTE";
+const INIT_VOTES = "INIT_VOTES";
 
-const votesReducer = (state=defaultState, action) => {
-  switch(action.type) {
-    case(SET_VOTE):
-     return ({ ...state, [action.highway]: action.place });
+const votesReducer = (state=[], action) => {
+  switch (action.type) {
+    case INIT_VOTES:
+      return action.votes;
+    case ADD_VOTE:
+      return [ ...state, action.place ];
+    case REMOVE_VOTE:
+      return state.filter(place => place.id !== action.id);
     default:
-      return state; 
+      return state;
   }
 }
 
-export const setVote = (place) => {
-  return {
-    type: SET_VOTE,
-    highway: place.highway,
-    place: place.placeId
+export const initializeVotes = () => {
+  let votes = votesService.getAll();
+  if (votes === null) {
+    votes = [];
+  }  
+  return dispatch => {
+    dispatch({
+      type: INIT_VOTES,
+      votes: votes
+    });
   }
 }
+
+export const addToVoted = (place) => {
+  return dispatch => { 
+      votesService.save(place);
+      dispatch({
+        type: ADD_VOTE,
+        place: place
+      });        
+  }  
+}
+
+export const removeFromVoted = (place) => {
+  return dispatch => {
+    votesService.remove(place);
+    dispatch({
+      type: REMOVE_VOTE,
+      id: place.id
+    });
+  }  
+} 
 
 export default votesReducer;

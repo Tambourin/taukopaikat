@@ -1,26 +1,34 @@
 import React from "react";
 import { connect } from "react-redux";
 import { Icon, Button } from "semantic-ui-react";
-import { votePlace } from "../reducers/placesReducer";
+import { addVoteToPlace, removeVoteFromPlace } from "../reducers/placesReducer";
+import { addToVoted, removeFromVoted } from "../reducers/votesReducer";
 
-const VoteButton = ({ place, votePlace, votes }) => {
-  const executeVote = () => {
-    votePlace(place);
-  }
-  console.log(votes[place.highway]);
+const VoteButton = ({ place, votes, addVoteToPlace, removeVoteFromPlace, addToVoted, removeFromVoted }) => {
+  console.log("place", place.name, place.votes);
   
-  if(votes[place.highway] !== place.id.toString()) {
+  const executeVote = async () => {
+    const placeVotedOnSameHighway = votes.find(p => p.highway === place.highway);     
+    if (placeVotedOnSameHighway) { 
+      const removedPlace = await removeVoteFromPlace(placeVotedOnSameHighway);      
+      removeFromVoted(removedPlace);            
+    }
+    const updatedPlace = await addVoteToPlace(place);
+    addToVoted(updatedPlace);    
+  } 
+  
+  if (votes.find(p => p.id === place.id)) {
     return (
-      <Button onClick={executeVote} icon floated="right" labelPosition='left'>      
-       <Icon name="like" />Äänestä parhaaksi      
-    </Button>
+      <div>
+      <Icon name="like" color="red"/>{`Olet äänestänyt tätä paikkaa ${place.highway}-tien parhaaksi`}
+      </div>
     );
   }
-
+  
   return (
-    <div>
-    <Icon name="like" color="red"/>{`Olet äänestänyt tätä paikkaa ${place.highway}-tien parhaaksi`}
-    </div>
+    <Button onClick={executeVote} icon floated="right" labelPosition='left'>      
+     <Icon name="like" />Äänestä parhaaksi      
+  </Button>
   );
 }
 
@@ -30,4 +38,4 @@ const mapStateToProps = state => {
   }
 } 
 
-export default connect(mapStateToProps, { votePlace })(VoteButton);
+export default connect(mapStateToProps, { addVoteToPlace, removeVoteFromPlace, addToVoted, removeFromVoted })(VoteButton);

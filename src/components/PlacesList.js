@@ -7,8 +7,8 @@ import { getFilteredPlaces } from "../reducers/placesReducer";
 const PlacesList = ({ places, isLoading }) => {
   if (isLoading) {
     return <Loader active />;
-  }
-  if (!places || places.length === 0) {
+  }  
+  if (places.length === 0) {
     return (
       <Segment>
         <p>Haku ei tuottanut tuloksia</p>

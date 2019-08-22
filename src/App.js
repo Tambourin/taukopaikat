@@ -5,11 +5,16 @@ import SearchBox from "./components/SearchBox";
 import Intro from "./components/Intro";
 import { Container } from "semantic-ui-react";
 import { initializePlaces } from "./reducers/placesReducer";
+import { initializeVotes } from "./reducers/votesReducer";
 
-const App = ({ initializePlaces }) => {
-  useEffect(() => {    
+const App = ({ initializePlaces, initializeVotes }) => {
+  useEffect(() => {   
     initializePlaces();    
   }, [initializePlaces]);
+
+  useEffect(() => {    
+    initializeVotes();    
+  }, [initializeVotes]);
  
   return (
     <Container>
@@ -20,4 +25,4 @@ const App = ({ initializePlaces }) => {
   );
 };
 
-export default connect(null, { initializePlaces })(App);
+export default connect(null, { initializePlaces, initializeVotes })(App);

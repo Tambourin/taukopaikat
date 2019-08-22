@@ -13,6 +13,7 @@ const highwayOptions = [
 ]
 
 const SearchBox = ({ setHighway, setDoesNotBelongToChain, filter }) => {   
+  console.log("SEtHighWay:", setHighway);
   return (
     <Segment raised>
       Valtatie

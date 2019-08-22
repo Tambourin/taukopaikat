@@ -11,8 +11,8 @@ import votesReducer from "./reducers/votesReducer";
 
 const reducer = combineReducers({
   places: placesReducer,
+  votes: votesReducer,
   filter: filterReducer,
-  votes: votesReducer
 });
 const store = createStore(reducer, applyMiddleware(thunk));
 
