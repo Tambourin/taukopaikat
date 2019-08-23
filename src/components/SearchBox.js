@@ -1,7 +1,14 @@
 import React from "react";
 import { connect } from "react-redux";
 import { Checkbox, Segment, Dropdown, Grid } from "semantic-ui-react";
-import { setHighway, setDoesNotBelongToChain } from "../reducers/filterReducer";
+import { 
+  setHighway, 
+  setDoesNotBelongToChain,
+  setIsOpenTwentyFourHours,
+  setHasPlayground,
+  setHasRestaurant,
+  setHasCoffee,
+  setIsAttraction } from "../reducers/filterReducer";
 
 const highwayOptions = [
   { value: "all", text:"Kaikki" },
@@ -12,7 +19,7 @@ const highwayOptions = [
   { value: "5", text:"5" }
 ]
 
-const SearchBox = ({ setHighway, setDoesNotBelongToChain, filter }) => {   
+const SearchBox = ({ setHighway, filter, ...props }) => {   
   console.log("SEtHighWay:", setHighway);
   return (
     <Segment raised>
@@ -33,26 +40,41 @@ const SearchBox = ({ setHighway, setDoesNotBelongToChain, filter }) => {
               <Checkbox 
                 label="Ei kuulu ketjuun"
                 checked={filter.doesNotBelongToChain}
-                onClick={setDoesNotBelongToChain} />
+                onClick={props.setDoesNotBelongToChain} />
             </Grid.Column>
             <Grid.Column>
-              <Checkbox label="Auki 24 h" />
-            </Grid.Column>
-          </Grid.Row>
-          <Grid.Row>
-            <Grid.Column>
-              <Checkbox label="Leikkipaikka" />
-            </Grid.Column>
-            <Grid.Column>
-            <Checkbox label="Ravintola" />
+              <Checkbox 
+                label="Auki 24 h"
+                checked={filter.isOpenTwentyFourHours}
+                onClick={props.setIsOpenTwentyFourHours} />
             </Grid.Column>
           </Grid.Row>
           <Grid.Row>
             <Grid.Column>
-              <Checkbox label="Kahvila" />
+              <Checkbox 
+                label="Leikkipaikka"
+                checked={filter.hasPlayground}
+                onClick={props.setHasPlayground} />
             </Grid.Column>
             <Grid.Column>
-              <Checkbox label="Nähtävyys" />
+            <Checkbox 
+              label="Ravintola" 
+              checked={filter.hasRestaurant}
+              onClick={props.setHasRestaurant}/>
+            </Grid.Column>
+          </Grid.Row>
+          <Grid.Row>
+            <Grid.Column>
+              <Checkbox 
+                label="Kahvila" 
+                checked={filter.hasCoffee}
+                onClick={props.setHasCoffee}/>
+            </Grid.Column>
+            <Grid.Column>
+              <Checkbox 
+                label="Nähtävyys"
+                checked={filter.isAttraction}
+                onClick={props.setIsAttraction} />
             </Grid.Column>
           </Grid.Row>
         </Grid>
@@ -67,4 +89,12 @@ const mapStateToProps = (state) => {
   }
 }
 
-export default connect(mapStateToProps, { setHighway, setDoesNotBelongToChain })(SearchBox);
+export default connect(mapStateToProps, { 
+  setHighway, 
+  setDoesNotBelongToChain,
+  setIsOpenTwentyFourHours,
+  setHasPlayground,
+  setHasRestaurant,
+  setHasCoffee,
+  setIsAttraction
+})(SearchBox);

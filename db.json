@@ -1,0 +1,61 @@
+{
+  "places": [
+    {
+      "id": 1,
+      "name": "Vaskikello",
+      "votes": 36,
+      "highway": "4",
+      "address": "Vaskikellontie 420 86800 Pyhäsalmi",
+      "images": [
+        "https://vaskikello.fi/img/1527505060096913.png"
+      ],
+      "description": "Vaikka Vaskikellon ravintola on tuttavallisen pieni, 82 paikkainen, olemme palvelleet sesonkiaikoina tuhansia asiakkaita päivässä, puoli miljoonaa vuodessa. Kesällä ulkoterassilla on tilaa. ",
+      "services": {
+        "doesNotBelongToChain": true,
+        "isOpenTwentyFourHours": false,
+        "hasPlayground": false,
+        "hasRestaurant": true,
+        "hasCofee": true,
+        "isAttraction": true
+      }
+    },
+    {
+      "id": 2,
+      "name": "Abc Hirvaskangas",
+      "votes": 50,
+      "highway": "4",
+      "address": "Vaskikellontie 420 86800 Pyhäsalmi",
+      "images": [
+        "https://sipa.s-palvelut.fi/?url=https%3A%2F%2Flaari.sok.fi%2Fdocuments%2F767684%2F904471%2FABC_Hirvaskangas_aseman_kuva.jpg%2Fc5b5c855-caab-4e4b-9a6e-883932dccbf7%3Ft%3D1387287133631&maxWidth=768&checksum=369aed3172bd93a2a8e3df6cd6b28192"
+      ],
+      "description": "Hirvaskangas on tuttu ja legendaarinen pysähdyspaikka Nelostien kulkijoille. ABC Hirvaskangas sijaitsee 33 kilometriä Jyväskylästä pohjoiseen Äänekoskella Nelostien (E75) varrella. Tarjoamme viihtyisät tilat ja monipuoliset palvelut.",
+      "services": {
+        "doesNotBelongToChain": false,
+        "isOpenTwentyFourHours": true,
+        "hasPlayground": true,
+        "hasRestaurant": true,
+        "hasCofee": true,
+        "isAttraction": false
+      }
+    },
+    {
+      "id": 3,
+      "name": "Design Hill",
+      "votes": "Number11111111",
+      "highway": "1",
+      "address": "Vaskiontie 41824800 Halikko",
+      "images": [
+        "https://d42y9z8h631ib.cloudfront.net/kuvat/jpg/1600x400/444971.jpg"
+      ],
+      "description": "String",
+      "services": {
+        "doesNotBelongToChain": true,
+        "isOpenTwentyFourHours": false,
+        "hasPlayground": false,
+        "hasRestaurant": true,
+        "hasCofee": true,
+        "isAttraction": false
+      }
+    }
+  ]
+}

@@ -1,13 +1,16 @@
 import React from "react";
 import { connect } from "react-redux";
-import PlaceCard from "./PlaceCard";
-import { Card, Segment, Loader, Label } from "semantic-ui-react";
+import PlaceCard from "./PlaceCard/PlaceCard";
+import { Card, Segment, Loader} from "semantic-ui-react";
 import { getFilteredPlaces } from "../reducers/placesReducer";
 
-const PlacesList = ({ places, isLoading }) => {
+const PlacesList = ({ places, isLoading, loadingErrored }) => {
   if (isLoading) {
     return <Loader active />;
   }  
+  if (loadingErrored) {
+    return <p>Tietojen lataus epäonnistui</p>
+  }
   if (places.length === 0) {
     return (
       <Segment>
@@ -30,7 +33,8 @@ const PlacesList = ({ places, isLoading }) => {
 const mapStateToProps = state => {
   return {
     places: getFilteredPlaces(state.places.data, state.filter),
-    isLoading: state.places.isLoading
+    isLoading: state.places.isLoading,
+    loadingErrored: state.places.loadingErrored
   };
 };
 

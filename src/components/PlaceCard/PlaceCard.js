@@ -1,0 +1,24 @@
+import React from "react";
+import { Image, Card } from "semantic-ui-react";
+import RoadNumber from "../RoadNumber";
+import VoteButton from "../VoteButton";
+
+const PlaceCard = ({ place }) => {
+  return (    
+    <Card>            
+      {place.images.length > 0 
+        ? (<Image wrapped ui={false} src={place.images[0]} alt="kuva taukopaikasta" />) 
+        : (<Image src="https://static.thenounproject.com/png/340719-200.png" alt="Kuvaa ei saatavilla" />) 
+      }        
+      <Card.Content>        
+        <Card.Header>{place.name}<RoadNumber roadNumber={place.highway} floated="right"/></Card.Header>      
+      </Card.Content>
+      <Card.Content extra>
+        
+        <VoteButton place={place} />
+      </Card.Content>
+    </Card>
+  )
+}
+
+export default PlaceCard;
