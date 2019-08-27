@@ -1,6 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
-import { Icon, Button } from "semantic-ui-react";
+import { Icon, Button, Label } from "semantic-ui-react";
 import { addVoteToPlace, removeVoteFromPlace } from "../reducers/placesReducer";
 import { addToVoted, removeFromVoted } from "../reducers/votesReducer";
 
@@ -29,11 +29,17 @@ const VoteButton = ({ place, votes, addVoteToPlace, removeVoteFromPlace, addToVo
       </div>
     );
   }
-  
+
   return (
+    <Button as="div" labelPosition='right'>
     <Button onClick={executeVote} icon floated="right" labelPosition='left'>      
-     <Icon name="like" />Äänestä parhaaksi      
-  </Button>
+     <Icon name="like" />Äänestä parhaaksi
+     </Button>
+     <Label as='a' basic pointing='left'>
+      {place.votes}
+      </Label>
+    
+    </Button>
   );
 }
 

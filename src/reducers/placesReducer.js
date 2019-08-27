@@ -102,20 +102,4 @@ export const initializePlaces = () => {
   };
 };
 
-export const getFilteredPlaces = (places, filter) => {
-  const placesFilter = place => {
-    if ((filter.highway !== place.highway && filter.highway !== "all")
-    || (filter.doesNotBelongToChain === true && place.services.doesNotBelongToChain === false)
-    || (filter.isOpenTwentyFourHours === true && place.services.isOpenTwentyFourHours === false)
-    || (filter.hasPlayground === true && place.services.hasPlayground === false)
-    || (filter.hasRestaurant === true && place.services.hasRestaurant === false)
-    || (filter.hasCofee === true && place.services.hasCofee === false)
-    || (filter.isAttraction === true && place.services.isAttraction === false)) {
-      return false;
-    }
-    return true;
-  };
-  return places.filter(place => placesFilter(place));
-};
-
 export default placesReducer;

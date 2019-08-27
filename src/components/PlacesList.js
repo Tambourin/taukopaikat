@@ -1,8 +1,8 @@
 import React from "react";
 import { connect } from "react-redux";
+import { Card, Segment, Loader } from "semantic-ui-react";
 import PlaceCard from "./PlaceCard/PlaceCard";
-import { Card, Segment, Loader} from "semantic-ui-react";
-import { getFilteredPlaces } from "../reducers/placesReducer";
+import { getFilteredPlaces, orderByVotes } from "../reducers/placesSelectors";
 
 const PlacesList = ({ places, isLoading, loadingErrored }) => {
   if (isLoading) {
@@ -18,21 +18,24 @@ const PlacesList = ({ places, isLoading, loadingErrored }) => {
       </Segment>
     );
   }
-
+  
   return (
-    <Segment>      
+    <>
+   
+    <Segment>          
       <Card.Group centered stackable>
         {places.map(place => (
           <PlaceCard key={place.id} place={place} />
         ))}
       </Card.Group>
     </Segment>
+    </>
   );
 };
 
 const mapStateToProps = state => {
   return {
-    places: getFilteredPlaces(state.places.data, state.filter),
+    places: orderByVotes(getFilteredPlaces(state.places.data, state.filter)),
     isLoading: state.places.isLoading,
     loadingErrored: state.places.loadingErrored
   };

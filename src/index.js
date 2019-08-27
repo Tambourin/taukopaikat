@@ -8,11 +8,13 @@ import App from './App';
 import placesReducer from "./reducers/placesReducer";
 import filterReducer from "./reducers/filterReducer";
 import votesReducer from "./reducers/votesReducer";
+import viewOptionsReducer from "./reducers/viewOptionsReducer";
 
 const reducer = combineReducers({
   places: placesReducer,
   votes: votesReducer,
   filter: filterReducer,
+  viewOptions: viewOptionsReducer
 });
 const store = createStore(reducer, applyMiddleware(thunk));
 
