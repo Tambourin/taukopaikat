@@ -1,15 +1,10 @@
 import React from "react";
-import { connect } from "react-redux";
-import { Card, Segment, Loader } from "semantic-ui-react";
+import { Card, Segment } from "semantic-ui-react";
 import PlaceCard from "./PlaceCard/PlaceCard";
-import { getFilteredPlaces, orderByVotes } from "../reducers/placesSelectors";
 
-const PlacesList = ({ places, isLoading, loadingErrored }) => {
-  if (isLoading) {
-    return <Loader active />;
-  }  
-  if (loadingErrored) {
-    return <p>Tietojen lataus epäonnistui</p>
+const PlacesList = ({ places }) => {
+  if (!places) {
+    return null;
   }
   if (places.length === 0) {
     return (
@@ -20,8 +15,7 @@ const PlacesList = ({ places, isLoading, loadingErrored }) => {
   }
   
   return (
-    <>
-   
+    <>   
     <Segment>          
       <Card.Group centered stackable>
         {places.map(place => (
@@ -33,12 +27,4 @@ const PlacesList = ({ places, isLoading, loadingErrored }) => {
   );
 };
 
-const mapStateToProps = state => {
-  return {
-    places: orderByVotes(getFilteredPlaces(state.places.data, state.filter)),
-    isLoading: state.places.isLoading,
-    loadingErrored: state.places.loadingErrored
-  };
-};
-
-export default connect(mapStateToProps)(PlacesList);
+export default PlacesList;

@@ -1,11 +1,12 @@
 import React, { useEffect } from "react";
 import { connect } from "react-redux";
-import PlacesList from "./components/PlacesList";
 import SearchBox from "./components/SearchBox";
 import Intro from "./components/Intro/Intro";
 import { Container } from "semantic-ui-react";
 import { initializePlaces } from "./reducers/placesReducer";
 import { initializeVotes } from "./reducers/votesReducer";
+import PlacesView from "./components/PlacesView";
+
 
 const App = ({ initializePlaces, initializeVotes }) => {
   useEffect(() => {   
@@ -19,8 +20,8 @@ const App = ({ initializePlaces, initializeVotes }) => {
   return (
     <Container>
       <Intro />
-      <SearchBox />   
-      <PlacesList />   
+      <SearchBox /> 
+      <PlacesView />
     </Container>
   );
 };
