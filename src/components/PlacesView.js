@@ -3,9 +3,9 @@ import { connect } from "react-redux";
 import { Loader, Segment } from "semantic-ui-react";
 import PlacesList from "./PlacesList";
 import PlacesMap from "./PlacesMap";
-import { getFilteredPlaces, orderByVotes } from "../reducers/placesSelectors";
+import { getFilteredPlaces, orderPlaces } from "../reducers/placesSelectors";
 
-const PlacesView = ({ showOnMap, places, isLoading, loadingErrored }) => {
+const PlacesView = ({ showOnMap, places, isLoading, loadingErrored, arrangeBy }) => {
   if (isLoading) {
     return (<Segment><Loader active /></Segment>);
   }
@@ -18,7 +18,7 @@ const PlacesView = ({ showOnMap, places, isLoading, loadingErrored }) => {
       {showOnMap ? (
         <PlacesMap places={places} />
       ) : (
-        <PlacesList places={places} />
+        <PlacesList places={orderPlaces(places, arrangeBy)} />
       )}
     </div>
   );
@@ -26,8 +26,9 @@ const PlacesView = ({ showOnMap, places, isLoading, loadingErrored }) => {
 
 const mapStateToProps = state => {
   return {
-    places: orderByVotes(getFilteredPlaces(state.places.data, state.filter)),
+    places: getFilteredPlaces(state.places.data, state.filter),
     showOnMap: state.viewOptions.showOnMap,
+    arrangeBy: state.viewOptions.arrangeBy,
     isLoading: state.places.isLoading,
     loadingErrored: state.places.loadingErrored
   };

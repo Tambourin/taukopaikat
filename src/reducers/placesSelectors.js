@@ -1,3 +1,5 @@
+import { arrangeOptions } from "./viewOptionsReducer";
+
 export const placeWithMostVotes = places => {
   return places.reduce((placeWithMostVotes, currentPlace) => {
     if (currentPlace.votes > placeWithMostVotes.votes) {
@@ -7,9 +9,18 @@ export const placeWithMostVotes = places => {
   });
 };
 
-export const orderByVotes = places => {
-  return [...places].sort((place1, place2) => place2.votes - place1.votes);
-};
+export const orderPlaces = (places, orderBy) => {
+  switch (orderBy) {
+    case arrangeOptions.VOTES:
+        return [...places].sort((place1, place2) => place2.votes - place1.votes); 
+    case arrangeOptions.APLHABETIC:
+        return [...places].sort((place1, place2) => { 
+          return place1.name > place2.name ? 1 : -1;
+        });
+    default:
+      break;
+  }
+}
 
 export const getFilteredPlaces = (places, filter) => {
   const placesFilter = place => {

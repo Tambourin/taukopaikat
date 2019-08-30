@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Map, Marker, InfoWindow, GoogleApiWrapper } from "google-maps-react";
-import { Segment } from "semantic-ui-react";
+import { Segment, Image } from "semantic-ui-react";
 
 const style = {
   height: "60vh"
@@ -8,24 +8,44 @@ const style = {
 
 const mapStyle = {
   height: "96%",
-  width: "96%",
-  position: "relative"
+  width: "96%"  
 }
 
 const PlacesMap = (props) => {
   const [ activeMarker, setActiveMarker ] = useState(null);  
-  const [ showInfoWindow, setShowInfoWindow ] = useState(false);  
+  const [ infoWindowIsVisible, setinfoWindowIsVisible ] = useState(false);  
 
   const onMarkerClick = (props, marker, e) => {
     setActiveMarker(marker);
-    setShowInfoWindow(true);
+    setinfoWindowIsVisible(true);
   }
 
   const closeInfoWindow = () => {
     setActiveMarker(null);
-    setShowInfoWindow(false);
+    setinfoWindowIsVisible(false);
   }
   
+  const infoWindow = () => {
+    return (
+      <InfoWindow 
+            marker={activeMarker}
+            visible={infoWindowIsVisible}
+            onClose={closeInfoWindow}
+          >
+          {
+            activeMarker ? (
+              <div>
+                <h4>{activeMarker.title}</h4>
+                <Image size="tiny" alt="place" src={activeMarker.image} />
+                <a href={`/api/places/${activeMarker.id}`}>Avaa</a> <br />
+                {activeMarker.address}               
+              </div>
+            ) : <div></div>
+          }        
+        </InfoWindow>
+    )
+  }
+
   var image = 'https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png';
   const mapPlacesToMarkers = (places) => {    
     return places.map(place => {      
@@ -35,6 +55,8 @@ const PlacesMap = (props) => {
           position={place.coordinates}
           title={place.name}
           address={place.address}
+          image={place.images[0]}
+          id={place.id}
           icon={image}                    
           onClick={onMarkerClick} />
       );
@@ -56,22 +78,8 @@ const PlacesMap = (props) => {
       >             
       
         {mapPlacesToMarkers(props.places)}
+        {infoWindow()}
         
-        <InfoWindow 
-            marker={activeMarker}
-            visible={showInfoWindow}
-            onClose={closeInfoWindow}
-          >
-          {
-            activeMarker ? (
-              <div>
-                {activeMarker.title} <br />
-                <a href={`https://www.google.com/maps/search/${activeMarker.title}`}>Hae Google Mapsista</a>
-                <button>Lisää</button>
-              </div>
-            ) : <div></div>
-          }        
-        </InfoWindow>
       </Map>  
     </Segment>   
   );

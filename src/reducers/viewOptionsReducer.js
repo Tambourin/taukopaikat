@@ -12,6 +12,7 @@ const defaultViewOptions = {
 
 const SHOW_ON_MAP = "SHOW_ON_MAP";
 const SHOW_AS_LIST = "SHOW_AS_LIST";
+const SET_ARRANGE_BY = "SET_ARRANGE_BY";
 
 const viewOptionsReducer = (state = defaultViewOptions, action) => {
   switch (action.type) {
@@ -19,6 +20,8 @@ const viewOptionsReducer = (state = defaultViewOptions, action) => {
       return { ...state, showOnMap: false };
     case SHOW_ON_MAP:
       return { ...state, showOnMap: true };
+    case SET_ARRANGE_BY:
+      return { ...state, arrangeBy: action.arrangeBy};
     default:
       return state;
   }
@@ -36,4 +39,10 @@ export const showOnMap = () => {
   };
 };
 
+export const setArrangeBy = (arrangeBy) => {
+  return {
+    type: SET_ARRANGE_BY,
+    arrangeBy: arrangeBy
+  }
+}
 export default viewOptionsReducer;
