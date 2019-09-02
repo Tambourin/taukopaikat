@@ -2,6 +2,7 @@ export const arrangeOptions = {
   VOTES: "VOTES",
   APLHABETIC: "ALPHABETIC",
   NORTH_TO_SOUTH: "NORTH_TO_SOUTH",
+  SOUTH_TO_NORT: "SOUTH_TO_NORTH",
   CITY: "CITY"  
 };
 

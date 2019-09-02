@@ -5,6 +5,7 @@ const SET_HAS_PLAYGROUND = "SET_HAS_PLAYGROUND";
 const SET_HAS_RESTAURANT = "SET_HAS_RESTAURANT";
 const SET_HAS_COFFEE = "SET_HAS_COFFEE";
 const SET_IS_ATTRACTION = "SET_IS_ATTRACTION";
+const SET_SEARCH_WORD = "SET_SEARCH_WORD";
 
 
 const defaultState = {
@@ -14,7 +15,8 @@ const defaultState = {
   hasPlayground: false,
   hasRestaurant: false,
   hasCofee: false,
-  isAttraction: false
+  isAttraction: false,
+  searchWord: ""
 }
 
 const filterReducer = (state=defaultState, action) => {
@@ -33,6 +35,8 @@ const filterReducer = (state=defaultState, action) => {
       return ({...state, hasCofee: !state.hasCofee });
     case(SET_IS_ATTRACTION):    
       return ({...state, isAttraction: !state.isAttraction });
+    case(SET_SEARCH_WORD):
+      return ({...state, searchWord: action.searchWord});
     default:
       return state;
   }
@@ -42,6 +46,13 @@ export const setHighway = (highway) => {
   return {
     type: SET_HIGHWAY,
     highway: highway
+  }
+}
+
+export const setSearchWord = (searchWord) => {
+  return {
+    type: SET_SEARCH_WORD,
+    searchWord: searchWord
   }
 }
 

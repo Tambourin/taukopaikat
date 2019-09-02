@@ -1,5 +1,5 @@
 import React from "react";
-import { Segment, Grid, Checkbox } from "semantic-ui-react";
+import { Segment, List, Checkbox, Icon, Popup } from "semantic-ui-react";
 
 const ChooseServices = ({
   filter,
@@ -12,57 +12,58 @@ const ChooseServices = ({
 }) => {
   return (
     <Segment>
+      <Popup
+        content="Näytä vain taukopaikat joista löytyy valitut palvelut"
+        trigger={<Icon name="info circle" />}
+      />
       Näiden pitää toteutua:
-      <Grid columns={2} divided>
-        <Grid.Row>
-          <Grid.Column>
-            <Checkbox
-              label="Ei kuulu ketjuun"
-              checked={filter.doesNotBelongToChain}
-              onClick={setDoesNotBelongToChain}
-            />
-          </Grid.Column>
-          <Grid.Column>
-            <Checkbox
-              label="Auki 24 h"
-              checked={filter.isOpenTwentyFourHours}
-              onClick={setIsOpenTwentyFourHours}
-            />
-          </Grid.Column>
-        </Grid.Row>
-        <Grid.Row>
-          <Grid.Column>
-            <Checkbox
-              label="Leikkipaikka"
-              checked={filter.hasPlayground}
-              onClick={setHasPlayground}
-            />
-          </Grid.Column>
-          <Grid.Column>
-            <Checkbox
-              label="Ravintola"
-              checked={filter.hasRestaurant}
-              onClick={setHasRestaurant}
-            />
-          </Grid.Column>
-        </Grid.Row>
-        <Grid.Row>
-          <Grid.Column>
-            <Checkbox
-              label="Kahvila"
-              checked={filter.hasCoffee}
-              onClick={setHasCoffee}
-            />
-          </Grid.Column>
-          <Grid.Column>
-            <Checkbox
-              label="Nähtävyys"
-              checked={filter.isAttraction}
-              onClick={setIsAttraction}
-            />
-          </Grid.Column>
-        </Grid.Row>
-      </Grid>
+      <List horizontal celled>
+        <List.Item>
+          <Checkbox
+            label="Ei kuulu ketjuun"
+            checked={filter.doesNotBelongToChain}
+            onClick={setDoesNotBelongToChain}
+          />
+        </List.Item>
+        <List.Item>
+          <Checkbox
+            label="Auki 24 h"
+            checked={filter.isOpenTwentyFourHours}
+            onClick={setIsOpenTwentyFourHours}
+          />
+        </List.Item>
+        <List.Item>
+          <Checkbox
+            label="Leikkipaikka"
+            checked={filter.hasPlayground}
+            onClick={setHasPlayground}
+          />
+        </List.Item>
+        <List.Item>
+          <Checkbox
+            label="Ravintola"
+            checked={filter.hasRestaurant}
+            onClick={setHasRestaurant}
+          />
+        </List.Item>
+        <List.Item>
+          <Checkbox
+            label="Kahvila"
+            checked={filter.isGasStation}
+            onClick={setHasCoffee}
+          />
+        </List.Item>
+        <List.Item>
+          <Checkbox
+            label="Nähtävyys"
+            checked={filter.isAttraction}
+            onClick={setIsAttraction}
+          />
+        </List.Item>
+        <List.Item>
+          <Checkbox label="Huotoasema" checked={false} onClick={null} />
+        </List.Item>
+      </List>
     </Segment>
   );
 };

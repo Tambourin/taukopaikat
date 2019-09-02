@@ -9,9 +9,11 @@ import {
   getFilteredPlaces
 } from "../../reducers/placesSelectors";
 
+
 const PlaceCard = ({ place, placesOnThisHighway }) => {
+
   return (
-    <Card>             
+    <Card>
       {place.images.length > 0 ? (
         <Image
           size="small"
@@ -25,7 +27,8 @@ const PlaceCard = ({ place, placesOnThisHighway }) => {
           src="https://static.thenounproject.com/png/340719-200.png"
           alt="Kuvaa ei saatavilla"
         />
-      )}               
+      )}             
+                     
       {placeWithMostVotes(placesOnThisHighway).id === place.id 
         ? <BestOfHighwayRibbon highway={place.highway} />
         : null

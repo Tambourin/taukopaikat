@@ -6,19 +6,19 @@ import PlacesMap from "./PlacesMap";
 import { getFilteredPlaces, orderPlaces } from "../reducers/placesSelectors";
 
 const PlacesView = ({ showOnMap, places, isLoading, loadingErrored, arrangeBy }) => {
-  if (isLoading) {
+  if(isLoading) {
     return (<Segment><Loader active /></Segment>);
   }
-  if (loadingErrored) {
-    return <p>Tietojen lataus epäonnistui</p>;
+  if(loadingErrored) {
+    return <Segment>Tietojen lataus epäonnistui</Segment>;
   }
 
   return (
     <div>
       {showOnMap ? (
         <PlacesMap places={places} />
-      ) : (
-        <PlacesList places={orderPlaces(places, arrangeBy)} />
+      ) : (                   
+        <PlacesList places={orderPlaces(places, arrangeBy)} /> 
       )}
     </div>
   );

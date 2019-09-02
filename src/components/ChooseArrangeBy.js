@@ -1,28 +1,29 @@
 import React from "react";
 import { connect } from "react-redux";
-import { Button } from "semantic-ui-react";
+import { Dropdown } from "semantic-ui-react";
 import { setArrangeBy, arrangeOptions } from "../reducers/viewOptionsReducer";
 
-const ChooseArrangeBy = ({ arrangeBy, setArrangeBy }) => {
-  return (
-    <Button.Group basic>
-      <Button
-        active={arrangeBy === arrangeOptions.VOTES}
-        onClick={() => setArrangeBy(arrangeOptions.VOTES)}>
-        Parhaat ensin
-      </Button>
-      <Button
-        active={arrangeBy === arrangeOptions.APLHABETIC}
-        onClick={() => setArrangeBy(arrangeOptions.APLHABETIC)}>
-        Aakkosjärjestys
-      </Button>
-    </Button.Group>
+const menuOptions = [
+  { icon: "like", value: arrangeOptions.VOTES, text: "Parhaat ensin" },
+  { icon: "sort alphabet ascending", value: arrangeOptions.APLHABETIC, text: "Aakkosjärjestys" },
+  { value: arrangeOptions.NORTH_TO_SOUTH, text: "Pohjoisesta etelään" },
+  { value: arrangeOptions.SOUTH_TO_NORT, text: "Etelästä pohjoiseen" }
+]
+
+const ChooseArrangeBy = ({ arrangeBy, setArrangeBy }) => {  
+  return (                
+      <Dropdown
+        selection 
+        options={menuOptions}
+        floating
+        value={arrangeBy}
+        onChange={(event, data) => setArrangeBy(data.value)}/>
   );
 };
 
 const mapStateToProps = state => {
   return {
-    arrangeBy: state.viewOptions.arrangeBy
+    arrangeBy: state.viewOptions.arrangeBy    
   };
 };
 

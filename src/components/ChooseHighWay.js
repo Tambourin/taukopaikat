@@ -1,6 +1,7 @@
 import React from "react";
 import { Dropdown } from "semantic-ui-react";
 
+
 const highwayOptions = [
   { value: "all", text:"Kaikki" },
   { value: "1", text:"1" },
@@ -11,17 +12,19 @@ const highwayOptions = [
 ]
 
 const ChooseHighWay = ({ highway, setHighway }) => {
-  return (
-    <div>
-      Valtatie
+  return (    
       <Dropdown        
+        className='icon'
+        icon='road'
+        labeled
+        button        
         fluid
-        selection
+        floating
+        selection 
         options={highwayOptions}
         value={highway}
         onChange={(event, data) => setHighway(data.value)}
       />
-    </div>
   )
 }
 

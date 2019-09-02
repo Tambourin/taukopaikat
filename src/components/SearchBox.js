@@ -1,9 +1,10 @@
 import React from "react";
 import { connect } from "react-redux";
-import { Segment } from "semantic-ui-react";
+import { Segment, Grid } from "semantic-ui-react";
 import ChooseServices from "./ChooseServices";
 import ChooseViewAsListOrMap from "./ChooseViewAsListOrMap";
 import ChooseHighWay from "./ChooseHighWay";
+import SearchWordInput from "./SearchWordInput";
 import { 
   setHighway, 
   setDoesNotBelongToChain,
@@ -16,8 +17,20 @@ import {showAsList, showOnMap } from "../reducers/viewOptionsReducer";
 
 const SearchBox = ({ setHighway, filter, viewOptions, ...props }) => {    
   return (
-    <Segment raised color="yellow" >      
-      <ChooseHighWay highway={filter.highway} setHighway={setHighway} />
+    <Segment raised color="yellow">     
+      <Grid stackable>
+        <Grid.Row columns={2}>
+          <Grid.Column>
+            Valtatie
+            <ChooseHighWay highway={filter.highway} setHighway={setHighway} />
+          </Grid.Column>
+          <Grid.Column>            
+            Hakusana
+            <SearchWordInput />
+          </Grid.Column>
+        </Grid.Row>
+      </Grid>   
+      
       <ChooseServices 
         filter={filter}
         setDoesNotBelongToChain={props.setDoesNotBelongToChain}
@@ -31,6 +44,7 @@ const SearchBox = ({ setHighway, filter, viewOptions, ...props }) => {
         viewOptions={viewOptions} 
         showAsList={props.showAsList}
         showOnMap={props.showOnMap}/> 
+      
     </Segment>      
   );
 }

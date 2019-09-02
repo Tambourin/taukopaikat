@@ -3,7 +3,6 @@ import { Card, Segment } from "semantic-ui-react";
 import PlaceCard from "./PlaceCard/PlaceCard";
 import ChooseArrangeBy from "./ChooseArrangeBy";
 
-
 const PlacesList = ({ places }) => {
   if (!places) {
     return null;
@@ -14,18 +13,20 @@ const PlacesList = ({ places }) => {
         <p>Haku ei tuottanut tuloksia</p>
       </Segment>
     );
-  }  
-  
+  }    
   
   return (
     <>   
-    <Segment>    
+    
+    <Segment>
       <ChooseArrangeBy />
-      <Card.Group centered stackable>
-        {places.map(place => (
-          <PlaceCard key={place.id} place={place} />
-        ))}
-      </Card.Group>
+      <Segment basic>
+        <Card.Group centered stackable>
+          {places.map(place => (
+            <PlaceCard key={place.id} place={place} />
+          ))}
+        </Card.Group>
+      </Segment>
     </Segment>
     </>
   );

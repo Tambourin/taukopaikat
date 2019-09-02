@@ -17,6 +17,12 @@ export const orderPlaces = (places, orderBy) => {
         return [...places].sort((place1, place2) => { 
           return place1.name > place2.name ? 1 : -1;
         });
+    case arrangeOptions.NORTH_TO_SOUTH:
+        return [...places].sort((place1, place2) => 
+          place2.coordinates.lat - place1.coordinates.lat);
+    case arrangeOptions.SOUTH_TO_NORT:
+      return [...places].sort((place1, place2) => 
+        place1.coordinates.lat - place2.coordinates.lat);
     default:
       break;
   }
@@ -39,7 +45,17 @@ export const getFilteredPlaces = (places, filter) => {
     ) {
       return false;
     }
+
+    if(filter.searchWord) {
+      const searchWord = filter.searchWord.toLowerCase();
+      const placeName = place.name.toLowerCase();
+      const address = place.address.toLowerCase();
+      if (!placeName.includes(searchWord) && !address.includes(searchWord)) {
+        return false;
+      }
+    }
     return true;
   };
+
   return places.filter(place => placesFilter(place));
 };
