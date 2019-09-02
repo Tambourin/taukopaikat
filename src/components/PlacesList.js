@@ -15,9 +15,7 @@ const PlacesList = ({ places }) => {
     );
   }    
   
-  return (
-    <>   
-    
+  return (      
     <Segment>
       <ChooseArrangeBy />
       <Segment basic>
@@ -27,8 +25,7 @@ const PlacesList = ({ places }) => {
           ))}
         </Card.Group>
       </Segment>
-    </Segment>
-    </>
+    </Segment>  
   );
 };
 

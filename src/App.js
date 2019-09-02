@@ -1,14 +1,14 @@
 import React, { useEffect } from "react";
 import { connect } from "react-redux";
-import SearchBox from "./components/SearchBox";
-import Intro from "./components/Intro/Intro";
 import { Container } from "semantic-ui-react";
 import { initializePlaces } from "./reducers/placesReducer";
 import { initializeVotes } from "./reducers/votesReducer";
-import PlacesView from "./components/PlacesView";
+import { BrowserRouter, Route } from "react-router-dom";
+import Intro from "./components/Intro/Intro";
+import MainPage from "./pages/MainPage";
+import SinglePlacePage from "./pages/SinglePlacePage";
 
-
-const App = ({ initializePlaces, initializeVotes }) => {
+const App = ({ initializePlaces, initializeVotes, places }) => {
   useEffect(() => {   
     initializePlaces();    
   }, [initializePlaces]);
@@ -19,11 +19,22 @@ const App = ({ initializePlaces, initializeVotes }) => {
  
   return (
     <Container>
-      <Intro />
-      <SearchBox /> 
-      <PlacesView />
+      <BrowserRouter>
+        <Intro />
+        <Route exact path="/" render={() => <MainPage />}/>
+        <Route exact path="/:id" render={({ match }) => 
+          <SinglePlacePage place={
+            places.find(place => place.id === Number(match.params.id))}/>
+        }/>
+      </BrowserRouter>
     </Container>
   );
 };
 
-export default connect(null, { initializePlaces, initializeVotes })(App);
+const mapStateToProps = (state) => {
+  return {
+    places: state.places.data
+  }
+}
+
+export default connect(mapStateToProps, { initializePlaces, initializeVotes })(App);

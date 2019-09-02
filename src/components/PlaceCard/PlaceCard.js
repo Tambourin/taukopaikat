@@ -1,5 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
+import { Link } from "react-router-dom";
 import { Image, Card } from "semantic-ui-react";
 import RoadNumber from "../RoadNumber";
 import VoteButton from "../VoteButton";
@@ -9,13 +10,12 @@ import {
   getFilteredPlaces
 } from "../../reducers/placesSelectors";
 
-
 const PlaceCard = ({ place, placesOnThisHighway }) => {
-
   return (
     <Card>
       {place.images.length > 0 ? (
         <Image
+          as={Link} to={`/${place.id}`}          
           size="small"
           wrapped
           ui={false}
@@ -23,7 +23,7 @@ const PlaceCard = ({ place, placesOnThisHighway }) => {
           alt="kuva taukopaikasta"
         />
       ) : (
-        <Image
+        <Image          
           src="https://static.thenounproject.com/png/340719-200.png"
           alt="Kuvaa ei saatavilla"
         />
@@ -34,11 +34,11 @@ const PlaceCard = ({ place, placesOnThisHighway }) => {
         : null
       }      
       <Card.Content>      
-        <Card.Header>
+        <Card.Header as={Link} to={`/${place.id}`}>
           {place.name}
           <RoadNumber roadNumber={place.highway} floated="right" />
         </Card.Header>
-        <Card.Meta>{place.address}</Card.Meta>
+        <Card.Meta>{place.city}</Card.Meta>
       </Card.Content>
       <Card.Content extra>
         <VoteButton place={place} />

@@ -5,7 +5,6 @@ import { addVoteToPlace, removeVoteFromPlace } from "../reducers/placesReducer";
 import { addToVoted, removeFromVoted } from "../reducers/votesReducer";
 
 const VoteButton = ({ place, votes, addVoteToPlace, removeVoteFromPlace, addToVoted, removeFromVoted }) => {
-  console.log("place", place.name, place.votes);
 
   const executeVote = async () => {
     const placeVotedOnSameHighway = votes.find(p => p.highway === place.highway);     
@@ -18,8 +17,7 @@ const VoteButton = ({ place, votes, addVoteToPlace, removeVoteFromPlace, addToVo
       addToVoted(updatedPlace);
     } catch (error) {
       console.log("Äänestys ei onnistun", error);      
-    }
-        
+    }        
   } 
   
   if (votes.find(p => p.id === place.id)) {
@@ -35,7 +33,7 @@ const VoteButton = ({ place, votes, addVoteToPlace, removeVoteFromPlace, addToVo
     <Button onClick={executeVote} icon floated="right" labelPosition='left'>      
      <Icon name="like" />Äänestä parhaaksi
      </Button>
-     <Label as='a' basic pointing='left'>
+     <Label as="a" basic pointing="left">
       {place.votes}
       </Label>
     
