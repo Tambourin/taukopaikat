@@ -13,6 +13,7 @@ const menuOptions = [
 const ChooseArrangeBy = ({ arrangeBy, setArrangeBy }) => {  
   return (                
       <Dropdown
+        style={{marginBottom: "20px"}}
         selection 
         options={menuOptions}
         floating

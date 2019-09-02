@@ -69,10 +69,9 @@ const PlacesMap = (props) => {
         google={props.google}
         style={mapStyle}        
         zoom={6}
-        initialCenter={{
-          lat: 62.121800,
-          lng: 25.540209
-        }}
+        initialCenter={
+          props.places[0].coordinates
+        }
         mapTypeControl={false}
         streetViewControl={false}
       >             

@@ -17,7 +17,7 @@ import {showAsList, showOnMap } from "../reducers/viewOptionsReducer";
 
 const SearchBox = ({ setHighway, filter, viewOptions, ...props }) => {    
   return (
-    <Segment raised color="yellow">     
+    <Segment raised color="olive">     
       <Grid stackable>
         <Grid.Row columns={2}>
           <Grid.Column>

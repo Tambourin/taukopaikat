@@ -50,7 +50,8 @@ export const getFilteredPlaces = (places, filter) => {
       const searchWord = filter.searchWord.toLowerCase();
       const placeName = place.name.toLowerCase();
       const address = place.address.toLowerCase();
-      if (!placeName.includes(searchWord) && !address.includes(searchWord)) {
+      const city = place.city.toLowerCase();
+      if (!placeName.includes(searchWord) && !address.includes(searchWord) && !city.includes(searchWord)) {
         return false;
       }
     }

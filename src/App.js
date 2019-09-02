@@ -5,6 +5,7 @@ import { initializePlaces } from "./reducers/placesReducer";
 import { initializeVotes } from "./reducers/votesReducer";
 import { BrowserRouter, Route } from "react-router-dom";
 import Intro from "./components/Intro/Intro";
+import HeaderMenu from "./components/HeaderMenu";
 import MainPage from "./pages/MainPage";
 import SinglePlacePage from "./pages/SinglePlacePage";
 
@@ -18,16 +19,19 @@ const App = ({ initializePlaces, initializeVotes, places }) => {
   }, [initializeVotes]);
  
   return (
-    <Container>
-      <BrowserRouter>
-        <Intro />
-        <Route exact path="/" render={() => <MainPage />}/>
-        <Route exact path="/:id" render={({ match }) => 
-          <SinglePlacePage place={
-            places.find(place => place.id === Number(match.params.id))}/>
-        }/>
-      </BrowserRouter>
-    </Container>
+    <>
+    <BrowserRouter>
+      <HeaderMenu />
+      <Container>
+          <Intro />
+          <Route exact path="/" render={() => <MainPage />}/>
+          <Route exact path="/:id" render={({ match }) => 
+            <SinglePlacePage place={
+              places.find(place => place.id === Number(match.params.id))}/>
+          }/>      
+      </Container>
+    </BrowserRouter>
+    </>
   );
 };
 

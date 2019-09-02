@@ -17,14 +17,12 @@ const PlacesList = ({ places }) => {
   
   return (      
     <Segment>
-      <ChooseArrangeBy />
-      <Segment basic>
-        <Card.Group centered stackable>
-          {places.map(place => (
-            <PlaceCard key={place.id} place={place} />
-          ))}
-        </Card.Group>
-      </Segment>
+      <ChooseArrangeBy />      
+      <Card.Group centered stackable>
+        {places.map(place => (
+          <PlaceCard key={place.id} place={place} />
+        ))}
+      </Card.Group>      
     </Segment>  
   );
 };

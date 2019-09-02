@@ -3,9 +3,14 @@
     {
       "id": 1,
       "name": "Vaskikello",
-      "votes": 37,
+      "votes": 38,
       "highway": "4",
       "address": "Vaskikellontie 420 86800 Pyhäsalmi",
+      "city": "Pyhäjärvi",
+      "coordinates": {
+        "lat": 63.713902,
+        "lng": 25.919409
+      },
       "images": [
         "https://vaskikello.fi/img/1527505060096913.png"
       ],
@@ -24,7 +29,8 @@
       "name": "Abc Hirvaskangas",
       "votes": 49,
       "highway": "4",
-      "address": "Vaskikellontie 420 86800 Pyhäsalmi",
+      "address": "Suonenjoentie 10, 44250 Koivisto",
+      "city": "Äänekoski",
       "coordinates": {
         "lat": 62.517555,
         "lng": 25.691022
@@ -45,9 +51,10 @@
     {
       "id": 3,
       "name": "Design Hill",
-      "votes": 0,
+      "votes": 1,
       "highway": "1",
       "address": "Vaskiontie 41824800 Halikko",
+      "city": "Salo",
       "coordinates": {
         "lat": 60.423864,
         "lng": 23.047332
