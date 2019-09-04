@@ -1,6 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
-import { Segment, Header, Image, Divider, Button, Label, Icon } from "semantic-ui-react";
+import { Segment, Header, Image, Divider, Button, Label, Icon, Grid } from "semantic-ui-react";
 import RoadNumber from "../components/RoadNumber";
 import VoteButton from "../components/VoteButton";
 import SinglePlaceAccordion from "../components/SinglePlaceAccordion";
@@ -24,38 +24,48 @@ const SinglePlacePage = ({ place, nearByPlaces }) => {
       <Header color="yellow">{place.city}</Header>      
       <b>Auki tänään:</b>      
       <Divider />
-      <Image centered bordered rounded src={place.images[0]} alt="Pääkuva taukopaikasta" />
+            
+
+      <Grid doubling columns={2}>
+        <Grid.Column>
+          <Image centered bordered rounded src={place.images[0]} alt="Pääkuva taukopaikasta" />
+        </Grid.Column>
+        <Grid.Column>
+          <p>{place.address}, {place.city}</p>
+        <Icon name="world" />
+        <a href={place.www}>Verkkosivu</a>       
+        <Segment basic secondary>
+          {place.description}
+        </Segment>
+        <Segment basic> 
+          <Label.Group size="large">
+            <Label color="blue">
+              <Icon name='like' />
+                taukopaikat.fi 
+              <Label.Detail>{place.votes}</Label.Detail>
+            </Label>
+            <Label color="blue">
+              <Icon name='star'/>
+                Arvio Google Mapsissa
+              <Label.Detail>{place.votes}</Label.Detail>
+            </Label>
+          </Label.Group>      
+          <VoteButton place={place}/>
+          </Segment>
+        </Grid.Column>        
+      </Grid>
+
       
-      <Divider/>      
-      <p>{place.address}</p>
-      <Icon name="world" />
-      <a href={place.www}>Verkkosivu</a>       
-      <Segment basic secondary>
-        {place.description}
-      </Segment>
-      <Segment basic> 
-        <Label.Group size="large">
-          <Label color="blue">
-            <Icon name='like' />
-              taukopaikat.fi 
-            <Label.Detail>{place.votes}</Label.Detail>
-          </Label>
-          <Label color="blue">
-            <Icon name='star'/>
-              Arvio Google Mapsissa
-            <Label.Detail>{place.votes}</Label.Detail>
-          </Label>
-        </Label.Group>      
-        <VoteButton place={place}/>
-        
-      </Segment>
-      <SinglePlaceAccordion place={place}/>  
-      <Divider hidden/>
+      <Segment basic>
+        <SinglePlaceAccordion place={place}/>  
+        <Divider hidden/>
         <Button basic icon labelPosition="left"       
           href={`https://www.google.com/maps/search/?api=1&query=${place.name}`} >
             <Icon as={Image}  src="http://icons.iconarchive.com/icons/papirus-team/papirus-apps/128/maps-icon.png" />
             Näytä Google Mapsissa
-        </Button>
+        </Button>    
+      </Segment>
+      
     </Segment>
 
     <Segment textAlign="center" color="olive">

@@ -48,6 +48,11 @@ export const nearbyPlacesSelector = (place, places, maxDistance) => {
     });
 }
 
+export const limitNumberOfPlacesSelector = (places, percentage) => {
+  const numberOfElementsToGet = Math.ceil(percentage / 100 * places.length);
+  return [...places].slice(0,numberOfElementsToGet);
+}
+
 export const getFilteredPlaces = (places, filter) => {
   const placesFilter = place => {
     if (

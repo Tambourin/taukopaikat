@@ -1,5 +1,5 @@
 import React from "react";
-import { Segment, List, Checkbox, Icon, Popup, Grid } from "semantic-ui-react";
+import { Segment, Checkbox, Icon, Popup, Grid } from "semantic-ui-react";
 
 const ChooseServices = ({
   filter,
@@ -66,11 +66,7 @@ const ChooseServices = ({
         <Grid.Column>
           <Checkbox label="Grilli" checked={false} onClick={null} />
         </Grid.Column>
-
       </Grid>
-
-
-      
     </Segment>
   );
 };

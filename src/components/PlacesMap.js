@@ -15,6 +15,8 @@ const PlacesMap = (props) => {
   const [ activeMarker, setActiveMarker ] = useState(null);  
   const [ infoWindowIsVisible, setinfoWindowIsVisible ] = useState(false);  
 
+  
+
   const onMarkerClick = (props, marker, e) => {
     setActiveMarker(marker);
     setinfoWindowIsVisible(true);
