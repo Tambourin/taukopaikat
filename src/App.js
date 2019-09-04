@@ -27,7 +27,8 @@ const App = ({ initializePlaces, initializeVotes, places }) => {
           <Route exact path="/" render={() => <MainPage />}/>
           <Route exact path="/:id" render={({ match }) => 
             <SinglePlacePage place={
-              places.find(place => place.id === Number(match.params.id))}/>
+              places.find(place => place.id === Number(match.params.id))}
+            />
           }/>      
       </Container>
     </BrowserRouter>

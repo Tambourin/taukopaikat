@@ -1,72 +1,82 @@
 import React from "react";
-import { Segment, Header, Image, Divider, Button, Comment, Form, Label, Icon, Container } from "semantic-ui-react";
+import { connect } from "react-redux";
+import { Segment, Header, Image, Divider, Button, Label, Icon } from "semantic-ui-react";
 import RoadNumber from "../components/RoadNumber";
 import VoteButton from "../components/VoteButton";
 import SinglePlaceAccordion from "../components/SinglePlaceAccordion";
+import CommentBox from "../components/CommentBox";
+import PlacesList from "../components/PlacesList";
+import { nearbyPlacesSelector } from "../reducers/placesSelectors";
+import { MAX_DIST_FOR_NEARBY_PLACES } from "../constants/constants";
 
-const SinglePlacePage = ({ place }) => {  
+const SinglePlacePage = ({ place, nearByPlaces }) => {    
   if(!place) {
     return null;
   }
+
+  window.scrollTo(0, 0); // SinglePlacePage aloitetaan aina sivun alusta
+
   return ( 
     <div> 
-      
     <Segment textAlign="center" color="olive">
-    <RoadNumber roadNumber={place.highway} floated="left"/>
-      <Header as="h2" color="olive">{place.name.toUpperCase()}</Header>
-      <Header color="yellow">{place.city}</Header>
-      
-      <b>Auki tänään:</b>
-      
+      <RoadNumber roadNumber={place.highway} floated="left"/>
+      <Header  as="h2" style={{ fontSize: "2.5em" }} color="olive">{place.name.toUpperCase()}</Header>
+      <Header color="yellow">{place.city}</Header>      
+      <b>Auki tänään:</b>      
       <Divider />
-      <Image bordered rounded src={place.images[0]} alt="Pääkuva taukopaikasta" />
-      <Divider/>
+      <Image centered bordered rounded src={place.images[0]} alt="Pääkuva taukopaikasta" />
+      
+      <Divider/>      
       <p>{place.address}</p>
-      <Button          
-        href={`https://www.google.com/maps/search/?api=1&query=${place.name}`} 
-        basic>
-          <Image inline size="mini" src="http://icons.iconarchive.com/icons/papirus-team/papirus-apps/128/maps-icon.png" />
-          Näytä Google Mapsissa
-      </Button> 
-      <Segment basic>{place.description}</Segment>   
+      <Icon name="world" />
+      <a href={place.www}>Verkkosivu</a>       
+      <Segment basic secondary>
+        {place.description}
+      </Segment>
+      <Segment basic> 
+        <Label.Group size="large">
+          <Label color="blue">
+            <Icon name='like' />
+              taukopaikat.fi 
+            <Label.Detail>{place.votes}</Label.Detail>
+          </Label>
+          <Label color="blue">
+            <Icon name='star'/>
+              Arvio Google Mapsissa
+            <Label.Detail>{place.votes}</Label.Detail>
+          </Label>
+        </Label.Group>      
+        <VoteButton place={place}/>
+        
+      </Segment>
       <SinglePlaceAccordion place={place}/>  
+      <Divider hidden/>
+        <Button basic icon labelPosition="left"       
+          href={`https://www.google.com/maps/search/?api=1&query=${place.name}`} >
+            <Icon as={Image}  src="http://icons.iconarchive.com/icons/papirus-team/papirus-apps/128/maps-icon.png" />
+            Näytä Google Mapsissa
+        </Button>
     </Segment>
 
-    <Segment color="olive">  
-    <Label.Group>
-      <Label color="blue">
-        <Icon name='like' />
-        taukopaikat.fi 
-        <Label.Detail>{place.votes}</Label.Detail>
-      </Label>
-      <Label color="blue">
-        <Icon name='star'/>
-        Arvio Google Mapsissa
-        <Label.Detail>{place.votes}</Label.Detail>
-      </Label>
-      </Label.Group>  
-      <VoteButton place={place}/> 
-      <Comment.Group>
-        <Header as='h3' dividing>
-          Kommentit
-        </Header>
-        <Comment>
-        <Comment.Content>
-          <Comment.Author>Olavi Hartonen</Comment.Author>
-          <Comment.Metadata>
-            <div>Today at 5:42PM</div>
-          </Comment.Metadata>
-          <Comment.Text>Tässä näkyis niinku näin kommentteja</Comment.Text>
-        </Comment.Content>
-        </Comment>
-        <Form reply> 
-          <Form.TextArea />
-          <Button content="Lisää kommentti" labelPosition="left" icon="edit" color="olive" />
-        </Form>
-      </Comment.Group>
+    <Segment textAlign="center" color="olive">
+         
+      <CommentBox place={place} />          
+    </Segment>
+    
+    <Segment>
+      <Header as="h3">
+        Vaihtoehtoja lähellä paikkaa {place.name} (max {MAX_DIST_FOR_NEARBY_PLACES} km)
+      </Header>
+      <PlacesList places={nearByPlaces} />
     </Segment>
     </div>  
   )
 }
 
-export default SinglePlacePage;
+const mapStateToProps = (state, ownProps) => {
+  return {
+    nearByPlaces: nearbyPlacesSelector(ownProps.place, state.places.data, MAX_DIST_FOR_NEARBY_PLACES)
+  }
+}
+
+export default connect(mapStateToProps)(SinglePlacePage);

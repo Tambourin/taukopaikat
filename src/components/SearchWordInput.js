@@ -9,7 +9,7 @@ const SearchWordInput = ({ searchWord, setSearchWord }) => {
       <Input        
         fluid
         icon="search" 
-        placeholder="Rajaa nimen ja osoitteen perusteella"
+        placeholder="Hae nimen ja paikkakunnan perusteella"
         value={searchWord}
         onChange={(event, data) => {setSearchWord(data.value)}} 
     />

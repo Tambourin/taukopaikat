@@ -1,5 +1,5 @@
 import React from "react";
-import { Segment, List, Checkbox, Icon, Popup } from "semantic-ui-react";
+import { Segment, List, Checkbox, Icon, Popup, Grid } from "semantic-ui-react";
 
 const ChooseServices = ({
   filter,
@@ -17,53 +17,60 @@ const ChooseServices = ({
         trigger={<Icon name="info circle" />}
       />
       Näiden pitää toteutua:
-      <List horizontal celled>
-        <List.Item>
+      <Grid doubling columns={8} centered>
+        <Grid.Column>
           <Checkbox
             label="Ei kuulu ketjuun"
             checked={filter.doesNotBelongToChain}
             onClick={setDoesNotBelongToChain}
           />
-        </List.Item>
-        <List.Item>
+        </Grid.Column>
+        <Grid.Column>
           <Checkbox
             label="Auki 24 h"
             checked={filter.isOpenTwentyFourHours}
             onClick={setIsOpenTwentyFourHours}
           />
-        </List.Item>
-        <List.Item>
+        </Grid.Column>
+        <Grid.Column>
           <Checkbox
             label="Leikkipaikka"
             checked={filter.hasPlayground}
             onClick={setHasPlayground}
           />
-        </List.Item>
-        <List.Item>
+        </Grid.Column>
+        <Grid.Column>
           <Checkbox
             label="Ravintola"
             checked={filter.hasRestaurant}
             onClick={setHasRestaurant}
           />
-        </List.Item>
-        <List.Item>
+        </Grid.Column>
+        <Grid.Column>
           <Checkbox
             label="Kahvila"
             checked={filter.isGasStation}
             onClick={setHasCoffee}
           />
-        </List.Item>
-        <List.Item>
-          <Checkbox
+        </Grid.Column>
+        <Grid.Column>
+        <Checkbox
             label="Nähtävyys"
             checked={filter.isAttraction}
             onClick={setIsAttraction}
           />
-        </List.Item>
-        <List.Item>
+        </Grid.Column>
+        <Grid.Column>
           <Checkbox label="Huotoasema" checked={false} onClick={null} />
-        </List.Item>
-      </List>
+        </Grid.Column>
+        <Grid.Column>
+          <Checkbox label="Grilli" checked={false} onClick={null} />
+        </Grid.Column>
+
+      </Grid>
+
+
+      
     </Segment>
   );
 };

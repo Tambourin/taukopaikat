@@ -1,0 +1,1 @@
+export const MAX_DIST_FOR_NEARBY_PLACES = 20;

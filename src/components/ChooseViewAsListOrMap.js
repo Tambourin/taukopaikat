@@ -3,7 +3,7 @@ import { Button, Icon } from "semantic-ui-react";
 
 const ChooseViewAsListOrMap = ({ viewOptions, showAsList, showOnMap}) => {
   return (
-    <Button.Group fluid size="tiny">
+    <Button.Group color="yellow" fluid size="tiny">
       <Button active={!viewOptions.showOnMap} onClick={showAsList}>
         <Icon name="list" />
         Listana

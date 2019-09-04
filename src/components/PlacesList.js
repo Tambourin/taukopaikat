@@ -1,7 +1,7 @@
 import React from "react";
 import { Card, Segment } from "semantic-ui-react";
 import PlaceCard from "./PlaceCard/PlaceCard";
-import ChooseArrangeBy from "./ChooseArrangeBy";
+
 
 const PlacesList = ({ places }) => {
   if (!places) {
@@ -16,8 +16,7 @@ const PlacesList = ({ places }) => {
   }    
   
   return (      
-    <Segment>
-      <ChooseArrangeBy />      
+    <Segment>           
       <Card.Group centered stackable>
         {places.map(place => (
           <PlaceCard key={place.id} place={place} />

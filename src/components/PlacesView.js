@@ -4,6 +4,7 @@ import { Loader, Segment } from "semantic-ui-react";
 import PlacesList from "./PlacesList";
 import PlacesMap from "./PlacesMap";
 import { getFilteredPlaces, orderPlaces } from "../reducers/placesSelectors";
+import ChooseArrangeBy from "../components/ChooseArrangeBy";
 
 const PlacesView = ({ showOnMap, places, isLoading, loadingErrored, arrangeBy }) => {
   if(isLoading) {
@@ -17,8 +18,11 @@ const PlacesView = ({ showOnMap, places, isLoading, loadingErrored, arrangeBy })
     <div>
       {showOnMap ? (
         <PlacesMap places={places} />
-      ) : (                   
-        <PlacesList places={orderPlaces(places, arrangeBy)} /> 
+      ) : (
+        <div>
+          <ChooseArrangeBy />                   
+          <PlacesList places={orderPlaces(places, arrangeBy)} />
+        </div>
       )}
     </div>
   );

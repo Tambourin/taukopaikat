@@ -88,6 +88,22 @@ export const removeVoteFromPlace = (place) => {
   }  
 }
 
+export const addComment = (place, comment) => {
+  return async dispatch => {
+    try {
+      const response = await placesService.update({
+        ...place,
+        comments: [...place.comments, comment]
+      });
+      dispatch(updatePlace(response));
+      return response;
+    } catch {
+      console.log("Adding a comment failed");
+    }    
+  }
+  
+}
+
 export const initializePlaces = () => {
   return async dispatch => {
     dispatch(setLoadingErrored(false));

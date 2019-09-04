@@ -37,7 +37,7 @@ const PlacesMap = (props) => {
               <div>
                 <h4>{activeMarker.title}</h4>
                 <Image size="tiny" alt="place" src={activeMarker.image} />
-                <a href={`/api/places/${activeMarker.id}`}>Avaa</a> <br />
+                <a href={`/${activeMarker.id}`}>Avaa</a> <br />
                 {activeMarker.address}               
               </div>
             ) : <div></div>
@@ -70,7 +70,10 @@ const PlacesMap = (props) => {
         style={mapStyle}        
         zoom={6}
         initialCenter={
-          props.places[0].coordinates
+          props.places[0] ? props.places[0].coordinates : {
+            "lat": 62.517555,
+            "lng": 25.691022
+          }
         }
         mapTypeControl={false}
         streetViewControl={false}

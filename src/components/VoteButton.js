@@ -28,11 +28,9 @@ const VoteButton = ({ place, votes, addVoteToPlace, removeVoteFromPlace, addToVo
     );
   }
 
-  return (
-    <Button as="div" labelPosition='right'>
-      <Button onClick={executeVote} icon floated="right" labelPosition='left'>      
+  return (    
+    <Button onClick={executeVote} icon labelPosition="left">      
       <Icon name="like" />Äänestä parhaaksi
-      </Button>
     </Button>
   );
 }

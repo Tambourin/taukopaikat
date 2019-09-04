@@ -28,6 +28,26 @@ export const orderPlaces = (places, orderBy) => {
   }
 }
 
+const getDistance = (lat1, lon1, lat2, lon2)  => {
+  var p = 0.017453292519943295;    // Math.PI / 180
+  var c = Math.cos;
+  var a = 0.5 - c((lat2 - lat1) * p)/2 + 
+          c(lat1 * p) * c(lat2 * p) * 
+          (1 - c((lon2 - lon1) * p))/2;
+  return 12742 * Math.asin(Math.sqrt(a)); // 2 * R; R = 6371 km
+}
+
+export const nearbyPlacesSelector = (place, places, maxDistance) => {
+  return places.filter(p => {
+    const dist = getDistance(
+      place.coordinates.lat, 
+      place.coordinates.lng, 
+      p.coordinates.lat, 
+      p.coordinates.lng);
+    return dist < maxDistance && dist !== 0;
+    });
+}
+
 export const getFilteredPlaces = (places, filter) => {
   const placesFilter = place => {
     if (
@@ -49,9 +69,8 @@ export const getFilteredPlaces = (places, filter) => {
     if(filter.searchWord) {
       const searchWord = filter.searchWord.toLowerCase();
       const placeName = place.name.toLowerCase();
-      const address = place.address.toLowerCase();
       const city = place.city.toLowerCase();
-      if (!placeName.includes(searchWord) && !address.includes(searchWord) && !city.includes(searchWord)) {
+      if (!placeName.includes(searchWord) && !city.includes(searchWord)) {
         return false;
       }
     }
