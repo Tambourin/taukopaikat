@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { Map, Marker, InfoWindow, GoogleApiWrapper } from "google-maps-react";
-import { Segment, Image } from "semantic-ui-react";
+import { Segment, Image, Button, Icon } from "semantic-ui-react";
+
+const ZOOM_LEVEL = 5;
 
 const style = {
   height: "60vh"
@@ -13,11 +15,23 @@ const mapStyle = {
 
 const PlacesMap = (props) => {
   const [ activeMarker, setActiveMarker ] = useState(null);  
-  const [ infoWindowIsVisible, setinfoWindowIsVisible ] = useState(false);  
+  const [ infoWindowIsVisible, setinfoWindowIsVisible ] = useState(false);
+  const [ currentPosition, setCurrentPosition ] = useState(null);  
 
-  
+const showOwnPosition = () => {
+  if (currentPosition) {
+    setCurrentPosition(null);
+    return;
+  }
+  navigator.geolocation.getCurrentPosition((position) => {
+    setCurrentPosition({
+      lat: position.coords.latitude,
+      lng: position.coords.longitude
+    });              
+  });
+}
 
-  const onMarkerClick = (props, marker, e) => {
+const onMarkerClick = (props, marker, e) => {
     setActiveMarker(marker);
     setinfoWindowIsVisible(true);
   }
@@ -25,8 +39,8 @@ const PlacesMap = (props) => {
   const closeInfoWindow = () => {
     setActiveMarker(null);
     setinfoWindowIsVisible(false);
-  }
-  
+  } 
+
   const infoWindow = () => {
     return (
       <InfoWindow 
@@ -66,26 +80,38 @@ const PlacesMap = (props) => {
   };
   
   return (
-    <Segment style={style}>
-      <Map 
-        google={props.google}
-        style={mapStyle}        
-        zoom={6}
-        initialCenter={
-          props.places[0] ? props.places[0].coordinates : {
-            "lat": 62.517555,
-            "lng": 25.691022
+    <Segment.Group>
+      <Segment style={style}>
+        <Map 
+          google={props.google}
+          style={mapStyle}        
+          zoom={ZOOM_LEVEL}
+          initialCenter={
+            props.places[0] ? props.places[0].coordinates : {
+              "lat": 62.517555,
+              "lng": 25.691022
+            }
           }
-        }
-        mapTypeControl={false}
-        streetViewControl={false}
-      >             
-      
-        {mapPlacesToMarkers(props.places)}
-        {infoWindow()}
-        
-      </Map>  
-    </Segment>   
+          mapTypeControl={false}
+          streetViewControl={false}
+        >                   
+          {mapPlacesToMarkers(props.places)}
+          {currentPosition ? <Marker position={currentPosition} /> : null}      
+          {infoWindow()}               
+        </Map>          
+      </Segment> 
+      <Segment>
+        <Button 
+          icon
+          toggle           
+          fluid
+          color="olive" 
+          onClick={showOwnPosition}>
+          <Icon name="map marker alternate" /> 
+          {currentPosition ? "Piilota oma sijainti" : "Näytä oma sijainti"}
+        </Button>
+      </Segment>  
+    </Segment.Group>
   );
 };
 

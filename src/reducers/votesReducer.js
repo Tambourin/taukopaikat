@@ -41,6 +41,7 @@ export const addToVoted = (place) => {
 }
 
 export const removeFromVoted = (place) => {
+  console.log(place);
   return dispatch => {
     votesService.remove(place);
     dispatch({

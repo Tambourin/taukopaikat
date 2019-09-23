@@ -1,6 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
-import { Segment, Label, Button, Grid } from "semantic-ui-react";
+import { Segment, Label, Grid } from "semantic-ui-react";
 import { setPercentageOfPlacesToView } from "../reducers/viewOptionsReducer";
 
 
@@ -16,27 +16,25 @@ const centerStyle = {
 
 const ChoosePercentageSlider = ({ percentageOfPlacesToView, setPercentageOfPlacesToView }) => {  
   return (
-    <Segment>
-      
+    <Segment>      
       <Grid columns='equal' >
         <Grid.Column textAlign='center'>
-          <Label basic >Parhaat</Label>
+          <Label color="olive" pointing="right" basic >Parhaat</Label>
         </Grid.Column>
-        <Grid.Column width={9} style={centerStyle}>
+        <Grid.Column width={8} style={centerStyle}>
           <input
             style={inputStyle}
             type="range"
             min={1}
-            max={100}
-            step="2"
+            max={100}            
             value={percentageOfPlacesToView}
             onChange={(event) => setPercentageOfPlacesToView(event.target.value)}
           />
         </Grid.Column>
         <Grid.Column textAlign='center'>
-        <Label basic color="olive">Kaikki</Label>
-        </Grid.Column>      
-      </Grid>
+        <Label pointing="left" basic >Kaikki</Label>
+        </Grid.Column>             
+      </Grid>      
     </Segment>
   );
 };

@@ -18,8 +18,7 @@ const SubmitCommentForm = ({ place, addComment }) => {
     addComment(place, {
       content: newComment,
       author: "Olai Hartonen",
-      date: new Date(),
-      id: Math.floor(Math.random() * 10000)
+      date: new Date()
     });
     setNewComment("");
   }

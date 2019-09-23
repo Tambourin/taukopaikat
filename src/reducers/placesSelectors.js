@@ -38,7 +38,13 @@ const getDistance = (lat1, lon1, lat2, lon2)  => {
 }
 
 export const nearbyPlacesSelector = (place, places, maxDistance) => {
+  if(!places || !place) {
+    return null;    
+  }  
   return places.filter(p => {
+    if (!p.coordinates || !place.coordinates) {
+      return null;
+    }
     const dist = getDistance(
       place.coordinates.lat, 
       place.coordinates.lng, 

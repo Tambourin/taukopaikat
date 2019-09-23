@@ -5,6 +5,7 @@ const START_LOADING = "START_LOADING";
 const LOADING_DONE = "LOADING_DONE";
 const SET_LOADING_ERRORED = "SET_LOADING_ERRORED";
 const UPDATE_PLACE = "UPDATE_PLACE";
+const ADD_PLACE = "ADD_PLACE";
 
 const defaultState = {
   data: [],
@@ -22,6 +23,8 @@ const placesReducer = (state = defaultState, action) => {
       return { ...state, isLoading: false };
     case SET_LOADING_ERRORED:
       return { ...state, loadingErrored: action.value }
+    case ADD_PLACE:
+      return { ...state, data: [ ...state.data, action.place ] }
     case UPDATE_PLACE:
       return {
         ...state,
@@ -82,26 +85,38 @@ export const removeVoteFromPlace = (place) => {
       const response = await placesService.update({
         ...place,
         votes: place.votes - 1
-      });
+      });     
       dispatch(updatePlace(response));
       return response;    
   }  
 }
 
+export const addPlace = (place) => {
+  return async (dispatch) => {
+    const newPlace = await placesService.postPlace(place);   
+    dispatch({
+      type: ADD_PLACE,
+      place: newPlace
+    });
+    return newPlace;
+  }
+}
+
 export const addComment = (place, comment) => {
   return async dispatch => {
     try {
-      const response = await placesService.update({
+      const addedComment = await placesService.postComment(place.id, comment);
+      console.log(addedComment);
+      const updatedPlace = {
         ...place,
-        comments: [...place.comments, comment]
-      });
-      dispatch(updatePlace(response));
-      return response;
+        comments: [...place.comments, addedComment]
+      };
+      dispatch(updatePlace(updatedPlace));
+      return updatedPlace;
     } catch {
       console.log("Adding a comment failed");
     }    
-  }
-  
+  }  
 }
 
 export const initializePlaces = () => {

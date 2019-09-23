@@ -7,15 +7,16 @@ import SinglePlaceAccordion from "../components/SinglePlaceAccordion";
 import CommentBox from "../components/CommentBox";
 import PlacesList from "../components/PlacesList";
 import { nearbyPlacesSelector } from "../reducers/placesSelectors";
-import { MAX_DIST_FOR_NEARBY_PLACES } from "../constants/constants";
+
+const MAX_DIST_FOR_NEARBY_PLACES = 20;
 
 const SinglePlacePage = ({ place, nearByPlaces }) => {    
   if(!place) {
     return null;
   }
 
-  window.scrollTo(0, 0); // SinglePlacePage aloitetaan aina sivun alusta
-
+  window.scrollTo(0, 0); // Always scroll to top when page is loaded
+  
   return ( 
     <div> 
     <Segment textAlign="center" color="olive">
@@ -24,8 +25,6 @@ const SinglePlacePage = ({ place, nearByPlaces }) => {
       <Header color="yellow">{place.city}</Header>      
       <b>Auki tänään:</b>      
       <Divider />
-            
-
       <Grid doubling columns={2}>
         <Grid.Column>
           <Image centered bordered rounded src={place.images[0]} alt="Pääkuva taukopaikasta" />
@@ -54,7 +53,6 @@ const SinglePlacePage = ({ place, nearByPlaces }) => {
           </Segment>
         </Grid.Column>        
       </Grid>
-
       
       <Segment basic>
         <SinglePlaceAccordion place={place}/>  
@@ -64,12 +62,10 @@ const SinglePlacePage = ({ place, nearByPlaces }) => {
             <Icon as={Image}  src="http://icons.iconarchive.com/icons/papirus-team/papirus-apps/128/maps-icon.png" />
             Näytä Google Mapsissa
         </Button>    
-      </Segment>
-      
+      </Segment>      
     </Segment>
 
-    <Segment textAlign="center" color="olive">
-         
+    <Segment textAlign="center" color="olive">         
       <CommentBox place={place} />          
     </Segment>
     

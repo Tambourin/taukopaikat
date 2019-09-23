@@ -1,1 +1,1 @@
-export const MAX_DIST_FOR_NEARBY_PLACES = 20;
+export const BASE_IMAGE_URL = "https://res.cloudinary.com/drugozaqq/image/upload/";

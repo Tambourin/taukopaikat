@@ -8,6 +8,7 @@ import Intro from "./components/Intro/Intro";
 import HeaderMenu from "./components/HeaderMenu";
 import MainPage from "./pages/MainPage";
 import SinglePlacePage from "./pages/SinglePlacePage";
+import EditPage from "./pages/EditPage";
 
 const App = ({ initializePlaces, initializeVotes, places }) => {
   useEffect(() => {   
@@ -25,9 +26,10 @@ const App = ({ initializePlaces, initializeVotes, places }) => {
       <Container>
           <Intro />
           <Route exact path="/" render={() => <MainPage />}/>
+          <Route path="/edit" render={() => <EditPage />}/>
           <Route exact path="/:id" render={({ match }) => 
             <SinglePlacePage place={
-              places.find(place => place.id === Number(match.params.id))}
+              places.find(place => place.id === match.params.id)}
             />
           }/>      
       </Container>

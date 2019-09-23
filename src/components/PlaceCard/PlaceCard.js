@@ -9,23 +9,24 @@ import {
   placeWithMostVotes,
   getFilteredPlaces
 } from "../../reducers/placesSelectors";
+import { BASE_IMAGE_URL } from "../../constants/constants";
 
 const PlaceCard = ({ place, placesOnThisHighway }) => {
   return (
     <Card>
-      {place.images.length > 0 ? (
+      {place.images ? (
         <Image
-          as={Link} to={`/${place.id}`}          
-          size="small"
-          wrapped
+          as={Link} to={`/${place.id}`} 
           ui={false}
-          src={place.images[0]}
+          src={`${BASE_IMAGE_URL}c_fill,w_290,h_200/${place.images[0]}`}
           alt="kuva taukopaikasta"
         />
       ) : (
-        <Image          
-          src="https://static.thenounproject.com/png/340719-200.png"
-          alt="Kuvaa ei saatavilla"
+        <Image
+          as={Link} to={`/${place.id}`} 
+          ui={false}
+          src={`https://maps.googleapis.com/maps/api/place/photo?maxwidth=200&photoreference=${place.googleImages[0]}&key=${process.env.REACT_APP_GOOGLE_MAPS_API_KEY}`}
+          alt="kuva taukopaikasta"
         />
       )}             
                      
