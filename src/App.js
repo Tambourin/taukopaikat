@@ -12,7 +12,7 @@ import EditPage from "./pages/EditPage";
 
 const App = ({ initializePlaces, initializeVotes, places }) => {
   useEffect(() => {   
-    initializePlaces();    
+    initializePlaces();  
   }, [initializePlaces]);
 
   useEffect(() => {    
@@ -26,9 +26,9 @@ const App = ({ initializePlaces, initializeVotes, places }) => {
       <Container>
           <Intro />
           <Route exact path="/" render={() => <MainPage />}/>
-          <Route path="/edit" render={() => <EditPage />}/>
+          <Route exact path="/edit" render={() => <EditPage />}/>
           <Route exact path="/:id" render={({ match }) => 
-            <SinglePlacePage place={
+            <SinglePlacePage id={match.params.id} place={
               places.find(place => place.id === match.params.id)}
             />
           }/>      

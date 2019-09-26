@@ -5,15 +5,15 @@ import { addVoteToPlace, removeVoteFromPlace } from "../reducers/placesReducer";
 import { addToVoted, removeFromVoted } from "../reducers/votesReducer";
 
 const VoteButton = ({ place, votes, addVoteToPlace, removeVoteFromPlace, addToVoted, removeFromVoted }) => {
-
+  
   const executeVote = async () => {
-    const placeVotedOnSameHighway = votes.find(p => p.highway === place.highway);     
+    const placeVotedOnSameHighway = votes.find(p => p.highway === place.highway);       
     try{
       if (placeVotedOnSameHighway) { 
-        const removedPlace = await removeVoteFromPlace(placeVotedOnSameHighway);      
+        const removedPlace = await removeVoteFromPlace(placeVotedOnSameHighway);             
         removeFromVoted(removedPlace);            
-      }
-      const updatedPlace = await addVoteToPlace(place);
+      }      
+      const updatedPlace = await addVoteToPlace(place);      
       addToVoted(updatedPlace);
     } catch (error) {
       console.log("Äänestys ei onnistun", error);      

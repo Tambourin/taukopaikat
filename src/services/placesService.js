@@ -20,7 +20,7 @@ const postComment = async (placeId, comment) => {
   return response.data;
 }
 
-const update = async place => {  
+const update = async place => {
   const response = await axios.put(
     "http://localhost:3001/api/places/" + place.id,
     place

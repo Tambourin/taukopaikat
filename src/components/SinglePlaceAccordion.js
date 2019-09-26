@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Accordion, Icon, Image } from "semantic-ui-react";
 import PlacesMap from "./PlacesMap";
+import OpeningHoursList from "./OpeningHoursList";
 
 import coffeeImage from "../static/coffee.jpg";
 import open24hImage from "../static/open24h.png";
@@ -9,11 +10,11 @@ import kindergartenImage from "../static/kindergarten.png";
 import gasStationImage from "../static/gas-station.jpg";
 import attractionImage from "../static/attraction.jpg";
 
-const SinglePlaceAccordion = ({ place }) => {
+
+const SinglePlaceAccordion = ({ place, openingHours }) => {  
   const [ activeIndex, setActiveIndex ] = useState(-1);
 
-  const openCloseAccordion = (index) => {
-    console.log(index, activeIndex);
+  const openCloseAccordion = (index) => {    
     index === activeIndex ? setActiveIndex(-1) : setActiveIndex(index);  
   }
 
@@ -44,7 +45,7 @@ const SinglePlaceAccordion = ({ place }) => {
           Aukiolo
         </Accordion.Title>
         <Accordion.Content active={activeIndex === 1}>
-          {place.openingHours ? <div>Tähän aukioloajat</div> : <p>Aukiotietoja ei löytynyt</p>}          
+          <OpeningHoursList openingHours={openingHours} />          
         </Accordion.Content> 
         <Accordion.Title active={activeIndex === 2} onClick={() => openCloseAccordion(2)}>
           <Icon name="dropdown" color="olive"/>

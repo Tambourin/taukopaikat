@@ -19,7 +19,8 @@ const EditPage = ({ history, addPlace }) => {
     const place = {
       name: event.target.nameField.value,
       description: event.target.descriptionField.value,
-      highway: event.target.highwayField.value,      
+      highway: event.target.highwayField.value,
+      city: event.target.cityField.value,      
       services: {
         doesNotBelongToChain: event.target.doesNotBelongToChain.checked,
         isOpenTwentyFourHours: event.target.isOpenTwentyFourHours.checked,
@@ -48,8 +49,8 @@ const EditPage = ({ history, addPlace }) => {
           <input name="nameField" />
         </Form.Field>
         <Form.Field>
-          <label htmlFor="addressField">Osoite</label>
-          <input name="addressField" />
+          <label htmlFor="cityField">Osoite</label>
+          <input name="cityField" />
         </Form.Field>
         <Form.Field>
           <label htmlFor="highwayField">Tien numero:</label>

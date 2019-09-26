@@ -9,9 +9,11 @@ import placesReducer from "./reducers/placesReducer";
 import filterReducer from "./reducers/filterReducer";
 import votesReducer from "./reducers/votesReducer";
 import viewOptionsReducer from "./reducers/viewOptionsReducer";
+import activeGoogleDataReducer from "./reducers/activeGoogleDataReducer";
 
 const reducer = combineReducers({
   places: placesReducer,
+  activeGoogleData: activeGoogleDataReducer,
   votes: votesReducer,
   filter: filterReducer,
   viewOptions: viewOptionsReducer

@@ -69,7 +69,7 @@ const updatePlace = place => {
   }
 }
 
-export const addVoteToPlace = (place) => {
+export const addVoteToPlace = (place) => {  
   return async (dispatch) => {    
       const response = await placesService.update({
         ...place,
@@ -81,6 +81,7 @@ export const addVoteToPlace = (place) => {
 }
 
 export const removeVoteFromPlace = (place) => {
+  console.log(place);
   return async dispatch => {  
       const response = await placesService.update({
         ...place,

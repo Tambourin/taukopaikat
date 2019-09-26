@@ -1,7 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
-import { Image, Card } from "semantic-ui-react";
+import { Card, Container } from "semantic-ui-react";
 import RoadNumber from "../RoadNumber";
 import VoteButton from "../VoteButton";
 import BestOfHighwayRibbon from "../BestOfHighWayRibbon";
@@ -9,27 +9,14 @@ import {
   placeWithMostVotes,
   getFilteredPlaces
 } from "../../reducers/placesSelectors";
-import { BASE_IMAGE_URL } from "../../constants/constants";
+import PlaceImage from "../../components/PlaceImage";
 
 const PlaceCard = ({ place, placesOnThisHighway }) => {
   return (
     <Card>
-      {place.images ? (
-        <Image
-          as={Link} to={`/${place.id}`} 
-          ui={false}
-          src={`${BASE_IMAGE_URL}c_fill,w_290,h_200/${place.images[0]}`}
-          alt="kuva taukopaikasta"
-        />
-      ) : (
-        <Image
-          as={Link} to={`/${place.id}`} 
-          ui={false}
-          src={`https://maps.googleapis.com/maps/api/place/photo?maxwidth=200&photoreference=${place.googleImages[0]}&key=${process.env.REACT_APP_GOOGLE_MAPS_API_KEY}`}
-          alt="kuva taukopaikasta"
-        />
-      )}             
-                     
+      <Container as={Link} to={`/${place.id}`}>
+        <PlaceImage imageId={place.images[0]} googleImageId={place.googleImage}/>
+      </Container>
       {placeWithMostVotes(placesOnThisHighway).id === place.id 
         ? <BestOfHighwayRibbon highway={place.highway} />
         : null
