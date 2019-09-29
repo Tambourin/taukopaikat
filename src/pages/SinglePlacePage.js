@@ -1,28 +1,25 @@
 import React, { useEffect } from "react";
 import { connect } from "react-redux";
-import { Segment, Header, Image, Divider, Button, Label, Icon, Grid, Loader } from "semantic-ui-react";
+import { Segment, Header, Image, Divider, Button, Label, Icon, Grid, Container } from "semantic-ui-react";
 import RoadNumber from "../components/RoadNumber";
 import VoteButton from "../components/VoteButton";
-import SinglePlaceAccordion from "../components/SinglePlaceAccordion";
-import CommentBox from "../components/CommentBox";
-import PlacesList from "../components/PlacesList";
+import SinglePlaceAccordion from "../components/singlePlace/SinglePlaceAccordion";
+import CommentBox from "../components/singlePlace/CommentBox";
 import PlaceImage from "../components/PlaceImage";
-import { nearbyPlacesSelector } from "../reducers/placesSelectors";
+import NearByPlaces from "../components/singlePlace/NearByPlaces";
+import ShowOnGoogleMapsButton from "../components/ShowOnGoogleMapsButton";
+import RatingsGroup from "../components/RatingsGroup";
 import { initActiveGoogleData } from "../reducers/activeGoogleDataReducer";
 
-const MAX_DIST_FOR_NEARBY_PLACES = 20;
 
-const SinglePlacePage = ({ id, place, nearByPlaces, activeGoogleData, initActiveGoogleData, isLoading, loadingErrored }) => {
- 
+const SinglePlacePage = ({ id, place, activeGoogleData, initActiveGoogleData, isLoading, loadingErrored }) => {
   useEffect(() => {  
     initActiveGoogleData(id);
-  }, [place, initActiveGoogleData, id]); 
+  }, [initActiveGoogleData, id]); 
   
-  if(isLoading || !place) {
+  if(isLoading || !place || !activeGoogleData) {
     return (
-      <Segment>
-        <Loader active/>
-      </Segment>
+      <Segment placeholder loading />
     );    
   }    
   
@@ -34,57 +31,43 @@ const SinglePlacePage = ({ id, place, nearByPlaces, activeGoogleData, initActive
     );
   }
 
-  const fullPlaceData = activeGoogleData;
+  console.log("activeGoogleData", activeGoogleData);
+  console.log("place ", place);
 
   window.scrollTo(0, 0); // Always scroll to top when page is loaded
   
   return ( 
-    <div> 
-    <Segment textAlign="center" color="olive">
-      <RoadNumber roadNumber={place.highway} floated="left"/>
-      <Header  as="h2" style={{ fontSize: "2.5em" }} color="olive">{place.name.toUpperCase()}</Header>
+    <Container> 
+    <Segment style={{ marginTop: "10px" }} textAlign="center" color="olive">
+      <RoadNumber roadNumber={place.highway} />
+      <Header  as="h2" style={{ fontSize: "3.0em" }} color="olive">{place.name.toUpperCase()}</Header>
       <Header color="yellow">{place.city}</Header>      
       <b>Auki tänään:</b>      
       <Divider />
       <Grid doubling columns={2}>
         <Grid.Column>
-          <PlaceImage imageId={place.images[0]} googleImageId={fullPlaceData.googleImage}/>        
+          <PlaceImage imageId={place.images[0]} googleImageId={place.googleImage}/>        
         </Grid.Column>
         <Grid.Column>
-          {fullPlaceData.address ? <p>{fullPlaceData.address}, {fullPlaceData.city}</p> : null}
+          {activeGoogleData.address ? <p>{activeGoogleData.address}, {activeGoogleData.city}</p> : null}
           <Icon name="world" />
-          <a href={fullPlaceData.www}>Verkkosivu</a>       
+          <a href={activeGoogleData.www}>Verkkosivu</a>       
           {place.description 
             ? <Segment basic secondary>
               {place.description}
             </Segment>
           : null }
-          <Segment basic> 
-            <Label.Group size="large">
-              <Label color="blue">
-                <Icon name='like' />
-                  taukopaikat.fi 
-                <Label.Detail>{place.votes}</Label.Detail>
-              </Label>
-              <Label color="blue">
-                <Icon name='star'/>
-                  Arvio Google Mapsissa
-                <Label.Detail>{fullPlaceData.googleRating}</Label.Detail>
-              </Label>
-            </Label.Group>      
+                       
+            <RatingsGroup votes={place.votes} googleRating={activeGoogleData.googleRating} />
             <VoteButton place={place}/>
-          </Segment>
+          
         </Grid.Column>        
       </Grid>
       
       <Segment basic>
-        <SinglePlaceAccordion place={place} openingHours={fullPlaceData.openingHours}/>  
-        <Divider hidden/>
-        <Button basic icon labelPosition="left"       
-          href={`https://www.google.com/maps/search/?api=1&query=${place.name}`} >
-            <Icon as={Image}  src="http://icons.iconarchive.com/icons/papirus-team/papirus-apps/128/maps-icon.png" />
-            Näytä Google Mapsissa
-        </Button>    
+        <SinglePlaceAccordion place={place} openingHours={activeGoogleData.openingHours}/>  
+        <Divider hidden/>          
+        <ShowOnGoogleMapsButton placeName={place.name} />
       </Segment>      
     </Segment>
 
@@ -92,20 +75,16 @@ const SinglePlacePage = ({ id, place, nearByPlaces, activeGoogleData, initActive
       <CommentBox place={place} />         
     </Segment>
     
-    <Segment>
-      <Header as="h3">
-        Vaihtoehtoja lähellä paikkaa {place.name} (max {MAX_DIST_FOR_NEARBY_PLACES} km)
-      </Header>
-      <PlacesList places={nearByPlaces} />
+    <Segment>      
+      <NearByPlaces place={place} />
     </Segment>
-    </div>  
+    </Container>  
   )
 }
 
 const mapStateToProps = (state, ownProps) => {
   return {
-    activeGoogleData: state.activeGoogleData.data,
-    nearByPlaces: nearbyPlacesSelector(ownProps.place, state.places.data, MAX_DIST_FOR_NEARBY_PLACES),
+    activeGoogleData: state.activeGoogleData.data,    
     isLoading: state.activeGoogleData.isLoading,
     loadingErrored: state.activeGoogleData.loadingErrored    
   }

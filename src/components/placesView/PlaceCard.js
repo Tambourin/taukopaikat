@@ -4,12 +4,12 @@ import { Link } from "react-router-dom";
 import { Card, Container } from "semantic-ui-react";
 import RoadNumber from "../RoadNumber";
 import VoteButton from "../VoteButton";
-import BestOfHighwayRibbon from "../BestOfHighWayRibbon";
+import BestOfHighwayRibbon from "./BestOfHighWayRibbon";
 import {
   placeWithMostVotes,
   getFilteredPlaces
 } from "../../reducers/placesSelectors";
-import PlaceImage from "../../components/PlaceImage";
+import PlaceImage from "../PlaceImage";
 
 const PlaceCard = ({ place, placesOnThisHighway }) => {
   return (

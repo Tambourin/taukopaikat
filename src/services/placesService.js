@@ -10,6 +10,11 @@ const getOneById = async (id) => {
   return response.data;
 }
 
+const getGoogleDataByPlaceId = async (id) => {
+  const response = await axios.get(`http://localhost:3001/api/places/${id}/google`);
+  return response.data;
+}
+
 const postPlace = async (place) => {
   const response = await axios.post("http://localhost:3001/api/places/", place);
   return response.data;
@@ -29,4 +34,4 @@ const update = async place => {
 };
 
 
-export default { getAll, getOneById, postComment, update, postPlace };
+export default { getAll, getOneById, postComment, update, postPlace, getGoogleDataByPlaceId };

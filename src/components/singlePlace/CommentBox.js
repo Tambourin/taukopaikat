@@ -1,7 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import { Comment, Header } from "semantic-ui-react";
-import { addComment } from "../reducers/placesReducer";
+import { addComment } from "../../reducers/placesReducer";
 import SubmitCommentForm from "./SubmitCommentForm";
 import Comments from "./Comments";
 

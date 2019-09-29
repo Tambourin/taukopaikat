@@ -1,14 +1,14 @@
 import React, { useState } from "react";
 import { Accordion, Icon, Image } from "semantic-ui-react";
-import PlacesMap from "./PlacesMap";
+import PlacesMap from "../placesView/PlacesMap";
 import OpeningHoursList from "./OpeningHoursList";
 
-import coffeeImage from "../static/coffee.jpg";
-import open24hImage from "../static/open24h.png";
-import restaurantImage from "../static/restaurant.jpg";
-import kindergartenImage from "../static/kindergarten.png";
-import gasStationImage from "../static/gas-station.jpg";
-import attractionImage from "../static/attraction.jpg";
+import coffeeImage from "../../static/coffee.jpg";
+import open24hImage from "../../static/open24h.png";
+import restaurantImage from "../../static/restaurant.jpg";
+import kindergartenImage from "../../static/kindergarten.png";
+import gasStationImage from "../../static/gas-station.jpg";
+import attractionImage from "../../static/attraction.jpg";
 
 
 const SinglePlaceAccordion = ({ place, openingHours }) => {  
@@ -52,8 +52,8 @@ const SinglePlaceAccordion = ({ place, openingHours }) => {
           Kartta
         </Accordion.Title>
         <Accordion.Content active={activeIndex === 2}>
-          <PlacesMap places={[place]}/>
-        </Accordion.Content>        
+          {activeIndex === 2 ? <PlacesMap places={[place]}/> : null}
+        </Accordion.Content>    
     </Accordion>
   )
 }

@@ -12,8 +12,8 @@ import {
   setHasPlayground,
   setHasRestaurant,
   setHasCoffee,
-  setIsAttraction } from "../reducers/filterReducer";
-import {showAsList, showOnMap } from "../reducers/viewOptionsReducer";
+  setIsAttraction } from "../../reducers/filterReducer";
+import {showAsList, showOnMap } from "../../reducers/viewOptionsReducer";
 
 const SearchBox = ({ setHighway, filter, viewOptions, ...props }) => {    
   return (

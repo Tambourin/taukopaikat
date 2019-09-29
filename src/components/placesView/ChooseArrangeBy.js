@@ -1,7 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import { Dropdown } from "semantic-ui-react";
-import { setArrangeBy, arrangeOptions } from "../reducers/viewOptionsReducer";
+import { setArrangeBy, arrangeOptions } from "../../reducers/viewOptionsReducer";
 
 const menuOptions = [
   { icon: "like", value: arrangeOptions.VOTES, text: "Parhaat ensin" },
@@ -12,7 +12,7 @@ const menuOptions = [
 
 const ChooseArrangeBy = ({ arrangeBy, setArrangeBy }) => {  
   return (                
-      <Dropdown        
+      <Dropdown       
         selection 
         options={menuOptions}
         floating

@@ -13,7 +13,8 @@ const highwayOptions = [
 
 const ChooseHighWay = ({ highway, setHighway }) => {
   return (    
-      <Dropdown        
+      <Dropdown
+        id="highwayFilterDropdown"        
         className='icon'
         icon='road'
         labeled

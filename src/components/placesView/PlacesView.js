@@ -6,10 +6,11 @@ import PlacesMap from "./PlacesMap";
 import {
   getFilteredPlaces,
   orderPlaces,
-  limitNumberOfPlacesSelector
-} from "../reducers/placesSelectors";
-import ChooseArrangeBy from "../components/ChooseArrangeBy";
-import ChoosePercentageSlider from "../components/ChoosePercentageSlider";
+  limitNumberOfPlacesByNumber,
+  limitNumberOfPlacesByPercent
+} from "../../reducers/placesSelectors";
+import ChooseArrangeBy from "./ChooseArrangeBy";
+import ChoosePercentageSlider from "./ChoosePercentageSlider";
 
 const PlacesView = ({
   showOnMap,
@@ -17,11 +18,12 @@ const PlacesView = ({
   isLoading,
   loadingErrored,
   arrangeBy,
-  percentageOfPlacesToView
+  percentageOfPlacesToView,
+  numberOfPlacesToView
 }) => {
   if (isLoading) {
     return (
-      <Segment>
+      <Segment placeholder>
         <Loader active />
       </Segment>
     );
@@ -36,7 +38,7 @@ const PlacesView = ({
         <div>
           <ChoosePercentageSlider />
           <PlacesMap
-            places={limitNumberOfPlacesSelector(
+            places={limitNumberOfPlacesByPercent(
               orderPlaces(places, arrangeBy),
               percentageOfPlacesToView
             )}
@@ -45,7 +47,12 @@ const PlacesView = ({
       ) : (
         <div>
           <ChooseArrangeBy />
-          <PlacesList places={orderPlaces(places, arrangeBy)} />
+          <PlacesList
+            places={orderPlaces(
+              limitNumberOfPlacesByNumber(places, numberOfPlacesToView),
+              arrangeBy
+            )}            
+          />
         </div>
       )}
     </div>
@@ -59,7 +66,8 @@ const mapStateToProps = state => {
     arrangeBy: state.viewOptions.arrangeBy,
     isLoading: state.places.isLoading,
     loadingErrored: state.places.loadingErrored,
-    percentageOfPlacesToView: state.viewOptions.percentageOfPlacesToView
+    percentageOfPlacesToView: state.viewOptions.percentageOfPlacesToView,
+    numberOfPlacesToView: state.viewOptions.numberOfPlacesToView
   };
 };
 

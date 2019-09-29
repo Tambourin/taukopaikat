@@ -1,12 +1,13 @@
 import React from "react";
 import { connect } from "react-redux";
 import { Input } from "semantic-ui-react";
-import { setSearchWord } from "../reducers/filterReducer";
+import { setSearchWord } from "../../reducers/filterReducer";
 
 const SearchWordInput = ({ searchWord, setSearchWord }) => {
   return (
     <div>
-      <Input        
+      <Input
+        id="searchWordInput"        
         fluid
         icon="search" 
         placeholder="Hae nimen ja paikkakunnan perusteella"

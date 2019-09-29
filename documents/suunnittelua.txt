@@ -2,21 +2,21 @@
 
 *SinglePlace-sivu
 
-Karttaan oma sijainti?
-Karttaan slideri, että paljonko näytetään
+*Karttaan oma sijainti?
+*Karttaan slideri, että paljonko näytetään
 Valtatien valinta korostaa kyseisen tien kartassa
 *InfoWindow onClick vie SinglePlaceen
-
 *Listanäkymän järestäminen
-Paginaatio
 
+*Paginaatio
 Tien parhaan paikan selvittäminen viisaammmin
-
 Lisää kuvia SinglePlaceen
+Suorien kyselyiden rajoittaminen backendissä
+käyttäjät
+vupden taukopaikat
 
 
 Hakemistorakenne:
-
 Pages
   Main
   SinglePlace

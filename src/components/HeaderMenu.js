@@ -4,9 +4,9 @@ import { Menu } from "semantic-ui-react";
 
 const HeaderMenu = () => {
   return (
-    <Menu stackable inverted color="olive" fluid>
+    <Menu stackable inverted color="olive" fluid style={{ marginBottom: "0px" }}>
       <Menu.Item as={Link} to="/">
-        <h2>Taukopaikat.fi</h2>
+        <h2 style={{fontFamily: "'Source Sans Pro', sans-serif"}}>Taukopaikat.fi</h2>
       </Menu.Item>
     </Menu>
   )

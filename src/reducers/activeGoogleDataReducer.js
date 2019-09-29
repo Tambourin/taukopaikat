@@ -28,7 +28,7 @@ export const initActiveGoogleData = (id) => {
     dispatch({ type: SET_LOADING_ERRORED, loadingErrored: false });
     dispatch({ type: SET_IS_LOADING, isLoading: true });
     try {
-      const placeData = await placesService.getOneById(id);        
+      const placeData = await placesService.getGoogleDataByPlaceId(id);        
       dispatch({
         type: INIT_ACTIVE_GOOGLE_DATA,
         place: placeData

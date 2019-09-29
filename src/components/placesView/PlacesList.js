@@ -1,7 +1,7 @@
 import React from "react";
 import { Card, Segment } from "semantic-ui-react";
-import PlaceCard from "./PlaceCard/PlaceCard";
-
+import PlaceCard from "./PlaceCard";
+import ShowMoreButton from "./ShowMoreButton";
 
 const PlacesList = ({ places }) => {
   if (!places) {
@@ -21,7 +21,8 @@ const PlacesList = ({ places }) => {
         {places.map(place => (
           <PlaceCard key={place.id} place={place} />
         ))}
-      </Card.Group>      
+      </Card.Group>   
+      <ShowMoreButton placesLength={places.length}/>
     </Segment>  
   );
 };

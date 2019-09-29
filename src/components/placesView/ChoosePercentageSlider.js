@@ -1,7 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import { Segment, Label, Grid } from "semantic-ui-react";
-import { setPercentageOfPlacesToView } from "../reducers/viewOptionsReducer";
+import { setPercentageOfPlacesToView } from "../../reducers/viewOptionsReducer";
 
 
 const inputStyle = {  

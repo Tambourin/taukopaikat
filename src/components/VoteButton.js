@@ -4,14 +4,17 @@ import { Icon, Button } from "semantic-ui-react";
 import { addVoteToPlace, removeVoteFromPlace } from "../reducers/placesReducer";
 import { addToVoted, removeFromVoted } from "../reducers/votesReducer";
 
-const VoteButton = ({ place, votes, addVoteToPlace, removeVoteFromPlace, addToVoted, removeFromVoted }) => {
+const VoteButton = ({ place, places, votes, addVoteToPlace, removeVoteFromPlace, addToVoted, removeFromVoted }) => {
   
   const executeVote = async () => {
     const placeVotedOnSameHighway = votes.find(p => p.highway === place.highway);       
     try{
       if (placeVotedOnSameHighway) { 
-        const removedPlace = await removeVoteFromPlace(placeVotedOnSameHighway);             
-        removeFromVoted(removedPlace);            
+        const placeToRemove = places.find(place => place.id === placeVotedOnSameHighway.id);
+        if(placeToRemove) {
+          await removeVoteFromPlace(placeToRemove);
+        }                 
+        removeFromVoted(placeVotedOnSameHighway);            
       }      
       const updatedPlace = await addVoteToPlace(place);      
       addToVoted(updatedPlace);
@@ -37,7 +40,8 @@ const VoteButton = ({ place, votes, addVoteToPlace, removeVoteFromPlace, addToVo
 
 const mapStateToProps = state => {
   return {
-    votes: state.votes
+    votes: state.votes,
+    places: state.places.data
   }
 } 
 

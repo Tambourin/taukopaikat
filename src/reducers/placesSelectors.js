@@ -54,9 +54,13 @@ export const nearbyPlacesSelector = (place, places, maxDistance) => {
     });
 }
 
-export const limitNumberOfPlacesSelector = (places, percentage) => {
+export const limitNumberOfPlacesByPercent = (places, percentage) => {
   const numberOfElementsToGet = Math.ceil(percentage / 100 * places.length);
-  return [...places].slice(0,numberOfElementsToGet);
+  return [...places].slice(0, numberOfElementsToGet);
+}
+
+export const limitNumberOfPlacesByNumber = (places, numberofPlaces) => {  
+  return [...places].slice(0, numberofPlaces);
 }
 
 export const getFilteredPlaces = (places, filter) => {
@@ -80,10 +84,15 @@ export const getFilteredPlaces = (places, filter) => {
     if(filter.searchWord) {
       const searchWord = filter.searchWord.toLowerCase();
       const placeName = place.name.toLowerCase();
-      const city = place.city.toLowerCase();
-      if (!placeName.includes(searchWord) && !city.includes(searchWord)) {
+      if (!placeName.includes(searchWord)) {
         return false;
       }
+      if (place.city) {
+        const city = place.city.toLowerCase();
+        if(!city.includes(searchWord)) {
+          return false;
+        }
+      }      
     }
     return true;
   };
