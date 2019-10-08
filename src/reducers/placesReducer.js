@@ -119,6 +119,17 @@ export const addComment = (place, comment) => {
   }  
 }
 
+export const addImage = (place, imageData) => {  
+  return async (dispatch) => {
+    try {
+      const updatedPlace = await placesService.postImage(place.id, imageData);     
+      dispatch(updatePlace(updatedPlace));
+    } catch {
+      console.log("Adding an image failed");
+    }
+  }
+}
+
 export const initializePlaces = () => {
   return async dispatch => {
     dispatch(setLoadingErrored(false));

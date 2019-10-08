@@ -1,6 +1,11 @@
 import React from "react";
 import { Grid, Image, Icon } from "semantic-ui-react";
 
+const footerStyle = {
+  backgroundColor: "#B2D115",
+    
+}
+
 const footerUpperStyle = {
   padding: "50px 70px",
   margin: 0
@@ -11,23 +16,21 @@ const copyrightStyle = {
   padding: "10px 70px"
 }
 
-const footerStyle = {
-  backgroundColor: "#7DAE9A",
-  marginTop: "20px"  
-}
+const columnStyle = { padding: "0px 10% 0px 0px" };
+
+const headerStyle = {  fontFamily: "'Courgette', cursive " };
 
 const Footer = () => {
   return (
     <footer style={footerStyle}>      
       <Grid style={footerUpperStyle} stackable divided columns="equal">          
-        <Grid.Column style={{ padding: "0px 10% 0px 0px" }} width={10}>
-          <h3 style={{ fontFamily: "'Courgette', cursive " }}>Taukopaikat.fi:stä</h3>
+        <Grid.Column style={columnStyle} width={10}>
+          <h3 style={headerStyle}>Taukopaikat.fi:stä</h3>
           <p>Taukopaikat.fi on riippumaton verkkosivu, joka on syntynyt yksinkertaisesta halusta löytää hauskimmat taukopaikat. Sivu listaa Suomen parhaat taukopaikat valtateiden varsilta. Etsi seuraava pysähdyspaikka tai äänestä omaa suosikkiasi parhaiden joukkoon. Koska automatkailu voi olla kivaa!</p>
-          <h4 style={{ fontFamily: "'Courgette', cursive " }}>Mikä on paras taukopaikka?</h4>
-          <p>Taukopaikkojen järjestys määräytyy Taukopaikat.fi:ssä tehtyjen äänestysten ja käyttäjien Google Mapsissä antamien pisteiden perusteella.</p>
-          
+          <h4 style={headerStyle}>Mikä on paras taukopaikka?</h4>
+          <p>Taukopaikkojen järjestys määräytyy Taukopaikat.fi:ssä tehtyjen äänestysten ja käyttäjien Google Mapsissä antamien pisteiden perusteella.</p>    
         </Grid.Column>
-        <Grid.Column width={3}> 
+        <Grid.Column width={5}> 
           <Icon circular name="mail" />
           Ota yhteyttä
         </Grid.Column>

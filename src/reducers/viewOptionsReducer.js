@@ -6,7 +6,7 @@ export const arrangeOptions = {
   CITY: "CITY"  
 };
 
-export const BUNCH_OF_PLACES = 1;
+export const BUNCH_OF_PLACES = 10;
 
 const defaultViewOptions = {
   showOnMap: false,

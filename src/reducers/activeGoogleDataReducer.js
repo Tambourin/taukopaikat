@@ -15,17 +15,16 @@ const activeGoogleDataReducer = (state = defaultState, action) => {
     case INIT_ACTIVE_GOOGLE_DATA:            
       return { ...state, data: action.place }
     case SET_IS_LOADING:
-      return { ...state, isLoading: action.isLoading }
+      return { ...state, isLoading: action.isLoading, loadingErrored: false }
     case SET_LOADING_ERRORED:
-      return { ...state, loadingErrored: action.loadingErrored }
+      return { ...state, loadingErrored: true, isLoading: false }
     default:
       return state;
   }
 }
 
 export const initActiveGoogleData = (id) => {
-  return async (dispatch) => {
-    dispatch({ type: SET_LOADING_ERRORED, loadingErrored: false });
+  return async (dispatch) => {    
     dispatch({ type: SET_IS_LOADING, isLoading: true });
     try {
       const placeData = await placesService.getGoogleDataByPlaceId(id);        
@@ -37,7 +36,7 @@ export const initActiveGoogleData = (id) => {
       return placeData;
     } catch {
       console.log("error loading Google data");
-      dispatch({ type: SET_LOADING_ERRORED, loadingErrored: true });
+      dispatch({ type: SET_LOADING_ERRORED, loadingErrored: true });     
     }
   }
 }

@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@auth0/auth0-spa-js": "^1.2.4",
     "axios": "^0.19.0",
     "google-maps-react": "^2.0.2",
     "react": "^16.9.0",
@@ -44,7 +45,15 @@
     "json-server": "^0.15.0"
   },
   "standard": {
-    "env": ["browser", "mocha"],
-    "globals": ["cy", "Cypress", "expect", "assert"]
+    "env": [
+      "browser",
+      "mocha"
+    ],
+    "globals": [
+      "cy",
+      "Cypress",
+      "expect",
+      "assert"
+    ]
   }
 }

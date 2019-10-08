@@ -37,6 +37,7 @@ const EditPage = ({ history, addPlace }) => {
     console.log(result); 
     history.push("/");      
   }
+  
 
   const handleImageFileChange = (event) => {
     reader.readAsDataURL(event.target.files[0]);

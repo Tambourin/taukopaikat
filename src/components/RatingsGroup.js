@@ -1,9 +1,9 @@
 import React from "react";
-import { Icon, Statistic, Segment } from "semantic-ui-react";
+import { Icon, Statistic } from "semantic-ui-react";
 
 const RatingsGroup = ({ votes, googleRating }) => {
   return (
-    <Segment basic>    
+    <div>    
         <Statistic color="red" size="mini">
           <Statistic.Value>
             <Icon name="like" />
@@ -18,7 +18,7 @@ const RatingsGroup = ({ votes, googleRating }) => {
           </Statistic.Value>
           <Statistic.Label>Arvio Google Mapsissa</Statistic.Label>
         </Statistic>
-    </Segment>
+    </div>
 
   );
 };

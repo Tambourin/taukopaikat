@@ -11,11 +11,13 @@ import {
 } from "../../reducers/placesSelectors";
 import PlaceImage from "../PlaceImage";
 
+const MAX_IMAGE_HEIGHT = 210;
+
 const PlaceCard = ({ place, placesOnThisHighway }) => {
   return (
     <Card>
-      <Container as={Link} to={`/${place.id}`}>
-        <PlaceImage imageId={place.images[0]} googleImageId={place.googleImage}/>
+      <Container as={Link} to={`/${place.id}`} >
+        <PlaceImage imageId={place.images[0]} googleImageId={place.googleImage} height={MAX_IMAGE_HEIGHT} />
       </Container>
       {placeWithMostVotes(placesOnThisHighway).id === place.id 
         ? <BestOfHighwayRibbon highway={place.highway} />

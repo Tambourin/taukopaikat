@@ -11,7 +11,7 @@ import gasStationImage from "../../static/gas-station.jpg";
 import attractionImage from "../../static/attraction.jpg";
 
 
-const SinglePlaceAccordion = ({ place, openingHours }) => {  
+const SinglePlaceAccordion = ({ place, activeGoogleData, openingHours }) => {  
   const [ activeIndex, setActiveIndex ] = useState(-1);
 
   const openCloseAccordion = (index) => {    
@@ -35,24 +35,36 @@ const SinglePlaceAccordion = ({ place, openingHours }) => {
     <Accordion styled fluid>
         <Accordion.Title active={activeIndex === 0} onClick={() => openCloseAccordion(0)}>
           <Icon name="dropdown" color="olive"/>
-          Palvelut
+          Yhteystiedot
         </Accordion.Title>
-        <Accordion.Content active={activeIndex === 0}>          
-          {servicesIcons()}
+        <Accordion.Content active={activeIndex === 0}>
+          <div>
+            {activeGoogleData.address}, {activeGoogleData.city}
+          </div>  
+          <div>
+            <a id="webLink"  href={activeGoogleData.www}>Verkkosivu</a>
+          </div>
         </Accordion.Content>
         <Accordion.Title active={activeIndex === 1} onClick={() => openCloseAccordion(1)}>
           <Icon name="dropdown" color="olive"/>
+          Palvelut
+        </Accordion.Title>
+        <Accordion.Content active={activeIndex === 1}>          
+          {servicesIcons()}
+        </Accordion.Content>
+        <Accordion.Title active={activeIndex === 2} onClick={() => openCloseAccordion(2)}>
+          <Icon name="dropdown" color="olive"/>
           Aukiolo
         </Accordion.Title>
-        <Accordion.Content active={activeIndex === 1}>
+        <Accordion.Content active={activeIndex === 2}>
           <OpeningHoursList openingHours={openingHours} />          
         </Accordion.Content> 
-        <Accordion.Title active={activeIndex === 2} onClick={() => openCloseAccordion(2)}>
+        <Accordion.Title active={activeIndex === 3} onClick={() => openCloseAccordion(3)}>
           <Icon name="dropdown" color="olive"/>
           Kartta
         </Accordion.Title>
-        <Accordion.Content active={activeIndex === 2}>
-          {activeIndex === 2 ? <PlacesMap places={[place]}/> : null}
+        <Accordion.Content active={activeIndex === 3}>
+          {activeIndex === 3 ? <PlacesMap places={[place]}/> : null}
         </Accordion.Content>    
     </Accordion>
   )

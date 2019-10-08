@@ -20,9 +20,9 @@ const App = ({ initializePlaces, initializeVotes, places }) => {
   }, [initializeVotes]);
  
   return (
-    <>
+    <div>
     <BrowserRouter>
-      <HeaderMenu />            
+      <HeaderMenu />      
         <Route exact path="/" render={() => <MainPage />}/>
         <Route exact path="/edit" render={() => <EditPage />}/>
         <Route exact path="/:id" render={({ match }) => 
@@ -32,7 +32,7 @@ const App = ({ initializePlaces, initializeVotes, places }) => {
         }/>
       <Footer />     
     </BrowserRouter>
-    </>
+    </div>
   );
 };
 

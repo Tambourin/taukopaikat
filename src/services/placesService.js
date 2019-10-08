@@ -25,6 +25,12 @@ const postComment = async (placeId, comment) => {
   return response.data;
 }
 
+const postImage = async (placeId, imageData) => {  
+  const response = await axios.post(`http://localhost:3001/api/places/${placeId}/images`, { imageData: imageData });
+  console.log(response.data);
+  return response.data;
+}
+
 const update = async place => {
   const response = await axios.put(
     "http://localhost:3001/api/places/" + place.id,
@@ -34,4 +40,4 @@ const update = async place => {
 };
 
 
-export default { getAll, getOneById, postComment, update, postPlace, getGoogleDataByPlaceId };
+export default { getAll, getOneById, postComment, update, postPlace, getGoogleDataByPlaceId, postImage };

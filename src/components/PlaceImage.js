@@ -2,14 +2,14 @@ import React from "react";
 import { Image } from "semantic-ui-react";
 import { BASE_IMAGE_URL } from "../constants/constants";
 
-const imageStyle = {
-  height: "210px", 
-  width: "100%", 
-  objectFit: "cover", 
-  objectPosition: "center"
-}
+const SinglePlaceImage = ({ imageId, googleImageId, height }) => {
+  const imageStyle = {
+    height: `${height}px`, 
+    width: "100%", 
+    objectFit: "cover", 
+    objectPosition: "center"
+  }
 
-const SinglePlaceImage = ({ imageId, googleImageId }) => {
   if(imageId) {
     return (
       <Image

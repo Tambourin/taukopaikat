@@ -1,18 +1,29 @@
 import { arrangeOptions } from "./viewOptionsReducer";
 
 export const placeWithMostVotes = places => {
-  return places.reduce((placeWithMostVotes, currentPlace) => {
-    if (currentPlace.votes > placeWithMostVotes.votes) {
-      return currentPlace;
-    }
-    return placeWithMostVotes;
-  });
+  return places.sort((place1, place2) => orderByVotesAndGoogle(place1, place2))[0];  
 };
+
+const orderByVotesAndGoogle = (place1 , place2) => {
+  if(place1.votes && place2.votes) {
+    if(place2.votes !== place1.votes){
+      return place2.votes - place1.votes;
+    }
+    console.log(place2.googleRating, place1.googleRating);
+    return place2.googleRating - place1.googleRating;      
+  } else if (place1.votes) {
+    return 1;
+  } else if (place2.votes) {
+    return -1;
+  } else {
+    return place2.googleRating - place1.googleRating;
+  }
+}
 
 export const orderPlaces = (places, orderBy) => {
   switch (orderBy) {
-    case arrangeOptions.VOTES:
-        return [...places].sort((place1, place2) => place2.votes - place1.votes); 
+    case arrangeOptions.VOTES:       
+        return [...places].sort((place1, place2) => orderByVotesAndGoogle(place1, place2)); 
     case arrangeOptions.APLHABETIC:
         return [...places].sort((place1, place2) => { 
           return place1.name > place2.name ? 1 : -1;
