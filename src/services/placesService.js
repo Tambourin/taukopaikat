@@ -1,5 +1,10 @@
 import axios from "axios";
 
+const setToken = (token) => {
+  axios.defaults.headers.post["Authorization"] = "bearer " + token;
+  axios.defaults.headers.put["Authorization"] = "bearer " + token;
+}
+
 const getAll = async () => {
   const response = await axios.get("http://localhost:3001/api/places");  
   return response.data;
@@ -40,4 +45,4 @@ const update = async place => {
 };
 
 
-export default { getAll, getOneById, postComment, update, postPlace, getGoogleDataByPlaceId, postImage };
+export default { getAll, getOneById, postComment, update, postPlace, getGoogleDataByPlaceId, postImage, setToken };

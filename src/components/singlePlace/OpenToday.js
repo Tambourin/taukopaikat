@@ -18,10 +18,10 @@ const OpenToday = ({ openingHours }) => {
   }
 
   return (
-    <div>
+    <h3>
       <b>Auki tänään: </b>
       {splitWeekdayText()}
-    </div>
+    </h3>
   );
 };
 

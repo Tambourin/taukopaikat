@@ -10,7 +10,7 @@ const SearchWordInput = ({ searchWord, setSearchWord }) => {
         id="searchWordInput"        
         fluid
         icon="search" 
-        placeholder="Hae nimen ja paikkakunnan perusteella"
+        placeholder="Hae nimen tai paikkakunnan perusteella"
         value={searchWord}
         onChange={(event, data) => {setSearchWord(data.value)}} 
     />

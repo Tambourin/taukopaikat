@@ -38,10 +38,11 @@ const SinglePlaceAccordion = ({ place, activeGoogleData, openingHours }) => {
           Yhteystiedot
         </Accordion.Title>
         <Accordion.Content active={activeIndex === 0}>
-          <div>
+          <p>
             {activeGoogleData.address}, {activeGoogleData.city}
-          </div>  
+          </p>  
           <div>
+            <Icon name="world" />
             <a id="webLink"  href={activeGoogleData.www}>Verkkosivu</a>
           </div>
         </Accordion.Content>

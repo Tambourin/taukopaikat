@@ -9,11 +9,10 @@ const orderByVotesAndGoogle = (place1 , place2) => {
     if(place2.votes !== place1.votes){
       return place2.votes - place1.votes;
     }
-    console.log(place2.googleRating, place1.googleRating);
     return place2.googleRating - place1.googleRating;      
-  } else if (place1.votes) {
-    return 1;
   } else if (place2.votes) {
+    return 1;
+  } else if (place1.votes) {
     return -1;
   } else {
     return place2.googleRating - place1.googleRating;
@@ -82,28 +81,31 @@ export const getFilteredPlaces = (places, filter) => {
         place.services.doesNotBelongToChain === false) ||
       (filter.isOpenTwentyFourHours === true &&
         place.services.isOpenTwentyFourHours === false) ||
-      (filter.hasPlayground === true &&
-        place.services.hasPlayground === false) ||
-      (filter.hasRestaurant === true &&
-        place.services.hasRestaurant === false) ||
-      (filter.hasCofee === true && place.services.hasCofee === false) ||
-      (filter.isAttraction === true && place.services.isAttraction === false)
+      (filter.hasBeenAvarded === true &&
+        place.services.hasBeenAvarded === false) ||
+      (filter.isAttraction === true &&
+        place.services.isAttraction === false) ||
+      (filter.isSummerCafe === true && place.services.isSummerCafe === false) ||
+      (filter.isGasStation === true && place.services.isGasStation === false) ||
+      (filter.isGrill === true && place.services.isGrill === false)
     ) {
       return false;
     }
 
     if(filter.searchWord) {
-      const searchWord = filter.searchWord.toLowerCase();
+      const searchWord = filter.searchWord.toLowerCase();      
       const placeName = place.name.toLowerCase();
-      if (!placeName.includes(searchWord)) {
-        return false;
-      }
-      if (place.city) {
-        const city = place.city.toLowerCase();
-        if(!city.includes(searchWord)) {
+       
+      if(place.city) {        
+        const city = place.city.toLowerCase();      
+        if (!placeName.includes(searchWord) && !city.includes(searchWord)) {
           return false;
         }
-      }      
+      } else {
+        if (!placeName.includes(searchWord)) {
+          return false;
+        }
+      }       
     }
     return true;
   };

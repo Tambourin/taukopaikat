@@ -4,28 +4,33 @@ const INIT_PLACES = "INIT_PLACES";
 const START_LOADING = "START_LOADING";
 const LOADING_DONE = "LOADING_DONE";
 const SET_LOADING_ERRORED = "SET_LOADING_ERRORED";
+const SET_UPLOAD_ERROR_MESSAGE = "UPLOAD_ERROR_MESSAGE";
 const UPDATE_PLACE = "UPDATE_PLACE";
 const ADD_PLACE = "ADD_PLACE";
 
 const defaultState = {
   data: [],
   isLoading: false,
-  loadingErrored: false
+  loadingErrored: false,
+  uploadErrorMessage: null
 };
 
 const placesReducer = (state = defaultState, action) => {
   switch (action.type) {
     case INIT_PLACES:
       return { ...state, data: action.places };
-    case START_LOADING:      
-      return { ...state, isLoading: true };
-    case LOADING_DONE:     
-      return { ...state, isLoading: false };
+    case START_LOADING:
+      return { ...state, isLoading: true, loadingErrored: false };
+    case LOADING_DONE:
+      return { ...state, isLoading: false, loadingErrored: false };
     case SET_LOADING_ERRORED:
-      return { ...state, loadingErrored: action.value }
+      return { ...state, loadingErrored: true, isLoading: false };
+    case SET_UPLOAD_ERROR_MESSAGE:
+      return { ...state, uploadErrorMessage: action.message };
     case ADD_PLACE:
-      return { ...state, data: [ ...state.data, action.place ] }
+      return { ...state, data: [...state.data, action.place] };
     case UPDATE_PLACE:
+      console.log("reducer: ", action.place);
       return {
         ...state,
         data: state.data.map(place =>
@@ -48,12 +53,11 @@ const loadingDone = () => {
   };
 };
 
-const setLoadingErrored = (value) => {
+const setLoadingErrored = () => {
   return {
-    type: SET_LOADING_ERRORED,
-    value: value
-  }
-}
+    type: SET_LOADING_ERRORED
+  };
+};
 
 const initPlaces = places => {
   return {
@@ -66,41 +70,50 @@ const updatePlace = place => {
   return {
     type: UPDATE_PLACE,
     place: place
-  }
-}
+  };
+};
 
-export const addVoteToPlace = (place) => {  
-  return async (dispatch) => {    
-      const response = await placesService.update({
-        ...place,
-        votes: place.votes + 1
-      });      
-      dispatch(updatePlace(response));      
-      return response;
-  }  
-}
-
-export const removeVoteFromPlace = (place) => {
-  return async dispatch => { 
-      const response = await placesService.update({
-        ...place,
-        votes: place.votes - 1
-      });     
-      dispatch(updatePlace(response));
-      return response;    
-  }  
-}
-
-export const addPlace = (place) => {
-  return async (dispatch) => {
-    const newPlace = await placesService.postPlace(place);   
-    dispatch({
-      type: ADD_PLACE,
-      place: newPlace
+export const addVoteToPlace = place => {
+  return async dispatch => {
+    const response = await placesService.update({
+      ...place,
+      votes: place.votes + 1
     });
-    return newPlace;
-  }
-}
+    dispatch(updatePlace(response));
+    return response;
+  };
+};
+
+export const removeVoteFromPlace = place => {
+  return async dispatch => {
+    const response = await placesService.update({
+      ...place,
+      votes: place.votes - 1
+    });
+    dispatch(updatePlace(response));
+    return response;
+  };
+};
+
+export const addPlace = place => {
+  return async dispatch => {
+    dispatch({ type: SET_UPLOAD_ERROR_MESSAGE, message: null });
+    try {
+      const newPlace = await placesService.postPlace(place);
+      dispatch({
+        type: ADD_PLACE,
+        place: newPlace
+      });
+      return newPlace;
+    } catch (error) {
+      dispatch({
+        type: SET_UPLOAD_ERROR_MESSAGE,
+        message: error.response ? error.response.data.error : "Ei saada yhteyttä palvelimeen."
+      });
+      return null;
+    }
+  };
+};
 
 export const addComment = (place, comment) => {
   return async dispatch => {
@@ -115,32 +128,40 @@ export const addComment = (place, comment) => {
       return updatedPlace;
     } catch {
       console.log("Adding a comment failed");
-    }    
-  }  
-}
-
-export const addImage = (place, imageData) => {  
-  return async (dispatch) => {
-    try {
-      const updatedPlace = await placesService.postImage(place.id, imageData);     
-      dispatch(updatePlace(updatedPlace));
-    } catch {
-      console.log("Adding an image failed");
     }
-  }
-}
+  };
+};
+
+export const updatePlaceAction = place => {
+  return async dispatch => {
+    dispatch(updatePlace(place));
+    return place;
+  };
+};
+
+export const updatePlaceSmartAction = place => {
+  return async dispatch => {
+    try {
+      const response = await placesService.update(place);
+      dispatch(updatePlace(response));
+      return response;
+    } catch {
+      console.log("Update failed");
+      return null;
+    }
+  };
+};
 
 export const initializePlaces = () => {
-  return async dispatch => {
-    dispatch(setLoadingErrored(false));
+  return async dispatch => {   
     dispatch(startLoading());
-    try{
+    try {
       const places = await placesService.getAll();
       dispatch(initPlaces(places));
-    } catch {      
-      dispatch(setLoadingErrored(true));
+      dispatch(loadingDone());
+    } catch {
+      dispatch(setLoadingErrored());
     }    
-    dispatch(loadingDone());
   };
 };
 

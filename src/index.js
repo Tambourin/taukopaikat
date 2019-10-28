@@ -4,21 +4,29 @@ import { createStore, combineReducers, applyMiddleware } from "redux";
 import { Provider } from "react-redux";
 import thunk from "redux-thunk";
 import './index.css';
+
 import App from './App';
 import placesReducer from "./reducers/placesReducer";
 import filterReducer from "./reducers/filterReducer";
 import votesReducer from "./reducers/votesReducer";
 import viewOptionsReducer from "./reducers/viewOptionsReducer";
 import activeGoogleDataReducer from "./reducers/activeGoogleDataReducer";
+import imageUploadReducer from "./reducers/imageUploadReducer";
+import userReducer from "./reducers/userReducer";
+
 
 const reducer = combineReducers({
   places: placesReducer,
   activeGoogleData: activeGoogleDataReducer,
+  user: userReducer,
+  imageUpload: imageUploadReducer,
   votes: votesReducer,
   filter: filterReducer,
   viewOptions: viewOptionsReducer
 });
 const store = createStore(reducer, applyMiddleware(thunk));
+
+
 
 ReactDOM.render(
   <Provider store={store}>

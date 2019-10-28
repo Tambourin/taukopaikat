@@ -1,7 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
-import { Card, Container } from "semantic-ui-react";
+import { Card } from "semantic-ui-react";
 import RoadNumber from "../RoadNumber";
 import VoteButton from "../VoteButton";
 import BestOfHighwayRibbon from "./BestOfHighWayRibbon";
@@ -16,15 +16,15 @@ const MAX_IMAGE_HEIGHT = 210;
 const PlaceCard = ({ place, placesOnThisHighway }) => {
   return (
     <Card>
-      <Container as={Link} to={`/${place.id}`} >
+      <Link to={`/places/${place.id}`} >
         <PlaceImage imageId={place.images[0]} googleImageId={place.googleImage} height={MAX_IMAGE_HEIGHT} />
-      </Container>
+      </Link>
       {placeWithMostVotes(placesOnThisHighway).id === place.id 
         ? <BestOfHighwayRibbon highway={place.highway} />
         : null
       }      
       <Card.Content>      
-        <Card.Header as={Link} to={`/${place.id}`}>
+        <Card.Header as={Link} to={`/places/${place.id}`}>
           {place.name}
           <RoadNumber roadNumber={place.highway} floated="right" />
         </Card.Header>

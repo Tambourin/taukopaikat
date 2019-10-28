@@ -9,10 +9,11 @@ import {
   setHighway, 
   setDoesNotBelongToChain,
   setIsOpenTwentyFourHours,
-  setHasPlayground,
-  setHasRestaurant,
-  setHasCoffee,
-  setIsAttraction } from "../../reducers/filterReducer";
+  setHasBeenAvarded,
+  setIsAttraction,
+  setIsSummerCafe,
+  setIsGasStation,
+  setIsGrill } from "../../reducers/filterReducer";
 import {showAsList, showOnMap } from "../../reducers/viewOptionsReducer";
 
 const SearchBox = ({ setHighway, filter, viewOptions, ...props }) => {    
@@ -35,10 +36,11 @@ const SearchBox = ({ setHighway, filter, viewOptions, ...props }) => {
         filter={filter}
         setDoesNotBelongToChain={props.setDoesNotBelongToChain}
         setIsOpenTwentyFourHours={props.setIsOpenTwentyFourHours}
-        setHasPlayground={props.setHasPlayground}
-        setHasRestaurant={props.setHasRestaurant}
-        setHasCoffee={props.setHasCoffee}
-        setIsAttraction={props.setIsAttraction} 
+        setHasBeenAvarded={props.setHasBeenAvarded}
+        setIsAttraction={props.setIsAttraction}
+        setIsSummerCafe={props.setIsSummerCafe}
+        setIsGasStation={props.setIsGasStation}
+        setIsGrill={props.setIsGrill} 
       />
       <ChooseViewAsListOrMap 
         viewOptions={viewOptions} 
@@ -60,10 +62,11 @@ export default connect(mapStateToProps, {
   setHighway, 
   setDoesNotBelongToChain,
   setIsOpenTwentyFourHours,
-  setHasPlayground,
-  setHasRestaurant,
-  setHasCoffee,
+  setHasBeenAvarded,
   setIsAttraction,
+  setIsSummerCafe,
+  setIsGasStation,
+  setIsGrill,
   showAsList,
   showOnMap
 })(SearchBox);

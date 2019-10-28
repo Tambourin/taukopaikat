@@ -1,61 +1,66 @@
 import React, { useState } from "react";
 import { connect } from "react-redux";
-import { addImage } from "../reducers/placesReducer";
-import { Segment, Button, Icon } from "semantic-ui-react";
+import { updatePlaceAction } from "../reducers/placesReducer";
+import { Segment, Button, Modal } from "semantic-ui-react";
+import { setImageAction, upLoadAction } from "../reducers/imageUploadReducer";
 
 const reader = new FileReader();
 
-const AddImage = ({ place, addImage }) => {
-  const [ImageByte64, setImageByte64] = useState("");
-  const [loading, setLoading] = useState(false);
-  const [chooseFileVisible, setChooseFileVisible] = useState(false);
-  const [loadingSuccess, setLoadingSuccess] = useState(false);
-
+const AddImage = ({ place, image, loading, setImageAction, errored, loadingSuccess, upLoadAction, updatePlaceAction }) => {
+  
+  const [ show, setShow ] = useState(false);
+ 
   reader.addEventListener("load", () => {
-    setImageByte64(reader.result);
+    setImageAction(reader.result);
   });
 
   const handleImageFileChange = event => {
     reader.readAsDataURL(event.target.files[0]);
   };
 
-  const handleSubmit = async event => {
+  const handleSubmit = async event => {    
     event.preventDefault();
-    setLoading(true);
-    await addImage(place, ImageByte64);
-    setLoading(false);
-    setLoadingSuccess(true);
-    setTimeout(() => {
-      setLoadingSuccess(false);
-    }, 5000);
-    setImageByte64("");
-    setChooseFileVisible(false);
+    setShow(false);
+    const updatedPlace = await upLoadAction(place.id, image);
+    if(updatedPlace) {
+      updatePlaceAction(updatedPlace);
+    }    
   };
 
   if (loadingSuccess) {
-    return <Segment>Kuvan lisäys onnistui!</Segment>;
+    return <Button disabled={true} icon="check" color="green" />;
+  } else if (errored) {
+    return <Segment inverted color="red">Kuvan lisäys epäonnistui!</Segment>
+  } else if (loading) {
+    return <Modal open={true}><Segment loading placeholder></Segment></Modal>;
   }
 
-  if (loading) {
-    return <Segment loading></Segment>;
+  const triggerButton = () => {
+    return <Button       
+      title="Lähetä kuva"  
+      aria-label="Lähetä kuva"           
+      active={show}
+      circular
+      size="huge"        
+      icon="plus"      
+      onClick={() => setShow(!show)}
+    />
   }
 
   return (
-    <div>
-      <Button
-        basic
-        toggle
-        active={chooseFileVisible}
-        fluid
-        size="tiny"
-        onClick={() => setChooseFileVisible(!chooseFileVisible)}
-      >
-        <Icon name="plus" />
-        Lähetä kuva
-      </Button>
-      {chooseFileVisible ? (
-        <Segment>
-          <form onSubmit={handleSubmit}>
+    <Modal 
+      open={show} 
+      trigger={triggerButton()}      
+      onClose={() => setShow(false)} 
+      closeOnDimmerClick
+      closeOnEscape
+      closeIcon         
+    >
+      <Modal.Header>
+        Valitse lähetettävä kuva
+      </Modal.Header>
+      <Modal.Content>           
+        <form onSubmit={handleSubmit}>
             <input
               type="file"
               name="image"
@@ -63,14 +68,22 @@ const AddImage = ({ place, addImage }) => {
               onChange={handleImageFileChange}
             ></input>
             <input type="submit"></input>
-          </form>
-        </Segment>
-      ) : null}
-    </div>
+          </form>          
+      </Modal.Content>      
+    </Modal>
   );
 };
 
+const mapStateToProps = state => {
+  return {
+    image: state.imageUpload.image,
+    loading: state.imageUpload.loading,
+    errored: state.imageUpload.errored,
+    loadingSuccess: state.imageUpload.loadingSuccess
+  }
+}
+
 export default connect(
-  null,
-  { addImage }
+  mapStateToProps,
+  { updatePlaceAction, setImageAction, upLoadAction }
 )(AddImage);

@@ -16,7 +16,7 @@ const centerStyle = {
 
 const ChoosePercentageSlider = ({ percentageOfPlacesToView, setPercentageOfPlacesToView }) => {  
   return (
-    <Segment>      
+    <Segment color="olive">      
       <Grid columns='equal' >
         <Grid.Column textAlign='center'>
           <Label color="olive" pointing="right" basic >Parhaat</Label>

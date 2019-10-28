@@ -1,10 +1,13 @@
 const SET_HIGHWAY = "SET_HIGHWAY";
 const SET_DOES_NOT_BELONG_TO_CHAIN = "SET_DOES_NOT_BELONG_TO_CHAIN";
 const SET_IS_OPEN_TWENTY_FOUR_HOURS = "SET_IS_OPEN_TWNETY_FOUR_HOURS";
-const SET_HAS_PLAYGROUND = "SET_HAS_PLAYGROUND";
-const SET_HAS_RESTAURANT = "SET_HAS_RESTAURANT";
-const SET_HAS_COFFEE = "SET_HAS_COFFEE";
+const SET_HAS_BEEN_AVARDED = "SET_HAS_BEEN_AVARDED";
 const SET_IS_ATTRACTION = "SET_IS_ATTRACTION";
+const SET_IS_SUMMER_CAFE = "SET_IS_SUMMER_CAFE";
+const SET_IS_GAS_STATION = "SET_IS_GAS_STATION";
+const SET_IS_GRILL = "SET_IS_GRILL";
+
+
 const SET_SEARCH_WORD = "SET_SEARCH_WORD";
 
 
@@ -27,14 +30,16 @@ const filterReducer = (state=defaultState, action) => {
       return ({...state, doesNotBelongToChain: !state.doesNotBelongToChain });
     case(SET_IS_OPEN_TWENTY_FOUR_HOURS):    
       return ({...state, isOpenTwentyFourHours: !state.isOpenTwentyFourHours });
-    case(SET_HAS_PLAYGROUND):    
-      return ({...state, hasPlayground: !state.hasPlayground });
-    case(SET_HAS_RESTAURANT):    
-      return ({...state, hasRestaurant: !state.hasRestaurant });
-    case(SET_HAS_COFFEE):    
-      return ({...state, hasCofee: !state.hasCofee });
+    case(SET_HAS_BEEN_AVARDED):    
+      return ({...state, hasBeenAvarded: !state.hasBeenAvarded });
     case(SET_IS_ATTRACTION):    
       return ({...state, isAttraction: !state.isAttraction });
+    case(SET_IS_SUMMER_CAFE):    
+      return ({...state, isSummerCafe: !state.isSummerCafe });
+    case(SET_IS_GAS_STATION):    
+      return ({...state, isGasStation: !state.isGasStation });
+    case(SET_IS_GRILL):    
+      return ({...state, isGrill: !state.isGrill });
     case(SET_SEARCH_WORD):
       return ({...state, searchWord: action.searchWord});
     default:
@@ -58,9 +63,10 @@ export const setSearchWord = (searchWord) => {
 
 export const setDoesNotBelongToChain = () => ({ type: SET_DOES_NOT_BELONG_TO_CHAIN });
 export const setIsOpenTwentyFourHours = () => ({ type: SET_IS_OPEN_TWENTY_FOUR_HOURS });
-export const setHasPlayground = () => ({ type: SET_HAS_PLAYGROUND });
-export const setHasRestaurant = () => ({ type: SET_HAS_RESTAURANT });
-export const setHasCoffee = () => ({ type: SET_HAS_COFFEE });
+export const setHasBeenAvarded = () => ({ type: SET_HAS_BEEN_AVARDED });
 export const setIsAttraction = () => ({ type: SET_IS_ATTRACTION });
+export const setIsSummerCafe = () => ({ type: SET_IS_SUMMER_CAFE });
+export const setIsGasStation = () => ({ type: SET_IS_GAS_STATION });
+export const setIsGrill = () => ({ type: SET_IS_GRILL });
 
 export default filterReducer;

@@ -2,8 +2,7 @@ import React from "react";
 import { Grid, Image, Icon } from "semantic-ui-react";
 
 const footerStyle = {
-  backgroundColor: "#B2D115",
-    
+  backgroundColor: "#B2D115",    
 }
 
 const footerUpperStyle = {
@@ -15,6 +14,11 @@ const copyrightStyle = {
   backgroundColor: "rgba(0, 0, 0, 0.2)",
   padding: "10px 70px"
 }
+
+const mailtoStyle = { 
+  color: "inherit", 
+  textDecoration: "none" 
+};
 
 const columnStyle = { padding: "0px 10% 0px 0px" };
 
@@ -30,9 +34,11 @@ const Footer = () => {
           <h4 style={headerStyle}>Mikä on paras taukopaikka?</h4>
           <p>Taukopaikkojen järjestys määräytyy Taukopaikat.fi:ssä tehtyjen äänestysten ja käyttäjien Google Mapsissä antamien pisteiden perusteella.</p>    
         </Grid.Column>
-        <Grid.Column width={5}> 
-          <Icon circular name="mail" />
-          Ota yhteyttä
+        <Grid.Column width={5}>
+          <a style={mailtoStyle} href="mailto:jirka.hartonen@gmail.com?subject=Taukopaikat.fi yhteydenotto">
+            <Icon circular name="mail" />
+            Ota yhteyttä
+          </a>
         </Grid.Column>
       </Grid>
         

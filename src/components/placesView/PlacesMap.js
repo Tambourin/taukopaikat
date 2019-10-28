@@ -53,7 +53,7 @@ const onMarkerClick = (props, marker, e) => {
               <div>
                 <h4>{activeMarker.title}</h4>
                 <Image size="tiny" alt="place" src={activeMarker.image} />
-                <a href={`/${activeMarker.id}`}>Avaa</a> <br />
+                <a href={`/places/${activeMarker.id}`}>Avaa</a> <br />
                 {activeMarker.address}               
               </div>
             ) : <div></div>

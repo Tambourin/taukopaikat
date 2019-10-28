@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import { Button } from "semantic-ui-react";
 import PlaceImage from "../PlaceImage";
+import AllPlaceImages from "../AllPlaceImages";
 
-const IMAGE_HEIGHT = 320;
+const IMAGE_HEIGHT = 520;
 
 const buttonStyle = {
   position: "absolute",
@@ -35,8 +36,8 @@ const ImageSlideShow = ({ images, googleImageId }) => {
   };
 
   return (
-    <div>      
-      <PlaceImage imageId={images[index]} googleImageId={googleImageId} height={IMAGE_HEIGHT} />      
+    <div style={{ maxWidth: "1200px", margin: "auto" }}>      
+      <PlaceImage imageId={images[index]} googleImageId={googleImageId} height={IMAGE_HEIGHT} big/>      
       {index > 0 ? (
         <Button
           circular
@@ -53,7 +54,10 @@ const ImageSlideShow = ({ images, googleImageId }) => {
           onClick={handleNextImage}
         ></Button>
       ) : null}
-      <p>Kuva: {index + 1} / {images.length}</p>
+      <div style={{ backgroundColor: "rgba(0,0,0,0.2)" }}>
+        {images.length > 0 ? <p>Kuva: {index + 1} / {images.length}</p> : null}
+      </div>
+      
     </div>
   );
 };

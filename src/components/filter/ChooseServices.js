@@ -5,10 +5,11 @@ const ChooseServices = ({
   filter,
   setDoesNotBelongToChain,
   setIsOpenTwentyFourHours,
-  setHasPlayground,
-  setHasRestaurant,
-  setHasCoffee,
-  setIsAttraction
+  setHasBeenAvarded,
+  setIsAttraction,
+  setIsSummerCafe,
+  setIsGasStation,
+  setIsGrill
 }) => {
   return (
     <Segment>
@@ -34,37 +35,37 @@ const ChooseServices = ({
         </Grid.Column>
         <Grid.Column>
           <Checkbox
-            label="Leikkipaikka"
-            checked={filter.hasPlayground}
-            onClick={setHasPlayground}
+            label="Palkittu"
+            checked={filter.hasBeenAvarded}
+            onClick={setHasBeenAvarded}
           />
         </Grid.Column>
         <Grid.Column>
           <Checkbox
-            label="Ravintola"
-            checked={filter.hasRestaurant}
-            onClick={setHasRestaurant}
-          />
-        </Grid.Column>
-        <Grid.Column>
-          <Checkbox
-            label="Kahvila"
-            checked={filter.isGasStation}
-            onClick={setHasCoffee}
-          />
-        </Grid.Column>
-        <Grid.Column>
-        <Checkbox
             label="Nähtävyys"
             checked={filter.isAttraction}
             onClick={setIsAttraction}
           />
         </Grid.Column>
         <Grid.Column>
-          <Checkbox label="Huotoasema" checked={false} onClick={null} />
+          <Checkbox
+            label="Kesäkahvila"
+            checked={filter.isSummerCafe}
+            onClick={setIsSummerCafe}
+          />
         </Grid.Column>
         <Grid.Column>
-          <Checkbox label="Grilli" checked={false} onClick={null} />
+        <Checkbox
+            label="Huotoasema"
+            checked={filter.isGasStation}
+            onClick={setIsGasStation}
+          />
+        </Grid.Column>        
+        <Grid.Column>
+          <Checkbox 
+            label="Grilli" 
+            checked={filter.isGrill} 
+            onClick={setIsGrill} />
         </Grid.Column>
       </Grid>
     </Segment>
