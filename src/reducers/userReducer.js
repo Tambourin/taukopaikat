@@ -27,12 +27,11 @@ const userReducer = (state=defaultState, action) => {
     case CONFIGURE_FAILURE:
       return { ...state, loading: false, errored: true, isAuthenticated: false, user: null, token: null }    
     case LOGOUT:
-      return { ...state, user: null, token: null, isAuthenticated: null };    
+      return { ...state, user: null, token: null, isAuthenticated: null, loading: false, errored: false };    
     default:
       return state;
   }
 };
-
 
 export const initializeAuth = () => {
   return async dispatch => {
@@ -72,7 +71,7 @@ export const login = () => {
     try {
       const authClient = await createAuth0Client(authConfig());
       await authClient.loginWithRedirect({
-        redirect_uri: "http://localhost:3000"
+        redirect_uri: window.location.pathname
       });          
     } catch (error){
       dispatch({ type: CONFIGURE_FAILURE });

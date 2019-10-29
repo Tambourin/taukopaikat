@@ -6,7 +6,7 @@ import { setImageAction, upLoadAction } from "../reducers/imageUploadReducer";
 
 const reader = new FileReader();
 
-const AddImage = ({ place, image, loading, setImageAction, errored, loadingSuccess, upLoadAction, updatePlaceAction }) => {
+const AddImage = ({ place, image, loading, setImageAction, errored, loadingSuccess, upLoadAction, updatePlaceAction, user }) => {
   
   const [ show, setShow ] = useState(false);
  
@@ -47,6 +47,35 @@ const AddImage = ({ place, image, loading, setImageAction, errored, loadingSucce
     />
   }
 
+  const sendModal = () => {
+    return (
+      <>
+        <Modal.Header>
+          {`Lähetä kuva kohteesta ${place.name}.`}
+        </Modal.Header>
+        <Modal.Content>           
+          <form onSubmit={handleSubmit}>
+              <input
+                type="file"
+                name="image"
+                accept="image/*"
+                onChange={handleImageFileChange}
+              ></input>
+              <input type="submit"></input>
+            </form>          
+        </Modal.Content> 
+      </>
+    );
+  }
+
+  const requestLoginModal = () => {
+    return (
+      <>
+        <Modal.Header>Kirjaudu ensin sisään</Modal.Header>
+      </>
+    )
+  }
+
   return (
     <Modal 
       open={show} 
@@ -56,20 +85,7 @@ const AddImage = ({ place, image, loading, setImageAction, errored, loadingSucce
       closeOnEscape
       closeIcon         
     >
-      <Modal.Header>
-        Valitse lähetettävä kuva
-      </Modal.Header>
-      <Modal.Content>           
-        <form onSubmit={handleSubmit}>
-            <input
-              type="file"
-              name="image"
-              accept="image/*"
-              onChange={handleImageFileChange}
-            ></input>
-            <input type="submit"></input>
-          </form>          
-      </Modal.Content>      
+      {user ? sendModal() : requestLoginModal()}
     </Modal>
   );
 };
@@ -79,7 +95,8 @@ const mapStateToProps = state => {
     image: state.imageUpload.image,
     loading: state.imageUpload.loading,
     errored: state.imageUpload.errored,
-    loadingSuccess: state.imageUpload.loadingSuccess
+    loadingSuccess: state.imageUpload.loadingSuccess,
+    user: state.user.user
   }
 }
 

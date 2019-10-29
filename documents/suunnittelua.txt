@@ -10,11 +10,12 @@ Valtatien valinta korostaa kyseisen tien kartassa
 
 *Paginaatio
 Tien parhaan paikan selvittäminen viisaammmin
-Lisää kuvia SinglePlaceen
+*Lisää kuvia SinglePlaceen
 Suorien kyselyiden rajoittaminen backendissä
-käyttäjät
+*käyttäjät
 vupden taukopaikat
 
+Tykkäyksen lisääminen omaksi post-routeksi. Ei saa käyttää käyttäjän lähettämää placea korvaamaan tietokannassa oleva
 
 Hakemistorakenne:
 Pages
