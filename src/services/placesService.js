@@ -2,7 +2,7 @@ import axios from "axios";
 
 const baseUrl =
   process.env.NODE_ENV === "production"
-    ? "https://taukopaikat-backend.herokuapp.com/api/places/"
+    ? "https://taukopaikat-backend.herokuapp.com/api/places"
     : "http://localhost:3001/api/places";
 
 const setToken = token => {
