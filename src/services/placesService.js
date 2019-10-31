@@ -3,7 +3,7 @@ import axios from "axios";
 const baseUrl =
   process.env.NODE_ENV === "production"
     ? "https://taukopaikat-backend.herokuapp.com/api/places/"
-    : "http://localhost:3001/api/places";
+    : "http://localhost:3001/api/places/";
 
 const setToken = token => {
   axios.defaults.headers.post["Authorization"] = "bearer " + token;
@@ -34,7 +34,7 @@ const postPlace = async place => {
 
 const postComment = async (placeId, comment) => {
   const response = await axios.post(
-    `http://localhost:3001/api/places/${placeId}/comments`,
+    baseUrl + placeId + "/comments",
     comment
   );
   return response.data;
@@ -42,7 +42,7 @@ const postComment = async (placeId, comment) => {
 
 const postImage = async (placeId, imageData) => {
   const response = await axios.post(
-    `http://localhost:3001/api/places/${placeId}/images`,
+    baseUrl + placeId +"/images",
     { imageData: imageData }
   );
   return response.data;
@@ -50,14 +50,14 @@ const postImage = async (placeId, imageData) => {
 
 const addVote = async placeId => {
   const response = await axios.post(
-    `http://localhost:3001/api/places/${placeId}/votes`
+    baseUrl + placeId + "/votes"
   );
   return response.data;
 };
 
 const removeVote = async placeId => {
   const response = await axios.delete(
-    `http://localhost:3001/api/places/${placeId}/votes`
+    baseUrl + placeId + "/votes"
   );
   return response.data;
 };

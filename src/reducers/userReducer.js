@@ -71,7 +71,9 @@ export const login = () => {
     try {
       const authClient = await createAuth0Client(authConfig());
       await authClient.loginWithRedirect({
-        redirect_uri: window.location.pathname
+        redirect_uri: process.env.NODE_ENV === "production"
+        ? "https://taukopaikat.herokuapp.com"
+        : "http://localhost:3000"
       });          
     } catch (error){
       dispatch({ type: CONFIGURE_FAILURE });
