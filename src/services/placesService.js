@@ -2,7 +2,7 @@ import axios from "axios";
 
 const baseUrl =
   process.env.NODE_ENV === "production"
-    ? "https://taukopaikat-backend.herokuapp.com/api/places"
+    ? "https://taukopaikat-backend.herokuapp.com/api/places/"
     : "http://localhost:3001/api/places";
 
 const setToken = token => {
@@ -16,19 +16,19 @@ const getAll = async () => {
 };
 
 const getOneById = async id => {
-  const response = await axios.get(`http://localhost:3001/api/places/${id}`);
+  const response = await axios.get(baseUrl + id);
   return response.data;
 };
 
 const getGoogleDataByPlaceId = async id => {
   const response = await axios.get(
-    `http://localhost:3001/api/places/${id}/google`
+    baseUrl + id + "/google"
   );
   return response.data;
 };
 
 const postPlace = async place => {
-  const response = await axios.post("http://localhost:3001/api/places/", place);
+  const response = await axios.post(baseUrl, place);
   return response.data;
 };
 
