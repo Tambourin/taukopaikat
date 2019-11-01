@@ -18,7 +18,7 @@ const App = ({ initializePlaces, initializeVotes, initializeAuth, places }) => {
 
   useEffect(() => {   
     initializePlaces();  
-  }, [initializePlaces]);
+  }, []);
 
   useEffect(() => {    
     initializeVotes();    

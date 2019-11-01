@@ -30,7 +30,7 @@ const Footer = () => {
       <Grid style={footerUpperStyle} stackable divided columns="equal">          
         <Grid.Column style={columnStyle} width={10}>
           <h3 style={headerStyle}>Taukopaikat.fi:stä</h3>
-          <p>Taukopaikat.fi on riippumaton verkkosivu, joka on syntynyt yksinkertaisesta halusta löytää hauskimmat taukopaikat. Sivu listaa Suomen parhaat taukopaikat valtateiden varsilta. Etsi seuraava pysähdyspaikka tai äänestä omaa suosikkiasi parhaiden joukkoon. Koska automatkailu voi olla kivaa!</p>
+          <p>Taukopaikat.fi on riippumaton verkkosivu, joka on syntynyt yksinkertaisesta halusta löytää hauskimmat taukopaikat. Sivu listaa Suomen parhaat taukopaikat valtateiden varsilta. Etsi seuraava pysähdyspaikka tai äänestä omaa suosikkiasi parhaiden joukkoon.</p>
           <h4 style={headerStyle}>Mikä on paras taukopaikka?</h4>
           <p>Taukopaikkojen järjestys määräytyy Taukopaikat.fi:ssä tehtyjen äänestysten ja käyttäjien Google Mapsissä antamien pisteiden perusteella.</p>    
         </Grid.Column>
