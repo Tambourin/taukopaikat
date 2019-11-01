@@ -1,11 +1,15 @@
 import React from "react";
 import { connect } from "react-redux";
-import { Input } from "semantic-ui-react";
+import { Input, Form } from "semantic-ui-react";
 import { setSearchWord } from "../../reducers/filterReducer";
 
 const SearchWordInput = ({ searchWord, setSearchWord }) => {
+  const handleSubmit = () => {
+    window.scrollBy(0, 300);
+  }
+
   return (
-    <div>
+    <Form onSubmit={handleSubmit}>
       <Input
         id="searchWordInput"        
         fluid
@@ -13,8 +17,8 @@ const SearchWordInput = ({ searchWord, setSearchWord }) => {
         placeholder="Hae nimen tai paikkakunnan perusteella"
         value={searchWord}
         onChange={(event, data) => {setSearchWord(data.value)}} 
-    />
-    </div>    
+      />
+    </Form>    
   )
 }
 const mapStateToProps = (state) => {

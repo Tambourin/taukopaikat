@@ -59,8 +59,11 @@ export const initializeAuth = () => {
     try {
       const authClient = await createAuth0Client(authConfig());
       if (window.location.search.includes("code=")) {
-        await authClient.handleRedirectCallback();
-        window.history.replaceState({}, document.title, "/");
+        console.log("code");
+        const { appState } = await authClient.handleRedirectCallback();
+        window.history.replaceState({}, document.title, appState && appState.targetUrl
+          ? appState.targetUrl
+          : window.location.pathname);
       }
       const isAuthenticated = await authClient.isAuthenticated();
       let user = null;

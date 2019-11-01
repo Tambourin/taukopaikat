@@ -4,7 +4,7 @@ import { Image, Segment, Responsive, Transition} from "semantic-ui-react";
 const containerStyle = {
   position: "relative",
   marginTop: "0px",
-  marginBottom: "-40px",  
+  marginBottom: "-16%",  
   display: "flex",
   justifyContent: "center"
 }

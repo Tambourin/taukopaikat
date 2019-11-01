@@ -67,6 +67,12 @@ const ChooseServices = ({
             checked={filter.isGrill} 
             onClick={setIsGrill} />
         </Grid.Column>
+        <Grid.Column>
+          <Checkbox 
+            label="Joku vielä" 
+            checked={filter.isGrill} 
+            onClick={setIsGrill} />
+        </Grid.Column>
       </Grid>
     </Segment>
   );
