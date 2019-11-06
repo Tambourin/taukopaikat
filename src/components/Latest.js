@@ -1,5 +1,5 @@
 import React from "react";
-import { Responsive, Grid } from "semantic-ui-react";
+import { Grid } from "semantic-ui-react";
 
 const style = {
   marginTop: "20px", 
@@ -10,11 +10,11 @@ const style = {
 const Latest = () => {
   return (
     <div>    
-      <Responsive as={Grid} columns={3} textAlign="center" style={style} minWidth={Responsive.onlyTablet.minWidth}>       
+      <Grid columns={3} textAlign="center" style={style} stackable>       
         <Grid.Column>Viimeksi äänestetty: ABC Hirvaskangas</Grid.Column>
         <Grid.Column>Viimeksi kommentoitu: ABC Hirvaskangas</Grid.Column>
         <Grid.Column>Kaikista paras: ABC Hirvaskangas</Grid.Column>          
-      </Responsive>
+      </Grid>
     </div>
   );
 };

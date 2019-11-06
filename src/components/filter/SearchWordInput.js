@@ -10,6 +10,7 @@ const SearchWordInput = ({ searchWord, setSearchWord }) => {
 
   return (
     <Form onSubmit={handleSubmit}>
+      <label htmlFor="searchWordInput">Hakusana</label>
       <Input
         id="searchWordInput"        
         fluid

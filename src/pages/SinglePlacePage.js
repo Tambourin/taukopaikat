@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { connect } from "react-redux";
-import { Segment, Header, Container, Grid, Button } from "semantic-ui-react";
+import { Segment, Header, Container } from "semantic-ui-react";
 import { initActiveGoogleData, clearActiveGoogleData } from "../reducers/activeGoogleDataReducer";
 import RoadNumber from "../components/RoadNumber";
 import VoteButton from "../components/VoteButton";

@@ -29,9 +29,9 @@ export const orderPlaces = (places, orderBy) => {
         });
     case arrangeOptions.NORTH_TO_SOUTH:
         return [...places].sort((place1, place2) => {
-          if(!place1.lat) {
+          if(!place1.coordinates.lat) {
             return -1;
-          } else if (!place2.lat) {
+          } else if (!place2.coordinates.lat) {
             return 1;
           } else {
             return place2.coordinates.lat - place1.coordinates.lat
@@ -39,9 +39,9 @@ export const orderPlaces = (places, orderBy) => {
         });          
     case arrangeOptions.SOUTH_TO_NORT:
       return [...places].sort((place1, place2) => {
-        if(!place1.lat) {
+        if(!place1.coordinates.lat) {
           return 1;
-        } else if (!place2.lat) {
+        } else if (!place2.coordinates.lat) {
           return -1;
         } else {
           return place1.coordinates.lat - place2.coordinates.lat

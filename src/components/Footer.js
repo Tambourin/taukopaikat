@@ -45,7 +45,7 @@ const Footer = () => {
       
       <div style={copyrightStyle}> 
         © 2019 Olavi Hartonen 
-        <Image inline floated="right" src="https://developers.google.com/maps/documentation/images/powered_by_google_on_white.png" />
+        <Image  src="https://developers.google.com/maps/documentation/images/powered_by_google_on_white.png" />
       </div>
     </footer>
   )

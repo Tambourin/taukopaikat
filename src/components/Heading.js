@@ -1,5 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { Image, Segment, Responsive, Transition} from "semantic-ui-react";
+import backgroundImage from "../static/background.svg";
+
+//"https://previews.123rf.com/images/petovarga/petovarga1701/petovarga170100009/70455786-flat-vector-cartoon-style-illustration-of-urban-landscape-street-with-cars-skyline-city-office-build.jpg"
 
 const containerStyle = {
   position: "relative",
@@ -73,7 +76,7 @@ const Heading = () => {
     <header>  
                       
       <div style={containerStyle}>
-        <Image style={{ width: "100%" }} src="https://previews.123rf.com/images/petovarga/petovarga1701/petovarga170100009/70455786-flat-vector-cartoon-style-illustration-of-urban-landscape-street-with-cars-skyline-city-office-build.jpg" />
+        <Image style={{ width: "100%" }} src={backgroundImage} />
         <Responsive as={Segment} basic textAlign="center" style={textStyle} minWidth={Responsive.onlyTablet.minWidth}>
           <Transition visible={textIsVisible} animation="fade" duration={TEXT_SPEED}>
            <div>{headingTexts[currentTextIndex]}</div>

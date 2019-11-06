@@ -12,12 +12,14 @@ const ChooseServices = ({
   setIsGrill
 }) => {
   return (
-    <Segment>
-      <Popup
-        content="Näytä vain taukopaikat joista löytyy valitut palvelut"
-        trigger={<Icon name="info circle" />}
-      />
-      Näiden pitää toteutua:
+    <Segment>      
+      <h5>
+        <Popup
+          content="Näytä vain taukopaikat joista löytyy valitut palvelut"
+          trigger={<Icon name="info circle" />}
+        />
+        Näiden pitää toteutua:
+      </h5>
       <Grid doubling columns={8} centered>
         <Grid.Column>
           <Checkbox

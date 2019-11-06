@@ -16,19 +16,15 @@ import {
   setIsGrill } from "../../reducers/filterReducer";
 import {showAsList, showOnMap } from "../../reducers/viewOptionsReducer";
 
-const SearchBox = ({ setHighway, filter, viewOptions, ...props }) => {   
- 
+const SearchBox = ({ setHighway, filter, viewOptions, ...props }) => {    
   return (
-    <Segment  raised color="olive">     
- 
+    <Segment raised color="olive">  
       <Grid stackable>
         <Grid.Row columns={2}>
-          <Grid.Column>
-            Valtatie
+          <Grid.Column>            
             <ChooseHighWay highway={filter.highway} setHighway={setHighway} />
           </Grid.Column>
-          <Grid.Column>            
-            Hakusana
+          <Grid.Column>     
             <SearchWordInput />
           </Grid.Column>
         </Grid.Row>

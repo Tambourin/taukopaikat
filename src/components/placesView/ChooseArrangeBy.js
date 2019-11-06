@@ -12,9 +12,9 @@ const menuOptions = [
 
 const ChooseArrangeBy = ({ arrangeBy, setArrangeBy }) => {  
   return (                
-      <Dropdown       
-        selection 
+      <Dropdown    
         options={menuOptions}
+        selection
         floating
         value={arrangeBy}
         onChange={(event, data) => setArrangeBy(data.value)}/>
