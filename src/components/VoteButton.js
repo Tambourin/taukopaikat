@@ -32,7 +32,7 @@ const VoteButton = ({ place, places, votes, addVoteToPlace, removeVoteFromPlace,
   }
 
   return (    
-    <Button basic onClick={executeVote} icon labelPosition="left" >      
+    <Button basic onClick={executeVote} icon labelPosition="left" size="tiny" fluid>      
       <Icon name="like" />Äänestä parhaaksi
     </Button>
   );

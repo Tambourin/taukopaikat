@@ -1,10 +1,9 @@
-import { testPlaces } from "./testPlaces";
+import testPlaces from "./testPlaces";
+import testUtility from "./testUtility";
 
 describe("mapView tests", function() {
   beforeEach(() => {
-    cy.request("GET", "http://localhost:3001/api/places/delete");
-    cy.request("POST", "http://localhost:3001/api/places", testPlaces[0]);
-    cy.visit("http://localhost:3000");
+    testUtility.prepare(testPlaces);
   });
 
   it("can open map view", function() {

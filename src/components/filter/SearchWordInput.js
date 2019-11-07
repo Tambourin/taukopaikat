@@ -1,33 +1,29 @@
 import React from "react";
-import { connect } from "react-redux";
-import { Input, Form } from "semantic-ui-react";
-import { setSearchWord } from "../../reducers/filterReducer";
+import { Input } from "semantic-ui-react";
 
 const SearchWordInput = ({ searchWord, setSearchWord }) => {
-  const handleSubmit = () => {
-    window.scrollBy(0, 300);
-  }
+  const ref = React.createRef();
+
+  const handleSubmit = event => {
+    event.preventDefault();
+    ref.current.scrollIntoView({
+      behavior: "smooth"
+    });
+  };
 
   return (
-    <Form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit} ref={ref}>
       <label htmlFor="searchWordInput">Hakusana</label>
       <Input
-        id="searchWordInput"        
+        id="searchWordInput"
         fluid
-        icon="search" 
+        icon="search"
         placeholder="Hae nimen tai paikkakunnan perusteella"
         value={searchWord}
-        onChange={(event, data) => {setSearchWord(data.value)}} 
+        onChange={(event, data) => setSearchWord(data.value)}
       />
-    </Form>    
-  )
-}
-const mapStateToProps = (state) => {
-  return {
-    searchWord: state.filter.searchWord
-  }
-}
+    </form>
+  );
+};
 
-export default connect(mapStateToProps, { setSearchWord })(SearchWordInput);
-
-  
+export default SearchWordInput;

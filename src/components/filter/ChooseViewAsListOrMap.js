@@ -1,14 +1,14 @@
 import React from "react";
 import { Button, Icon } from "semantic-ui-react";
 
-const ChooseViewAsListOrMap = ({ viewOptions, showAsList, showOnMap}) => {
+const ChooseViewAsListOrMap = ({ viewOptions, showAsList, showOnMap }) => {
   return (
     <Button.Group color="yellow" fluid>
-      <Button active={!viewOptions.showOnMap} onClick={showAsList}>
+      <Button active={viewOptions.showOnMap === false} onClick={showAsList}>
         <Icon name="list" />
         Listana
       </Button>
-      <Button active={viewOptions.showOnMap} onClick={showOnMap}>
+      <Button active={viewOptions.showOnMap === true} onClick={showOnMap}>
         <Icon name="map outline" />
         Kartalla
       </Button>
@@ -17,4 +17,3 @@ const ChooseViewAsListOrMap = ({ viewOptions, showAsList, showOnMap}) => {
 };
 
 export default ChooseViewAsListOrMap;
-

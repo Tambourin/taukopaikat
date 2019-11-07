@@ -1,6 +1,6 @@
 import React from "react";
 import { Container } from "semantic-ui-react";
-import SearchBox from "../components/filter/SearchBox";
+import FilterBox from "../components/filter/FilterBox";
 import PlacesView from "../components/placesView/PlacesView";
 import Heading from "../components/Heading";
 import Latest from "../components/Latest";
@@ -11,7 +11,7 @@ const MainPage = () => {
       <Heading />
       
       <Container>     
-        <SearchBox />       
+        <FilterBox />       
         <PlacesView />
       </Container>
       <Latest />

@@ -1,5 +1,5 @@
 import React from "react";
-import { Segment, Checkbox, Icon, Popup, Grid } from "semantic-ui-react";
+import { Segment, Checkbox, Icon, Popup, Grid, Form } from "semantic-ui-react";
 
 const ChooseServices = ({
   filter,
@@ -13,69 +13,73 @@ const ChooseServices = ({
 }) => {
   return (
     <Segment>      
-      <h5>
-        <Popup
-          content="Näytä vain taukopaikat joista löytyy valitut palvelut"
-          trigger={<Icon name="info circle" />}
-        />
-        Näiden pitää toteutua:
-      </h5>
-      <Grid doubling columns={8} centered>
-        <Grid.Column>
-          <Checkbox
-            label="Ei kuulu ketjuun"
-            checked={filter.doesNotBelongToChain}
-            onClick={setDoesNotBelongToChain}
-          />
-        </Grid.Column>
-        <Grid.Column>
-          <Checkbox
-            label="Auki 24 h"
-            checked={filter.isOpenTwentyFourHours}
-            onClick={setIsOpenTwentyFourHours}
-          />
-        </Grid.Column>
-        <Grid.Column>
-          <Checkbox
-            label="Palkittu"
-            checked={filter.hasBeenAvarded}
-            onClick={setHasBeenAvarded}
-          />
-        </Grid.Column>
-        <Grid.Column>
-          <Checkbox
-            label="Nähtävyys"
-            checked={filter.isAttraction}
-            onClick={setIsAttraction}
-          />
-        </Grid.Column>
-        <Grid.Column>
-          <Checkbox
-            label="Kesäkahvila"
-            checked={filter.isSummerCafe}
-            onClick={setIsSummerCafe}
-          />
-        </Grid.Column>
-        <Grid.Column>
-        <Checkbox
-            label="Huotoasema"
-            checked={filter.isGasStation}
-            onClick={setIsGasStation}
-          />
-        </Grid.Column>        
-        <Grid.Column>
-          <Checkbox 
-            label="Grilli" 
-            checked={filter.isGrill} 
-            onClick={setIsGrill} />
-        </Grid.Column>
-        <Grid.Column>
-          <Checkbox 
-            label="Joku vielä" 
-            checked={filter.isGrill} 
-            onClick={setIsGrill} />
-        </Grid.Column>
-      </Grid>
+      <Form>
+        <Form.Field>
+          <label>
+            <Popup
+              content="Näytä vain taukopaikat joista löytyy valitut palvelut"
+              trigger={<Icon name="info circle" />}
+            />
+            Näiden pitää toteutua:
+          </label>
+          <Grid doubling columns={8}>
+            <Grid.Column>
+              <Checkbox
+                label="Ei kuulu ketjuun"
+                checked={filter.doesNotBelongToChain}
+                onClick={setDoesNotBelongToChain}
+              />
+            </Grid.Column>
+            <Grid.Column>
+              <Checkbox
+                label="Auki 24 h"
+                checked={filter.isOpenTwentyFourHours}
+                onClick={setIsOpenTwentyFourHours}
+              />
+            </Grid.Column>
+            <Grid.Column>
+              <Checkbox
+                label="Palkittu"
+                checked={filter.hasBeenAvarded}
+                onClick={setHasBeenAvarded}
+              />
+            </Grid.Column>
+            <Grid.Column>
+              <Checkbox
+                label="Nähtävyys"
+                checked={filter.isAttraction}
+                onClick={setIsAttraction}
+              />
+            </Grid.Column>
+            <Grid.Column>
+              <Checkbox
+                label="Kesäkahvila"
+                checked={filter.isSummerCafe}
+                onClick={setIsSummerCafe}
+              />
+            </Grid.Column>
+            <Grid.Column>
+            <Checkbox
+                label="Huoltoasema"
+                checked={filter.isGasStation}
+                onClick={setIsGasStation}
+              />
+            </Grid.Column>        
+            <Grid.Column>
+              <Checkbox 
+                label="Grilli" 
+                checked={filter.isGrill} 
+                onClick={setIsGrill} />
+            </Grid.Column>
+            <Grid.Column>
+              <Checkbox 
+                label="Joku vielä" 
+                checked={filter.isGrill} 
+                onClick={setIsGrill} />
+            </Grid.Column>
+          </Grid>
+        </Form.Field>
+      </Form>
     </Segment>
   );
 };

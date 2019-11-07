@@ -1,4 +1,4 @@
-export const testPlaces = [
+const testPlaces = [
   {
     name: "ABC Kuortti",
     city: "Pertunmaa",
@@ -6,11 +6,10 @@ export const testPlaces = [
     highway: 5,
     services: {
       doesNotBelongToChain: false,
-      isOpenTwentyFourHours: true,
-      hasPlayground: true,
-      hasRestaurant: true,
-      hasCofee: true,
+      isOpenTwentyFourHours: true,    
+      hasBeenAvarded: false,  
       isAttraction: false,
+      isSummerCafe: false,
       isGasStation: true,
       isGrill: false
     }
@@ -24,10 +23,9 @@ export const testPlaces = [
     services: {
       doesNotBelongToChain: true,
       isOpenTwentyFourHours: false,
-      hasPlayground: false,
-      hasRestaurant: true,
-      hasCofee: true,
+      hasBeenAvarded: false,      
       isAttraction: true,
+      isSummerCafe: false,
       isGasStation: false,
       isGrill: false
     }
@@ -39,13 +37,14 @@ export const testPlaces = [
     highway: 4,
     services: {
       doesNotBelongToChain: false,
-      isOpenTwentyFourHours: true,
-      hasPlayground: true,
-      hasRestaurant: true,
-      hasCofee: true,
+      isOpenTwentyFourHours: true,    
+      hasBeenAvarded: false,  
       isAttraction: false,
+      isSummerCafe: false,
       isGasStation: true,
       isGrill: false
     }
   }
 ]
+
+export default testPlaces;

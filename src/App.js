@@ -18,7 +18,7 @@ const App = ({ initializePlaces, initializeVotes, initializeAuth, places }) => {
 
   useEffect(() => {   
     initializePlaces();  
-  }, []);
+  }, [initializePlaces]);
 
   useEffect(() => {    
     initializeVotes();    
@@ -26,7 +26,7 @@ const App = ({ initializePlaces, initializeVotes, initializeAuth, places }) => {
  
  
   return (
-    <div>
+    <>
     <BrowserRouter>
       <HeaderMenu />      
         <Route exact path="/" render={() => <MainPage />}/>
@@ -40,7 +40,7 @@ const App = ({ initializePlaces, initializeVotes, initializeAuth, places }) => {
         }/>
       <Footer />     
     </BrowserRouter>
-    </div>
+    </>
   );
 };
 
