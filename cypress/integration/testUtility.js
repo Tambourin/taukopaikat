@@ -9,4 +9,25 @@ const prepare = (places) => {
   cy.visit(baseFrontUrl);
 }
 
-export default { prepare };
+const addPlaces = (numberOfPlacesToAdd) => {
+  for(let i = 0; i < numberOfPlacesToAdd; i++) {
+    cy.request("POST", baseApiUrl, {
+        name: "testPlace" + i,
+        city: "xxx",
+        description: "testikxxxuvaus",
+        highway: 1,
+        services: {
+          doesNotBelongToChain: false,
+          isOpenTwentyFourHours: true,    
+          hasBeenAvarded: false,  
+          isAttraction: false,
+          isSummerCafe: false,
+          isGasStation: true,
+          isGrill: false
+        }
+    });
+    cy.visit(baseFrontUrl);
+  }
+}
+
+export default { prepare, addPlaces };

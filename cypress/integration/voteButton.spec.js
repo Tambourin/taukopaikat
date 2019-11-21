@@ -1,20 +1,17 @@
 import { testPlaces } from "./testPlaces";
+import testUtility from "./testUtility";
 
 describe("VoteButton", function() {
   beforeEach(() => {
     cy.clearLocalStorage();
-    cy.request("GET", "http://localhost:3001/api/places/delete");
-    cy.request("POST", "http://localhost:3001/api/places", testPlaces[0]);
-    cy.request("POST", "http://localhost:3001/api/places", testPlaces[1]);
-    cy.request("POST", "http://localhost:3001/api/places", testPlaces[2]);
-    cy.visit("http://localhost:3000");
+    testUtility.prepare();
   });
 
   it("click button", function() {
     cy.contains("Vaskikello").parentsUntil(".cards").contains("Äänestä")
       .click();
     cy.wait(500);
-    cy.request("GET", "http://localhost:3001/api/places/")
+    //cy.request("GET", "http://localhost:3001/api/places/")
     cy.contains("Vaskikello").parentsUntil(".cards")
       .contains("Olet äänestänyt tätä paikkaa 4-tien parhaaksi");
     cy.contains("Hirvaskangas").parentsUntil(".cards").contains("Äänestä")

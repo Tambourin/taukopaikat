@@ -1,5 +1,25 @@
 import { arrangeOptions } from "./viewOptionsReducer";
 
+
+export const lastCommentedSelector = places => { 
+  if(!places || places.length < 1) {
+    return null;
+  }
+  const reducer = (placeWithLatestComment, currentPlace) => {
+    if(!placeWithLatestComment.comments || !currentPlace.comments) {      
+      return placeWithLatestComment;
+    }
+    if(placeWithLatestComment.comments.length < 1 || currentPlace.comments.length < 1)  {      
+      return placeWithLatestComment;
+    }
+    if(currentPlace.comments[currentPlace.comments.length - 1].date > placeWithLatestComment.comments[placeWithLatestComment.comments.length - 1].date) {
+      return currentPlace;
+    } 
+    return placeWithLatestComment;
+  }
+  return places.reduce(reducer);
+}
+
 export const placeWithMostVotes = places => {
   return places.sort((place1, place2) => orderByVotesAndGoogle(place1, place2))[0];  
 };
@@ -29,9 +49,9 @@ export const orderPlaces = (places, orderBy) => {
         });
     case arrangeOptions.NORTH_TO_SOUTH:
         return [...places].sort((place1, place2) => {
-          if(!place1.coordinates.lat) {
-            return -1;
-          } else if (!place2.coordinates.lat) {
+          if(!place1.coordinates || !place1.coordinates.lat) {
+            return 1;
+          } else if (!place2.coordinates || !place2.coordinates.lat) {
             return 1;
           } else {
             return place2.coordinates.lat - place1.coordinates.lat
@@ -39,9 +59,9 @@ export const orderPlaces = (places, orderBy) => {
         });          
     case arrangeOptions.SOUTH_TO_NORT:
       return [...places].sort((place1, place2) => {
-        if(!place1.coordinates.lat) {
+        if(!place1.coordinates || !place1.coordinates.lat) {
           return 1;
-        } else if (!place2.coordinates.lat) {
+        } else if (!place2.coordinates || !place2.coordinates.lat) {
           return -1;
         } else {
           return place1.coordinates.lat - place2.coordinates.lat

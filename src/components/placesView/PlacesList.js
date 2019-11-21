@@ -6,17 +6,10 @@ import ShowMoreButton from "./ShowMoreButton";
 const PlacesList = ({ places }) => {
   if (!places) {
     return null;
-  }
-  if (places.length === 0) {
-    return (
-      <Segment>
-        <p>Haku ei tuottanut tuloksia</p>
-      </Segment>
-    );
-  }    
+  } 
   
-  return (      
-    <Segment>           
+  return (  
+    <Segment>                 
       <Card.Group centered stackable>
         {places.map(place => (
           <PlaceCard key={place.id} place={place} />

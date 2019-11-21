@@ -24,6 +24,7 @@ const placesReducer = (state = defaultState, action) => {
     case LOADING_DONE:
       return { ...state, isLoading: false, loadingErrored: false };
     case SET_LOADING_ERRORED:
+      console.log("setError");
       return { ...state, loadingErrored: true, isLoading: false };
     case SET_UPLOAD_ERROR_MESSAGE:
       return { ...state, uploadErrorMessage: action.message };

@@ -9,10 +9,10 @@ const MAX_DIST_FOR_NEARBY_PLACES = 20;
 const NearByPlaces = ({ nearByPlaces, place }) => {
   return (
     <div>
-    <Header as="h3">
+      <Header as="h3">
         Vaihtoehtoja lähellä paikkaa {place.name} (max {MAX_DIST_FOR_NEARBY_PLACES} km)
       </Header>
-      <PlacesList places={nearByPlaces} />
+      {nearByPlaces.lenght > 0 ? <PlacesList places={nearByPlaces} /> : <div>Ei kohteita</div>}
     </div>
   )
 }

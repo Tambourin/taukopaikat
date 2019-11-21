@@ -5,8 +5,6 @@ import { Menu, Icon, Dropdown, Responsive } from "semantic-ui-react";
 import LoginLogoutMenuItem from "./LoginLogoutMenuItem";
 
 const HeaderMenu = ({ user }) => {
-  console.log(user);
-
   const AddPlaceMenuItem = (dropdown) => {
     if(!user) {
       return null;

@@ -37,7 +37,7 @@ const Footer = () => {
         <Grid.Column width={5}>
           <a style={mailtoStyle} href="mailto:jirka.hartonen@gmail.com?subject=Taukopaikat.fi yhteydenotto">
             <Icon circular name="mail" />
-            Ota yhteyttä
+            Ota yhteyttä, ehdota muutosta, ehdota taukopaikkaa!
           </a>
         </Grid.Column>
       </Grid>

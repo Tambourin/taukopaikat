@@ -61,15 +61,15 @@ const removeVote = async placeId => {
   );
   return response.data;
 };
-/*
+
 const update = async place => {
   const response = await axios.put(
-    "http://localhost:3001/api/places/" + place.id,
+    baseUrl + place.id,
     place
   );
   return response.data;
 };
-*/
+
 
 export default {
   getAll,
@@ -80,5 +80,6 @@ export default {
   postImage,
   setToken,
   addVote,
-  removeVote
+  removeVote,
+  update
 };

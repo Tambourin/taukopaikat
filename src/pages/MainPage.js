@@ -8,8 +8,7 @@ import Latest from "../components/Latest";
 const MainPage = () => {
   return (
     <div>
-      <Heading />
-      
+      <Heading />      
       <Container>     
         <FilterBox />       
         <PlacesView />

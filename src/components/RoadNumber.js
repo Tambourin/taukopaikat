@@ -10,7 +10,7 @@ const roadNumbers = [ road1, road2, road3, road4, road5 ];
 
 const RoadNumber = ({ roadNumber, floated }) => {   
   return (
-    <Image floated={floated} verticalAlign='middle' size="mini" src={roadNumbers[roadNumber - 1]} />      
+    <Image className="road_number" floated={floated} verticalAlign='middle' size="mini" src={roadNumbers[roadNumber - 1]} />      
   )
 }
 

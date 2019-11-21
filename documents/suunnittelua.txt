@@ -1,26 +1,36 @@
 *Hakuboxin hoover-selitykset serviceille
-
 *SinglePlace-sivu
-
 *Karttaan oma sijainti?
 *Karttaan slideri, että paljonko näytetään
-Valtatien valinta korostaa kyseisen tien kartassa
 *InfoWindow onClick vie SinglePlaceen
 *Listanäkymän järestäminen
-
 *Paginaatio
-Tien parhaan paikan selvittäminen viisaammmin
 *Lisää kuvia SinglePlaceen
-Suorien kyselyiden rajoittaminen backendissä
 *käyttäjät
-vupden taukopaikat
-
 *Tykkäyksen lisääminen omaksi post-routeksi. Ei saa käyttää käyttäjän lähettämää placea korvaamaan tietokannassa oleva
-Muokkaa paikkaa nappula pienemmäksi
+*Kartta, mm. aloituskohta sliderissä jossain puolenvälin kohdilla?
+*Tien parhaan paikan selvittäminen viisaammmin
+*Palvelut-ikonit?
+*Äänestä parhaaksi napin sydämmen paikka
+*vupden taukopaikat
 
 Äänestys
 Kirjautuminen
-Kartta, mm. aloituskohta sliderissä jossain puolenvälin kohdilla?
-Palvelut-ikonit?
+
+Valtatien valinta korostaa kyseisen tien kartassa
+Suorien kyselyiden rajoittaminen backendissä
+Muokkaa paikkaa nappula pienemmäksi
+Oma sijainti production-versiossa ---- vaatii https
+Parhaan paikan ribboni myös SinglePlaceen
 
 
+
+käytääjänTiedot = find({ authId: user.sub })
+paikka = findById(placeID)
+käytääjänTiedot.likedPlaces.includes
+
+User {
+  id,
+  authId,
+  likedPlaces: []
+}

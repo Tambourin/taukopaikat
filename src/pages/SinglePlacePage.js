@@ -12,6 +12,7 @@ import RatingsGroup from "../components/RatingsGroup";
 import OpenToday from "../components/singlePlace/OpenToday";
 import SinglePlacePageImage from "../components/singlePlace/SinglePlacePageImage";
 import EditButton from "../components/EditButton";
+import ServiceIcons from "../components/ServiceIcons";
 
 const SinglePlacePage = ({ id, place, activeGoogleData, initActiveGoogleData, isLoading, loadingErrored, clearActiveGoogleData }) => {
   useEffect(() => {
@@ -34,25 +35,23 @@ const SinglePlacePage = ({ id, place, activeGoogleData, initActiveGoogleData, is
   console.log("place ", place);
 
   return ( 
-    <div>      
-        <Segment basic vertical textAlign="center" >
-          <EditButton place={place} />
-          <RoadNumber roadNumber={place.highway} />
-          <Header  as="h2" style={{ fontSize: "3.0em" }} color="olive">{place.name.toUpperCase()}</Header>
-          <Header color="yellow">{place.city}</Header>
-          <OpenToday openingHours={activeGoogleData.openingHours} />           
-        </Segment >
+    <>      
+      <Segment basic vertical textAlign="center" >
+        <EditButton place={place} />
+        <RoadNumber roadNumber={place.highway} />
+        <Header  as="h2" style={{ fontSize: "3.0em" }} color="olive">{place.name.toUpperCase()}</Header>
+        <Header color="yellow">{place.city}</Header>
+        <ServiceIcons place={place} /> 
+        <OpenToday openingHours={activeGoogleData.openingHours} /> 
+      </Segment >
 
-        <SinglePlacePageImage place={place} />
+      <SinglePlacePageImage place={place} />
         
       <Container>
-        <Segment padded vertical textAlign="center" color="olive">
-          {place.description ? <div>{place.description}</div> : null }
-        </Segment>
-
+        
         <Segment padded vertical textAlign="center">
           <RatingsGroup votes={place.votes} googleRating={activeGoogleData.googleRating} />
-          <VoteButton place={place}/> 
+          <VoteButton place={place}/>    
         </Segment>
 
         <Segment padded vertical textAlign="center" color="olive">
@@ -71,7 +70,7 @@ const SinglePlacePage = ({ id, place, activeGoogleData, initActiveGoogleData, is
           <ShowOnGoogleMapsButton placeName={place.name} />
         </Segment>         
     </Container>  
-    </div>
+    </>
   )
 }
 

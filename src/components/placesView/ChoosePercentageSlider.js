@@ -3,38 +3,55 @@ import { connect } from "react-redux";
 import { Segment, Label, Grid } from "semantic-ui-react";
 import { setPercentageOfPlacesToView } from "../../reducers/viewOptionsReducer";
 
-
-const inputStyle = {  
+const inputStyle = {
   width: "100%",
-  margin: "auto"  
-}
+  margin: "auto"
+};
 
 const centerStyle = {
   display: "flex",
   alignItems: "center"
-}
+};
 
-const ChoosePercentageSlider = ({ percentageOfPlacesToView, setPercentageOfPlacesToView }) => {  
+const ChoosePercentageSlider = ({
+  percentageOfPlacesToView,
+  setPercentageOfPlacesToView
+}) => {
   return (
-    <Segment color="olive">      
-      <Grid columns='equal' >
-        <Grid.Column textAlign='center'>
-          <Label color="olive" pointing="right" basic >Parhaat</Label>
+    <Segment color="olive">
+      <Grid columns="equal">
+        <Grid.Column textAlign="center">
+          <Label
+            id="show_only_best"
+            color="olive"
+            pointing="right"
+            basic
+            onClick={() => setPercentageOfPlacesToView(1)}
+          >
+            Parhaat
+          </Label>
         </Grid.Column>
         <Grid.Column width={8} style={centerStyle}>
           <input
             style={inputStyle}
             type="range"
             min={1}
-            max={100}            
-            value={percentageOfPlacesToView}
-            onChange={(event) => setPercentageOfPlacesToView(event.target.value)}
+            max={100}
+            value={percentageOfPlacesToView}  
+            onChange={event => setPercentageOfPlacesToView(event.target.value)}
           />
         </Grid.Column>
-        <Grid.Column textAlign='center'>
-        <Label pointing="left" basic >Kaikki</Label>
-        </Grid.Column>             
-      </Grid>      
+        <Grid.Column textAlign="center">
+          <Label
+            id="show_all"
+            pointing="left"
+            basic
+            onClick={() => setPercentageOfPlacesToView(100)}
+          >
+            Kaikki
+          </Label>
+        </Grid.Column>
+      </Grid>
     </Segment>
   );
 };

@@ -1,34 +1,13 @@
 import React, { useState } from "react";
-import { Accordion, Icon, Image } from "semantic-ui-react";
+import { Accordion, Icon } from "semantic-ui-react";
 import PlacesMap from "../placesView/PlacesMap";
 import OpeningHoursList from "./OpeningHoursList";
-
-import coffeeImage from "../../static/coffee.jpg";
-import open24hImage from "../../static/open24h.png";
-import restaurantImage from "../../static/restaurant.jpg";
-import kindergartenImage from "../../static/kindergarten.png";
-import gasStationImage from "../../static/gas-station.jpg";
-import attractionImage from "../../static/attraction.jpg";
-
 
 const SinglePlaceAccordion = ({ place, activeGoogleData, openingHours }) => {  
   const [ activeIndex, setActiveIndex ] = useState(-1);
 
   const openCloseAccordion = (index) => {    
     index === activeIndex ? setActiveIndex(-1) : setActiveIndex(index);  
-  }
-
-  const servicesIcons = () => {    
-    return (
-      <Image.Group>
-        {place.services.hasCoffee ? <Image size="tiny" src={coffeeImage} /> : null}
-        {place.services.isOpenTwentyFourHours ?<Image size="tiny" src={open24hImage}/>: null}
-        {place.services.hasRestaurant ? <Image size="tiny" src={restaurantImage}/>: null}
-        {place.services.hasPlayground ?<Image size="tiny" src={kindergartenImage}/>: null}
-        {place.services.hasGasStation ?<Image size="tiny" src={gasStationImage}/>: null}
-        {place.services.isAttraction ? <Image size="tiny" src={attractionImage}/>: null}
-      </Image.Group>
-    )
   }
 
   return (
@@ -39,20 +18,17 @@ const SinglePlaceAccordion = ({ place, activeGoogleData, openingHours }) => {
         </Accordion.Title>
         <Accordion.Content active={activeIndex === 0}>
           <p>
-            {activeGoogleData.address}, {activeGoogleData.city}
-          </p>  
-          <div>
-            <Icon name="world" />
-            <a id="webLink"  href={activeGoogleData.www}>Verkkosivu</a>
-          </div>
-        </Accordion.Content>
-        <Accordion.Title active={activeIndex === 1} onClick={() => openCloseAccordion(1)}>
-          <Icon name="dropdown" color="olive"/>
-          Palvelut
-        </Accordion.Title>
-        <Accordion.Content active={activeIndex === 1}>          
-          {servicesIcons()}
-        </Accordion.Content>
+            {activeGoogleData.address ? activeGoogleData.address + ", " : null} 
+            {place.city}
+          </p>
+          {activeGoogleData.www ?   
+            <div>
+              <Icon name="world" />
+              <a id="webLink"  href={activeGoogleData.www}>Verkkosivu</a>
+            </div>
+            : null
+          }
+        </Accordion.Content>        
         <Accordion.Title active={activeIndex === 2} onClick={() => openCloseAccordion(2)}>
           <Icon name="dropdown" color="olive"/>
           Aukiolo

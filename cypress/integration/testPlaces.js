@@ -26,7 +26,7 @@ const testPlaces = [
       hasBeenAvarded: false,      
       isAttraction: true,
       isSummerCafe: false,
-      isGasStation: false,
+      isGasStation: true,
       isGrill: false
     }
   },
@@ -34,7 +34,7 @@ const testPlaces = [
     name: "ABC Hirvaskangas",
     city: "Äänekoski",
     description: "testikuvaus",
-    highway: 4,
+    highway: 4,    
     services: {
       doesNotBelongToChain: false,
       isOpenTwentyFourHours: true,    

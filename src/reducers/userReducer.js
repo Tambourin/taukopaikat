@@ -1,4 +1,5 @@
 import createAuth0Client from "@auth0/auth0-spa-js";
+import { createBrowserHistory } from "history";
 import authConfig from "../authConfig";
 import placeService from "../services/placesService";
 
@@ -25,6 +26,7 @@ const userReducer = (state = defaultState, action) => {
         ...state,
         loading: false,
         errored: false,
+        authClient: action.authClient,
         user: action.user,
         token: action.token,
         isAuthenticated: action.isAuthenticated
@@ -52,29 +54,35 @@ const userReducer = (state = defaultState, action) => {
   }
 };
 
+
+
 export const initializeAuth = () => {
   return async dispatch => {
     console.log("init auth");
     dispatch({ type: CONFIGURE_START });
     try {
-      const authClient = await createAuth0Client(authConfig());
+      const auth0 = await createAuth0Client(authConfig());
+      console.log("authClient: ", auth0);
       if (window.location.search.includes("code=")) {
-        console.log("code");
-        const { appState } = await authClient.handleRedirectCallback();
-        window.history.replaceState({}, document.title, appState && appState.targetUrl
-          ? appState.targetUrl
-          : window.location.pathname);
+        console.log("Auth0 handleRedirect");
+        const { appState } = await auth0.handleRedirectCallback();
+        console.log(appState.targetUrl);        
+        createBrowserHistory().replace(appState.targetUrl);
       }
-      const isAuthenticated = await authClient.isAuthenticated();
+      const isAuthenticated = await auth0.isAuthenticated();
       let user = null;
-      let token = null;
+      let token = null;      
       if (isAuthenticated) {
-        user = await authClient.getUser();
-        token = await authClient.getTokenSilently();
+        user = await auth0.getUser();
+        token = await auth0.getTokenSilently();
         placeService.setToken(token);
       }
+      console.log("isAuthenticated:", isAuthenticated);
+      console.log("user:", user);
+      console.log("token:", token);      
       dispatch({
         type: CONFIGURE_SUCCESS,
+        authClient: auth0,
         isAuthenticated: isAuthenticated,
         token: token,
         user: user
@@ -87,14 +95,14 @@ export const initializeAuth = () => {
 };
 
 export const login = () => {
-  return async dispatch => {
+  return async (dispatch, getState) => {
     console.log("login");
     dispatch({ type: CONFIGURE_START });
     try {
-      const authClient = await createAuth0Client(authConfig());
+      const authClient = getState().user.authClient;
       await authClient.loginWithRedirect({
-        redirect_uri:
-          process.env.NODE_ENV === "production"
+        appState: { targetUrl: window.location.pathname },
+        redirect_uri: process.env.NODE_ENV === "production"
             ? "https://taukopaikat.herokuapp.com"
             : "http://localhost:3000"
       });
@@ -106,10 +114,10 @@ export const login = () => {
 };
 
 export const logout = () => {
-  return async dispatch => {
+  return async (dispatch, getState) => {
     dispatch({ type: CONFIGURE_START });
     try {
-      const authClient = await createAuth0Client(authConfig());
+      const authClient = getState().user.authClient;
       authClient.logout({
         returnTo: window.location.origin
       });

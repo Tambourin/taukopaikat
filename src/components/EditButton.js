@@ -14,6 +14,7 @@ const EditButton = ({ history, place, isAuthenticated }) => {
       style={{ position: "absolute", top: "10px", right: "10px" }} 
       floated="right"
       content="Muokkaa"
+      size="mini"
       onClick={() => history.push(`/edit/${place.id}`)}
     />    
   );

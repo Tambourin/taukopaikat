@@ -4,7 +4,7 @@ import { Icon, Button } from "semantic-ui-react";
 import { addVoteToPlace, removeVoteFromPlace } from "../reducers/placesReducer";
 import { addToVoted, removeFromVoted } from "../reducers/votesReducer";
 
-const VoteButton = ({ place, places, votes, addVoteToPlace, removeVoteFromPlace, addToVoted, removeFromVoted }) => {
+const VoteButton = ({ place, fluid, places, votes, addVoteToPlace, removeVoteFromPlace, addToVoted, removeFromVoted }) => {
   
   const executeVote = async () => {
     const placeVotedOnSameHighway = votes.find(p => p.highway === place.highway);       
@@ -32,7 +32,7 @@ const VoteButton = ({ place, places, votes, addVoteToPlace, removeVoteFromPlace,
   }
 
   return (    
-    <Button basic onClick={executeVote} icon labelPosition="left" size="tiny" fluid>      
+    <Button basic onClick={executeVote} icon labelPosition="left" fluid={fluid ? true : false}>      
       <Icon name="like" />Äänestä parhaaksi
     </Button>
   );

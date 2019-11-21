@@ -21,6 +21,7 @@ const PlacesView = ({
   percentageOfPlacesToView,
   numberOfPlacesToView
 }) => {
+
   if (isLoading) {
     return (
       <Segment placeholder>
@@ -28,14 +29,23 @@ const PlacesView = ({
       </Segment>
     );
   }
+
   if (loadingErrored) {
     return <Segment>Tietojen lataus epäonnistui</Segment>;
   }
 
+  if (places.length === 0) {
+    return (
+      <Segment>
+        <p>Haku ei tuottanut tuloksia</p>
+      </Segment>
+    );
+  }    
+
   return (
-    <div>
+    <>
       {showOnMap ? (
-        <div>
+        <>
           <ChoosePercentageSlider />
           <PlacesMap
             places={limitNumberOfPlacesByPercent(
@@ -43,9 +53,9 @@ const PlacesView = ({
               percentageOfPlacesToView
             )}
           />
-        </div>
+        </>
       ) : (
-        <div>
+        <>
           <ChooseArrangeBy />
           <PlacesList
             places={orderPlaces(
@@ -53,9 +63,9 @@ const PlacesView = ({
               arrangeBy
             )}            
           />
-        </div>
+        </>
       )}
-    </div>
+    </>
   );
 };
 

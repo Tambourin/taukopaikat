@@ -10,38 +10,46 @@ import {
   getFilteredPlaces
 } from "../../reducers/placesSelectors";
 import PlaceImage from "../PlaceImage";
+import ServiceIcons from "../ServiceIcons";
 
 const MAX_IMAGE_HEIGHT = 210;
 
-const PlaceCard = ({ place, placesOnThisHighway }) => {
+const PlaceCard = ({ place, isBest }) => {
   return (
     <Card>
-      <Link to={`/places/${place.id}`} >
-        <PlaceImage imageId={place.images[0]} googleImageId={place.googleImage} height={MAX_IMAGE_HEIGHT} />
+      <Link to={`/places/${place.id}`} style={{ position: "relative"}}>
+        <PlaceImage
+          imageId={place.images[0]}
+          googleImageId={place.googleImage}
+          height={MAX_IMAGE_HEIGHT}
+        />
       </Link>
-      {placeWithMostVotes(placesOnThisHighway).id === place.id 
-        ? <BestOfHighwayRibbon highway={place.highway} />
-        : null
-      }      
-      <Card.Content>      
+      {isBest ? <BestOfHighwayRibbon highway={place.highway} /> : null}
+      <Card.Content>
         <Card.Header as={Link} to={`/places/${place.id}`}>
           {place.name}
           <RoadNumber roadNumber={place.highway} floated="right" />
         </Card.Header>
-        <Card.Meta>{place.city}</Card.Meta>
+        <Card.Meta>
+          {place.city}
+          <ServiceIcons place={place} size="mini" />
+        </Card.Meta>
       </Card.Content>
       <Card.Content extra>
-        <VoteButton place={place} />
+        <VoteButton place={place} fluid/>
       </Card.Content>
     </Card>
   );
 };
 
 const mapStateToProps = (state, ownProps) => {
+  const placesOnThisHighway = getFilteredPlaces(state.places.data, {
+    highway: ownProps.place.highway
+  });
+  const bestOnThisHighWay = placeWithMostVotes(placesOnThisHighway);
   return {
-    placesOnThisHighway: getFilteredPlaces(state.places.data, {
-      highway: ownProps.place.highway
-    })
+    isBest: bestOnThisHighWay.id === ownProps.place.id ? true : false
   };
 };
+
 export default connect(mapStateToProps)(PlaceCard);
