@@ -22,7 +22,7 @@ Suorien kyselyiden rajoittaminen backendissä
 Muokkaa paikkaa nappula pienemmäksi
 Oma sijainti production-versiossa ---- vaatii https
 Parhaan paikan ribboni myös SinglePlaceen
-
+paikkojen lisäämis ja muokkaus pois
 
 
 käytääjänTiedot = find({ authId: user.sub })

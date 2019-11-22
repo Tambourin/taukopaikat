@@ -1,6 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
-import { Menu, Icon, Dropdown, Loader } from "semantic-ui-react";
+import { Menu, Icon, Dropdown, Loader, Image } from "semantic-ui-react";
 import { login, logout } from "../reducers/userReducer";
 
 const LoginLogoutMenuItem = ({
@@ -33,7 +33,9 @@ const LoginLogoutMenuItem = ({
             Kirjautuminen epäonnistui yritä uudelleen
           </span>
         ) : (
-          "Kirjaudu sisään"
+          
+            "Kirjaudu sisään"
+          
         )}
       </>
     )
@@ -44,8 +46,10 @@ const LoginLogoutMenuItem = ({
       return (
         <>
           <Dropdown.Item>
+          <Image inline size="mini" circular src={user.picture} alt="Käyttäjäkuvake"/>
             {user.nickname}
           </Dropdown.Item>
+          <Dropdown.Divider />
           <Dropdown.Item onClick={() => logout()}>
             {logoutText()}
           </Dropdown.Item>
@@ -63,7 +67,9 @@ const LoginLogoutMenuItem = ({
     if (user) {
       return (
         <Menu.Item onClick={() => logout()}>
-          <Menu.Header>{user.nickname}</Menu.Header>
+          
+            <div>Kirjautunut:  {user.nickname} </div>
+            <Image style={{ marginLeft: "10px" }} inline size="mini" circular src={user.picture} alt="Käyttäjäkuvake"/>            
           <Menu.Item>
             {logoutText()}
           </Menu.Item>

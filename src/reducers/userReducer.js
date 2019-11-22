@@ -1,5 +1,4 @@
 import createAuth0Client from "@auth0/auth0-spa-js";
-import { createBrowserHistory } from "history";
 import authConfig from "../authConfig";
 import placeService from "../services/placesService";
 
@@ -8,13 +7,18 @@ const CONFIGURE_SUCCESS = "CONFIGURE_SUCCESS";
 const CONFIGURE_FAILURE = "CONFIGURE_FAILURE";
 const LOGOUT = "LOGOUT";
 
+const redirectUri = process.env.NODE_ENV === "production"
+? "https://taukopaikat.herokuapp.com/redirect"
+: "http://localhost:3000/redirect";
+
 const defaultState = {
   authClient: null,
   isAuthenticated: false,
   token: null,
   user: null,
   loading: false,
-  errored: false
+  errored: false,
+  targetUrl: null
 };
 
 const userReducer = (state = defaultState, action) => {
@@ -29,7 +33,8 @@ const userReducer = (state = defaultState, action) => {
         authClient: action.authClient,
         user: action.user,
         token: action.token,
-        isAuthenticated: action.isAuthenticated
+        isAuthenticated: action.isAuthenticated,
+        targetUrl: action.targetUrl
       };
     case CONFIGURE_FAILURE:
       return {
@@ -38,7 +43,8 @@ const userReducer = (state = defaultState, action) => {
         errored: true,
         isAuthenticated: false,
         user: null,
-        token: null
+        token: null,
+        targetUrl: null
       };
     case LOGOUT:
       return {
@@ -47,14 +53,13 @@ const userReducer = (state = defaultState, action) => {
         token: null,
         isAuthenticated: null,
         loading: false,
-        errored: false
+        errored: false,
+        targetUrl: null
       };
     default:
       return state;
   }
 };
-
-
 
 export const initializeAuth = () => {
   return async dispatch => {
@@ -62,12 +67,11 @@ export const initializeAuth = () => {
     dispatch({ type: CONFIGURE_START });
     try {
       const auth0 = await createAuth0Client(authConfig());
-      console.log("authClient: ", auth0);
+      let targetUrl = null;
       if (window.location.search.includes("code=")) {
         console.log("Auth0 handleRedirect");
-        const { appState } = await auth0.handleRedirectCallback();
-        console.log(appState.targetUrl);        
-        createBrowserHistory().replace(appState.targetUrl);
+        const { appState } = await auth0.handleRedirectCallback(); 
+        targetUrl = appState.targetUrl;                 
       }
       const isAuthenticated = await auth0.isAuthenticated();
       let user = null;
@@ -77,15 +81,13 @@ export const initializeAuth = () => {
         token = await auth0.getTokenSilently();
         placeService.setToken(token);
       }
-      console.log("isAuthenticated:", isAuthenticated);
-      console.log("user:", user);
-      console.log("token:", token);      
       dispatch({
         type: CONFIGURE_SUCCESS,
         authClient: auth0,
         isAuthenticated: isAuthenticated,
         token: token,
-        user: user
+        user: user,
+        targetUrl: targetUrl
       });
     } catch (error) {
       dispatch({ type: CONFIGURE_FAILURE });
@@ -102,9 +104,7 @@ export const login = () => {
       const authClient = getState().user.authClient;
       await authClient.loginWithRedirect({
         appState: { targetUrl: window.location.pathname },
-        redirect_uri: process.env.NODE_ENV === "production"
-            ? "https://taukopaikat.herokuapp.com"
-            : "http://localhost:3000"
+        redirect_uri: redirectUri
       });
     } catch (error) {
       dispatch({ type: CONFIGURE_FAILURE });

@@ -28,7 +28,7 @@ const HeaderMenu = ({ user }) => {
   const FullMenu = () => {
     return (
       <Responsive as={Menu.Menu} position="right" minWidth={Responsive.onlyTablet.minWidth}>
-        <AddPlaceMenuItem />
+        
         <LoginLogoutMenuItem />
       </Responsive>
     );
@@ -39,8 +39,7 @@ const HeaderMenu = ({ user }) => {
       <Responsive as={Menu.Menu} position="right" maxWidth={Responsive.onlyTablet.minWidth}>
         <Menu.Item>
           <Dropdown icon="bars" floating>
-            <Dropdown.Menu>            
-              <AddPlaceMenuItem dropdown/>
+            <Dropdown.Menu>                          
               <LoginLogoutMenuItem dropdown/>
             </Dropdown.Menu>
           </Dropdown>

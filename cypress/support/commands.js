@@ -1,3 +1,6 @@
+
+import placeService from "../../src/services/placesService";
+
 // ***********************************************
 // This example commands.js shows you how to
 // create various custom commands and overwrite
@@ -23,3 +26,54 @@
 //
 // -- This is will overwrite an existing command --
 // Cypress.Commands.overwrite("visit", (originalFn, url, options) => { ... })
+
+Cypress.Commands.add('login', (overrides = {}) => {
+  Cypress.log({
+    name: 'loginViaAuth0',
+  });
+
+  const options = {
+    method: 'POST',
+    url: Cypress.env('auth_url'),
+    body: {
+      grant_type: 'password',
+      username: Cypress.env('auth_username'),
+      password: Cypress.env('auth_password'),
+      audience: Cypress.env('auth_audience'),
+      scope: 'openid profile email',
+      client_id: Cypress.env('auth_client_id'),
+      client_secret: Cypress.env('auth_client_secret'),
+    },
+  };
+  cy.request(options).then((resp) => {
+    return resp.body;
+  })
+  .then((body) => {
+    const {access_token, expires_in, id_token} = body;
+    placeService.setToken(access_token);
+
+    const options = {
+      url: "https://taukopaikat.eu.auth0.com/userinfo",
+      headers: {
+        Authorization: `Bearer ${access_token}`
+      }
+    };
+    let user = null;
+
+    cy.request(options).then(response => {
+      user = response.body;
+
+      cy
+      .window()
+      .its('store')
+      .invoke('dispatch', {
+        type: "CONFIGURE_SUCCESS",
+        authClient: null,
+        isAuthenticated: true,
+        token: access_token,
+        user: user
+      });
+    }) ;
+    
+  });
+});

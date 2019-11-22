@@ -18,7 +18,7 @@ const ChoosePercentageSlider = ({
   setPercentageOfPlacesToView
 }) => {
   return (
-    <Segment color="olive">
+    <Segment color="olive" raised>
       <Grid columns="equal">
         <Grid.Column textAlign="center">
           <Label

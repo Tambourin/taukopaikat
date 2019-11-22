@@ -9,6 +9,7 @@ import MainPage from "./pages/MainPage";
 import SinglePlacePage from "./pages/SinglePlacePage";
 import EditPage from "./pages/EditPage";
 import Footer from "./components/Footer";
+import RedirectPage from "./pages/RedirectPage";
 
 const App = ({ initializePlaces, initializeVotes, initializeAuth, places, isAuthenticated }) => {
 
@@ -29,6 +30,7 @@ const App = ({ initializePlaces, initializeVotes, initializeAuth, places, isAuth
       <BrowserRouter>
         <HeaderMenu />
         <Route exact path="/" render={() => <MainPage />} />
+        <Route exact path="/redirect" render={() => <RedirectPage />} />
         <Route
           exact
           path="/edit/:id"
