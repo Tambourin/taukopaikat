@@ -13,13 +13,13 @@
 *Palvelut-ikonit?
 *Äänestä parhaaksi napin sydämmen paikka
 *vupden taukopaikat
+*Kirjautuminen
+*Suorien kyselyiden rajoittaminen backendissä
+*Muokkaa paikkaa nappula pienemmäksi
 
 Äänestys
-Kirjautuminen
 
 Valtatien valinta korostaa kyseisen tien kartassa
-Suorien kyselyiden rajoittaminen backendissä
-Muokkaa paikkaa nappula pienemmäksi
 Oma sijainti production-versiossa ---- vaatii https
 Parhaan paikan ribboni myös SinglePlaceen
 paikkojen lisäämis ja muokkaus pois

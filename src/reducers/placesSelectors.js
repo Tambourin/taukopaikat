@@ -25,14 +25,14 @@ export const placeWithMostVotes = places => {
 };
 
 const orderByVotesAndGoogle = (place1 , place2) => {
-  if(place1.votes && place2.votes) {
-    if(place2.votes !== place1.votes){
-      return place2.votes - place1.votes;
+  if(place1.votes.length && place2.votes.length) {
+    if(place2.votes.length !== place1.votes.length){
+      return place2.votes.length - place1.votes.length;
     }
     return place2.googleRating - place1.googleRating;      
-  } else if (place2.votes) {
+  } else if (place2.votes.length) {
     return 1;
-  } else if (place1.votes) {
+  } else if (place1.votes.length) {
     return -1;
   } else {
     return place2.googleRating - place1.googleRating;

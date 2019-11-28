@@ -7,7 +7,7 @@ const RatingsGroup = ({ votes, googleRating, small }) => {
       <div>        
         <span>
           <Icon name="like" color="red"/>
-          {votes}
+          {votes.length}
         </span>
         <span style={{ marginInlineStart: "10px" }}>
           <Icon name="star" color="blue"/>
@@ -21,7 +21,7 @@ const RatingsGroup = ({ votes, googleRating, small }) => {
         <Statistic color="red" size="mini">
           <Statistic.Value>
             <Icon name="like" />
-            {votes}
+            {votes.length}
           </Statistic.Value>
           <Statistic.Label>taukopaikat.fi</Statistic.Label>
         </Statistic>

@@ -1,12 +1,12 @@
 import React from "react";
 import { connect } from "react-redux";
 import { Menu, Icon, Dropdown, Loader, Image } from "semantic-ui-react";
-import { login, logout } from "../reducers/userReducer";
+import { loginAction, logoutAction } from "../reducers/userReducer";
 
 const LoginLogoutMenuItem = ({
   dropdown,
-  login,
-  logout,
+  loginAction,
+  logoutAction,
   user,
   loading,
   errored
@@ -21,8 +21,8 @@ const LoginLogoutMenuItem = ({
         <Icon name="sign-out" />
         Kirjaudu ulos
       </>
-    )    
-  }
+    );
+  };
 
   const loginText = () => {
     return (
@@ -33,54 +33,52 @@ const LoginLogoutMenuItem = ({
             Kirjautuminen epäonnistui yritä uudelleen
           </span>
         ) : (
-          
-            "Kirjaudu sisään"
-          
+          "Kirjaudu sisään"
         )}
       </>
-    )
-  }
+    );
+  };
 
   const DropdownMenu = () => {
     if (user) {
       return (
         <>
           <Dropdown.Item>
-          <Image inline size="mini" circular src={user.picture} alt="Käyttäjäkuvake"/>
+            <Image
+              inline
+              size="mini"
+              circular
+              src={user.picture}
+              alt="Käyttäjäkuvake"
+            />
             {user.nickname}
           </Dropdown.Item>
           <Dropdown.Divider />
-          <Dropdown.Item onClick={() => logout()}>
-            {logoutText()}
-          </Dropdown.Item>
+          <Dropdown.Item onClick={logoutAction}>{logoutText()}</Dropdown.Item>
         </>
       );
     }
-    return (
-      <Dropdown.Item onClick={() => login()}>
-        {loginText()}
-      </Dropdown.Item>
-    );
+    return <Dropdown.Item onClick={loginAction}>{loginText()}</Dropdown.Item>;
   };
 
   const NormalMenu = () => {
     if (user) {
       return (
-        <Menu.Item onClick={() => logout()}>
-          
-            <div>Kirjautunut:  {user.nickname} </div>
-            <Image style={{ marginLeft: "10px" }} inline size="mini" circular src={user.picture} alt="Käyttäjäkuvake"/>            
-          <Menu.Item>
-            {logoutText()}
-          </Menu.Item>
+        <Menu.Item onClick={logoutAction}>
+          <div>Kirjautunut: {user.nickname} </div>
+          <Image
+            style={{ marginLeft: "10px" }}
+            inline
+            size="mini"
+            circular
+            src={user.picture}
+            alt="Käyttäjäkuvake"
+          />
+          <Menu.Item>{logoutText()}</Menu.Item>
         </Menu.Item>
       );
     }
-    return (
-      <Menu.Item onClick={() => login()}>
-        {loginText()}
-      </Menu.Item>
-    );
+    return <Menu.Item onClick={loginAction}>{loginText()}</Menu.Item>;
   };
 
   if (dropdown) {
@@ -97,6 +95,6 @@ const mapsStateToProps = state => {
   };
 };
 
-export default connect(mapsStateToProps, { login, logout })(
+export default connect(mapsStateToProps, { loginAction, logoutAction })(
   LoginLogoutMenuItem
 );

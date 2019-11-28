@@ -74,14 +74,29 @@ const updatePlace = place => {
   };
 };
 
-export const addVoteToPlace = place => {
-  return async dispatch => {
-    const response = await placesService.addVote(place.id);
-    dispatch(updatePlace(response));
-    return response;
+export const votePlaceAction = (place, user) => {
+  return async (dispatch, getState) => {
+    try{
+      const placesOnSameHighway = getState().places.data.filter(
+        p => p.highway === place.highway
+      );
+      const placeAlreadyVoted = placesOnSameHighway.find(p =>
+        p.votes.includes(user.sub)
+      );
+      if(placeAlreadyVoted) {
+        const placeWhereVoteRemoved = await placesService.removeVote(placeAlreadyVoted.id);
+        dispatch(updatePlace(placeWhereVoteRemoved));
+      }    
+      const updatedPlace = await placesService.addVote(place.id);
+      dispatch(updatePlace(updatedPlace));    
+      return updatedPlace;
+    } catch (error) {
+      console.log(error);
+      return null;
+    }
   };
 };
-
+/*
 export const removeVoteFromPlace = place => {
   return async dispatch => {
     const response = await placesService.removeVote(place.id);
@@ -89,7 +104,7 @@ export const removeVoteFromPlace = place => {
     return response;
   };
 };
-
+*/
 export const addPlace = place => {
   return async dispatch => {
     dispatch({ type: SET_UPLOAD_ERROR_MESSAGE, message: null });
@@ -103,7 +118,9 @@ export const addPlace = place => {
     } catch (error) {
       dispatch({
         type: SET_UPLOAD_ERROR_MESSAGE,
-        message: error.response ? error.response.data.error : "Ei saada yhteyttä palvelimeen."
+        message: error.response
+          ? error.response.data.error
+          : "Ei saada yhteyttä palvelimeen."
       });
       return null;
     }
@@ -114,7 +131,6 @@ export const addComment = (place, comment) => {
   return async dispatch => {
     try {
       const addedComment = await placesService.postComment(place.id, comment);
-      console.log(addedComment);
       const updatedPlace = {
         ...place,
         comments: [...place.comments, addedComment]
@@ -148,7 +164,7 @@ export const updatePlaceSmartAction = place => {
 };
 
 export const initializePlaces = () => {
-  return async dispatch => {   
+  return async dispatch => {
     dispatch(startLoading());
     try {
       const places = await placesService.getAll();
@@ -156,7 +172,7 @@ export const initializePlaces = () => {
       dispatch(loadingDone());
     } catch {
       dispatch(setLoadingErrored());
-    }    
+    }
   };
 };
 

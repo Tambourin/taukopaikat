@@ -1,31 +1,33 @@
 import React, { useState } from "react";
+import { connect } from "react-redux";
+import { addComment } from "../../reducers/placesReducer";
+import { loginAction } from "../../reducers/userReducer";
 import { Form, Button } from "semantic-ui-react";
-import SecurityQuestion from "./SecurityQuestion";
+import ConfirmSendComment from "./ConfirmSendComment";
 
-const SubmitCommentForm = ({ place, addComment }) => {
+const MIN_COMMENT_LENGTH = 15;
+
+const SubmitCommentForm = ({ place, addComment, user, loginAction }) => {
   const [ newComment, setNewComment ] = useState("");
   const [ modalOpen, setModalOpen ] = useState(false);
-  const [ modalField, setModalField ] = useState("");
-  const [ securityQuestionErrored, setSecurityQuestionErrored ] = useState(false);
 
-  const sendComment = () => {    
-    if (modalField.toLowerCase() !== "helsinki") {
-      setSecurityQuestionErrored(true);
-      return;
-    }
-    setModalField("");
+  const sendComment = () => { 
     setModalOpen(false);
     addComment(place, {
       content: newComment,
-      author: "Olai Hartonen",
-      date: new Date()
+      author: user.nickname
     });
     setNewComment("");
   }
 
   const closeModal = () => {
-    setModalField("");
     setModalOpen(false);
+  }
+
+  if(!user) {
+    return (
+      <Button basic onClick={loginAction}>Kirjaudu sisään kommentoidaksesi</Button>
+    )
   }
 
   return (
@@ -37,22 +39,27 @@ const SubmitCommentForm = ({ place, addComment }) => {
       />                        
       <Button 
         type="submit"
-        disabled={newComment.length < 15}
-        content={newComment.length < 15 ? "Kommentti liian lyhyt" : "Jätä oma kommenttisi paikasta"}
+        disabled={newComment.length < MIN_COMMENT_LENGTH}
+        content={newComment.length < MIN_COMMENT_LENGTH ? "Kommentti liian lyhyt" : "Jätä oma kommenttisi paikasta"}
         labelPosition="left" 
         icon="edit" 
         color="olive"              
       />
-      <SecurityQuestion 
-        modalOpen={modalOpen}
-        modalField={modalField}
-        setModalField={setModalField}
-        securityQuestionErrored={securityQuestionErrored}
+      <ConfirmSendComment 
+        modalOpen={modalOpen}        
         closeModal={closeModal}
+        placeName={place.name}
         sendComment={sendComment}
+        user={user}
+        commentContent={newComment} 
       />
     </Form>
   );
 };
 
-export default SubmitCommentForm;
+const mapStateToProps = state => {
+  return {
+    user: state.user.user
+  }
+}
+export default connect(mapStateToProps, { addComment, loginAction })(SubmitCommentForm);

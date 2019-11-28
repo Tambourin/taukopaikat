@@ -71,7 +71,7 @@ const AddImage = ({ place, image, loading, setImageAction, errored, loadingSucce
   const requestLoginModal = () => {
     return (
       <>
-        <Modal.Header>Kirjaudu ensin sisään</Modal.Header>
+        <Modal.Header>Kirjaudu sisään lähettääksesi kuvia</Modal.Header>
       </>
     )
   }

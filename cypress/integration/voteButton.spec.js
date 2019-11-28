@@ -1,10 +1,16 @@
-import { testPlaces } from "./testPlaces";
+import testPlaces from "./testPlaces";
 import testUtility from "./testUtility";
 
 describe("VoteButton", function() {
-  beforeEach(() => {
-    cy.clearLocalStorage();
-    testUtility.prepare();
+  before(function() {
+    cy.visit("http://localhost:3000/");
+    cy.login();    
+  });
+
+  beforeEach(() => {   
+    testUtility.prepare(testPlaces);
+    cy.wait(1000);
+    cy.login();
   });
 
   it("click button", function() {

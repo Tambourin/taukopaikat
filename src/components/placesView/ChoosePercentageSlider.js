@@ -22,8 +22,7 @@ const ChoosePercentageSlider = ({
       <Grid columns="equal">
         <Grid.Column textAlign="center">
           <Label
-            id="show_only_best"
-            color="olive"
+            id="show_only_best"            
             pointing="right"
             basic
             onClick={() => setPercentageOfPlacesToView(1)}

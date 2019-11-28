@@ -1,34 +1,13 @@
 import React from "react";
-import { connect } from "react-redux";
 import { Link } from "react-router-dom";
-import { Menu, Icon, Dropdown, Responsive } from "semantic-ui-react";
+import { Menu, Dropdown, Responsive } from "semantic-ui-react";
 import LoginLogoutMenuItem from "./LoginLogoutMenuItem";
 
-const HeaderMenu = ({ user }) => {
-  const AddPlaceMenuItem = (dropdown) => {
-    if(!user) {
-      return null;
-    }
-    if (dropdown) {
-      return (
-        <Dropdown.Item as={Link} to="/edit/new">
-          <Icon name="add square" />
-          Lisää uusi taukopaikka
-        </Dropdown.Item>
-      );
-    }
-    return (
-      <Menu.Item as={Link} to="/edit/new">
-        <Icon name="add square" />
-        Lisää uusi taukopaikka
-      </Menu.Item>
-    );
-  }
-
+const HeaderMenu = () => {
+  
   const FullMenu = () => {
     return (
       <Responsive as={Menu.Menu} position="right" minWidth={Responsive.onlyTablet.minWidth}>
-        
         <LoginLogoutMenuItem />
       </Responsive>
     );
@@ -48,7 +27,6 @@ const HeaderMenu = ({ user }) => {
     );
   }
   
-
   return (
     <Menu
       borderless
@@ -66,12 +44,4 @@ const HeaderMenu = ({ user }) => {
   );
 };
 
-const mapsStatetoProps = state => {
-  return {
-    user: state.user.user    
-  };
-};
-
-export default connect(
-  mapsStatetoProps
-)(HeaderMenu);
+export default HeaderMenu;

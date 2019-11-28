@@ -19,7 +19,7 @@ const buttonContainerStyle = {
 
 const SinglePlacePageImage = ({ place }) => {
   return (
-    <div style={componentContainerStyle}>      
+    <div style={componentContainerStyle}>  
       <PlaceImage imageId={place.images[0]} googleImageId={place.googleImage} height={IMAGE_HEIGHT} big/>
       <div style={buttonContainerStyle}>
         <AllPlaceImages imageIds={place.images}/> 

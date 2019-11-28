@@ -14,7 +14,6 @@ import activeGoogleDataReducer from "./reducers/activeGoogleDataReducer";
 import imageUploadReducer from "./reducers/imageUploadReducer";
 import userReducer from "./reducers/userReducer";
 
-
 const reducer = combineReducers({
   places: placesReducer,
   activeGoogleData: activeGoogleDataReducer,
@@ -26,8 +25,6 @@ const reducer = combineReducers({
 });
 const store = createStore(reducer, applyMiddleware(thunk));
 
-
-
 ReactDOM.render(
   <Provider store={store}>
     <App />
@@ -35,6 +32,7 @@ ReactDOM.render(
   , document.getElementById('root')
 );
 
-if (window.Cypress) {
+//For tests
+//if (window.Cypress) {
   window.store = store;
-}
+//}

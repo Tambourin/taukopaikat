@@ -96,7 +96,7 @@ export const initializeAuth = () => {
   };
 };
 
-export const login = () => {
+export const loginAction = () => {
   return async (dispatch, getState) => {
     console.log("login");
     dispatch({ type: CONFIGURE_START });
@@ -113,7 +113,7 @@ export const login = () => {
   };
 };
 
-export const logout = () => {
+export const logoutAction = () => {
   return async (dispatch, getState) => {
     dispatch({ type: CONFIGURE_START });
     try {

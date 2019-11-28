@@ -16,7 +16,10 @@ import ServiceIcons from "../components/ServiceIcons";
 
 const SinglePlacePage = ({ id, place, activeGoogleData, initActiveGoogleData, isLoading, loadingErrored, clearActiveGoogleData }) => {
   useEffect(() => {
-      window.scrollTo(0, 0);      
+    window.scrollTo(0, 0);    
+  });
+  
+  useEffect(() => {
       initActiveGoogleData(id);
       return (() => clearActiveGoogleData());
   }, [initActiveGoogleData, clearActiveGoogleData, id]); 
@@ -42,7 +45,7 @@ const SinglePlacePage = ({ id, place, activeGoogleData, initActiveGoogleData, is
         <Header  as="h2" style={{ fontSize: "3.0em" }} color="olive">{place.name.toUpperCase()}</Header>
         <Header color="yellow">{place.city}</Header>
         <ServiceIcons place={place} /> 
-        <OpenToday openingHours={activeGoogleData.openingHours} /> 
+        <OpenToday openingHours={activeGoogleData.openingHours} />         
       </Segment >
 
       <SinglePlacePageImage place={place} />

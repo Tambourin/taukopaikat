@@ -1,10 +1,14 @@
+import placesService from "../../src/services/placesService";
+
 const baseApiUrl = "http://localhost:3001/api/places";
 const baseFrontUrl = "http://localhost:3000";
 
 const prepare = (places) => {
   cy.request("GET", `${baseApiUrl}/delete`);
   places.forEach(place => {
-    cy.request("POST", baseApiUrl, place);
+    console.log(cy.window().its('store').invoke('getState'));
+    //cy.request("POST", baseApiUrl, place);
+    placesService.postPlace(place);
   });  
   cy.visit(baseFrontUrl);
 }

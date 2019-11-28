@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { initializePlaces } from "./reducers/placesReducer";
 import { initializeVotes } from "./reducers/votesReducer";
 import { BrowserRouter, Route } from "react-router-dom";
-import { initializeAuth, login, logout } from "./reducers/userReducer";
+import { initializeAuth } from "./reducers/userReducer";
 import HeaderMenu from "./components/HeaderMenu";
 import MainPage from "./pages/MainPage";
 import SinglePlacePage from "./pages/SinglePlacePage";
@@ -66,5 +66,5 @@ const mapStateToProps = state => {
 
 export default connect(
   mapStateToProps,
-  { initializePlaces, initializeVotes, initializeAuth, login, logout }
+  { initializePlaces, initializeVotes, initializeAuth }
 )(App);
