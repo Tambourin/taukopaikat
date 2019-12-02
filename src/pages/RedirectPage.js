@@ -5,13 +5,16 @@ import { Segment } from "semantic-ui-react";
 
 const RedirectPage = ({ user, targetUrl, errored }) => {
   console.log("user:", user);
+  console.log("errored:", errored);
+  
+  if(errored) {
+    return <Redirect to={"/"} />
+  }
   if(!user) {
     return <Segment loading></Segment>
   }
 
-  if(errored) {
-    return <Redirect to={"/"} />
-  }
+  
 
   return (
     <div>

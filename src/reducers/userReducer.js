@@ -40,6 +40,7 @@ const userReducer = (state = defaultState, action) => {
     case CONFIGURE_FAILURE:
       return {
         ...state,
+        authClient: null,
         loading: false,
         errored: true,
         isAuthenticated: false,
@@ -50,6 +51,7 @@ const userReducer = (state = defaultState, action) => {
     case LOGOUT:
       return {
         ...state,
+        authClient: null,
         user: null,
         token: null,
         isAuthenticated: null,
@@ -63,18 +65,22 @@ const userReducer = (state = defaultState, action) => {
 };
 
 export const initializeAuth = () => {
-  return async dispatch => {
-    console.log("init auth");
+  return async (dispatch, getState) => {
+    console.log("init auth");    
     dispatch({ type: CONFIGURE_START });
     try {
       const auth0 = await createAuth0Client(authConfig());
+      const isIn = await auth0.isAuthenticated();
+      console.log("isAuthenticated", isIn);
+      
       let targetUrl = null;
-      if (window.location.search.includes("code=")) {
-        console.log("Auth0 handleRedirect");
+      if (window.location.search.includes("code=") && isIn === false) {
+        console.log("Auth0 handleRedirect");        
         const { appState } = await auth0.handleRedirectCallback(); 
         targetUrl = appState.targetUrl;                 
       }
       const isAuthenticated = await auth0.isAuthenticated();
+      console.log("isAuth", isAuthenticated);
       let user = null;
       let token = null;      
       if (isAuthenticated) {
@@ -102,7 +108,7 @@ export const loginAction = () => {
     console.log("login");
     dispatch({ type: CONFIGURE_START });
     try {
-      const authClient = getState().user.authClient;
+      const authClient = await createAuth0Client(authConfig());//getState().user.authClient;
       await authClient.loginWithRedirect({
         appState: { targetUrl: window.location.pathname },
         redirect_uri: redirectUri
