@@ -26,6 +26,7 @@ const userReducer = (state = defaultState, action) => {
     case CONFIGURE_START:
       return { ...state, loading: true, errored: false };
     case CONFIGURE_SUCCESS:
+      console.log("Configure success");
       return {
         ...state,
         loading: false,

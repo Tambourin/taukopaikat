@@ -9,10 +9,11 @@ const RatingsGroup = ({ votes, googleRating, small }) => {
           <Icon name="like" color="red"/>
           {votes.length}
         </span>
-        <span style={{ marginInlineStart: "10px" }}>
+        {googleRating ? <span style={{ marginInlineStart: "10px" }}>
           <Icon name="star" color="blue"/>
           {googleRating} / 5
-        </span>
+        </span> 
+        : null}
       </div>
     )
   }
@@ -25,13 +26,14 @@ const RatingsGroup = ({ votes, googleRating, small }) => {
           </Statistic.Value>
           <Statistic.Label>taukopaikat.fi</Statistic.Label>
         </Statistic>
-        <Statistic color="blue" size="mini">
+        {googleRating ? <Statistic color="blue" size="mini">
           <Statistic.Value>
             <Icon name="star" />
             {googleRating}
           </Statistic.Value>
           <Statistic.Label>Arvio Google Mapsissa</Statistic.Label>
-        </Statistic>
+        </Statistic> 
+        : null}
     </div>
 
   );

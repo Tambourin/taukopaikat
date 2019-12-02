@@ -3,16 +3,26 @@ import { connect } from "react-redux";
 import { Redirect } from "react-router-dom";
 import { Segment } from "semantic-ui-react";
 
-const RedirectPage = ({ user, targetUrl }) => {
+const RedirectPage = ({ user, targetUrl, errored }) => {
+  console.log("user:", user);
+  if(!user) {
+    return <Segment loading></Segment>
+  }
+
+  if(errored) {
+    return <Redirect to={"/"} />
+  }
+
   return (
     <div>
-      {user ? <Redirect to={targetUrl} /> : <Segment loading></Segment>}
+      <Redirect to={targetUrl} />
     </div>
   );
 };
 const mapStateToProps = state => {  
   return {
     user: state.user.user,
+    errored: state.user.errored,
     targetUrl: state.user.targetUrl
   };
 };
