@@ -6,7 +6,7 @@ const SET_IS_ATTRACTION = "SET_IS_ATTRACTION";
 const SET_IS_SUMMER_CAFE = "SET_IS_SUMMER_CAFE";
 const SET_IS_GAS_STATION = "SET_IS_GAS_STATION";
 const SET_IS_GRILL = "SET_IS_GRILL";
-
+const SET_HAS_MARKETPLACE = "SET_HAS_MARKETPLACE"
 
 const SET_SEARCH_WORD = "SET_SEARCH_WORD";
 
@@ -19,6 +19,7 @@ const defaultState = {
   hasRestaurant: false,
   hasCofee: false,
   isAttraction: false,
+  hasMarketPlace: false,
   searchWord: ""
 }
 
@@ -40,6 +41,9 @@ const filterReducer = (state=defaultState, action) => {
       return ({...state, isGasStation: !state.isGasStation });
     case(SET_IS_GRILL):    
       return ({...state, isGrill: !state.isGrill });
+    case(SET_HAS_MARKETPLACE):
+    console.log("setHasMarketpla");
+      return ({...state, hasMarketPlace: !state.hasMarketPlace });
     case(SET_SEARCH_WORD):
       return ({...state, searchWord: action.searchWord});
     default:
@@ -68,5 +72,6 @@ export const setIsAttraction = () => ({ type: SET_IS_ATTRACTION });
 export const setIsSummerCafe = () => ({ type: SET_IS_SUMMER_CAFE });
 export const setIsGasStation = () => ({ type: SET_IS_GAS_STATION });
 export const setIsGrill = () => ({ type: SET_IS_GRILL });
+export const setHasMarketplace = () => ({ type: SET_HAS_MARKETPLACE });
 
 export default filterReducer;

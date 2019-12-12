@@ -14,7 +14,7 @@ import ServiceIcons from "../ServiceIcons";
 
 const MAX_IMAGE_HEIGHT = 210;
 
-const PlaceCard = ({ place, isBest }) => {
+const PlaceCard = ({ place, isBest, hideVoteButton }) => {
   return (
     <Card>
       <Link to={`/places/${place.id}`} style={{ position: "relative"}}>
@@ -36,7 +36,7 @@ const PlaceCard = ({ place, isBest }) => {
         </Card.Meta>
       </Card.Content>
       <Card.Content extra>
-        <VoteButton place={place} fluid/>
+        {hideVoteButton ? null : <VoteButton place={place} fluid/>}
       </Card.Content>
     </Card>
   );

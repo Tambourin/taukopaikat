@@ -1,8 +1,8 @@
-import React from "react";
+import React, { useRef } from "react";
 import { Input } from "semantic-ui-react";
 
 const SearchWordInput = ({ searchWord, setSearchWord }) => {
-  const ref = React.createRef();
+  const ref = useRef();
 
   const handleSubmit = event => {
     event.preventDefault();

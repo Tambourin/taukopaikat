@@ -8,7 +8,6 @@ import './index.css';
 import App from './App';
 import placesReducer from "./reducers/placesReducer";
 import filterReducer from "./reducers/filterReducer";
-import votesReducer from "./reducers/votesReducer";
 import viewOptionsReducer from "./reducers/viewOptionsReducer";
 import activeGoogleDataReducer from "./reducers/activeGoogleDataReducer";
 import imageUploadReducer from "./reducers/imageUploadReducer";
@@ -19,7 +18,6 @@ const reducer = combineReducers({
   activeGoogleData: activeGoogleDataReducer,
   user: userReducer,
   imageUpload: imageUploadReducer,
-  votes: votesReducer,
   filter: filterReducer,
   viewOptions: viewOptionsReducer
 });
@@ -33,6 +31,6 @@ ReactDOM.render(
 );
 
 //For tests
-//if (window.Cypress) {
+if (window.Cypress) {
   window.store = store;
-//}
+}

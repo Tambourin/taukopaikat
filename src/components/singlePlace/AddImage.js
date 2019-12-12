@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { connect } from "react-redux";
-import { updatePlaceAction } from "../reducers/placesReducer";
+import { updatePlaceAction } from "../../reducers/placesReducer";
 import { Segment, Button, Modal } from "semantic-ui-react";
-import { setImageAction, upLoadAction } from "../reducers/imageUploadReducer";
+import { setImageAction, upLoadAction } from "../../reducers/imageUploadReducer";
 
 const reader = new FileReader();
 

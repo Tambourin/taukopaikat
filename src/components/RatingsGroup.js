@@ -28,8 +28,8 @@ const RatingsGroup = ({ votes, googleRating, small }) => {
         </Statistic>
         {googleRating ? <Statistic color="blue" size="mini">
           <Statistic.Value>
-            <Icon name="star" />
-            {googleRating}
+            <Icon name="star" />            
+            {googleRating} / 5
           </Statistic.Value>
           <Statistic.Label>Arvio Google Mapsissa</Statistic.Label>
         </Statistic> 

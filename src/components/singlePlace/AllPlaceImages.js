@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Modal, Button } from "semantic-ui-react";
-import PlaceImage from "../components/PlaceImage";
+import PlaceImage from "../PlaceImage";
 
 
 const AllPlaceImages = ({ imageIds }) => {      

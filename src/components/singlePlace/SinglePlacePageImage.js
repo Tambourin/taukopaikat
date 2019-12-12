@@ -1,7 +1,7 @@
 import React from "react";
 import PlaceImage from "../PlaceImage";
-import AllPlaceImages from "../AllPlaceImages";
-import AddImage from "../AddImage";
+import AllPlaceImages from "./AllPlaceImages";
+import AddImage from "./AddImage";
 
 const IMAGE_HEIGHT = 520;
 

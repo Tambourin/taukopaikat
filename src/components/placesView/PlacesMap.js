@@ -87,21 +87,25 @@ const PlacesMap = props => {
 
   const mapPlacesToMarkers = places => {
     return places.map(place => {
-      return (
-        <Marker
-          key={place.id}
-          position={place.coordinates}
-          title={place.name}
-          image={place.images[0]}
-          googleImage={place.googleImage}
-          votes={place.votes}
-          highway={place.highway}
-          googleRating={place.googleRating}
-          id={place.id}
-          icon={flagIcon}
-          onClick={onMarkerClick}
-        />
-      );
+      if(place.coordinates) {
+        return (
+          <Marker
+            key={place.id}
+            position={place.coordinates}
+            title={place.name}
+            image={place.images[0]}
+            googleImage={place.googleImage}
+            votes={place.votes}
+            highway={place.highway}
+            services={place.services}
+            googleRating={place.googleRating}
+            id={place.id}
+            icon={flagIcon}
+            onClick={onMarkerClick}
+          />
+        );        
+      }   
+      return null;   
     });
   };
 

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef } from "react";
 import { Dropdown } from "semantic-ui-react";
 
 const highwayOptions = [
@@ -11,7 +11,7 @@ const highwayOptions = [
 ];
 
 const ChooseHighWay = ({ highway, setHighway }) => {
-  const ref = React.createRef();
+  const ref = useRef();
 
   const handleOnChange = (event, data) => {
     setHighway(data.value);

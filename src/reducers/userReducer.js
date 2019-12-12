@@ -8,7 +8,7 @@ const CONFIGURE_FAILURE = "CONFIGURE_FAILURE";
 const LOGOUT = "LOGOUT";
 
 const redirectUri = process.env.NODE_ENV === "production"
-? "https://taukopaikat.herokuapp.com/redirect"
+? "https://www.taukopaikat.fi/redirect"
 : "http://localhost:3000/redirect";
 
 const defaultState = {
@@ -70,9 +70,7 @@ export const initializeAuth = () => {
     dispatch({ type: CONFIGURE_START });
     try {
       const auth0 = await createAuth0Client(authConfig());
-      const isIn = await auth0.isAuthenticated();
-      console.log("isAuthenticated", isIn);
-      
+      const isIn = await auth0.isAuthenticated();      
       let targetUrl = null;
       if (window.location.search.includes("code=") && isIn === false) {
         console.log("Auth0 handleRedirect");        
@@ -80,7 +78,6 @@ export const initializeAuth = () => {
         targetUrl = appState.targetUrl;                 
       }
       const isAuthenticated = await auth0.isAuthenticated();
-      console.log("isAuth", isAuthenticated);
       let user = null;
       let token = null;      
       if (isAuthenticated) {
@@ -108,7 +105,7 @@ export const loginAction = () => {
     console.log("login");
     dispatch({ type: CONFIGURE_START });
     try {
-      const authClient = await createAuth0Client(authConfig());//getState().user.authClient;
+      const authClient = await createAuth0Client(authConfig());
       await authClient.loginWithRedirect({
         appState: { targetUrl: window.location.pathname },
         redirect_uri: redirectUri

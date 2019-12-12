@@ -1,44 +1,44 @@
 import React, { useEffect } from "react";
 import { connect } from "react-redux";
-import { initializePlaces } from "./reducers/placesReducer";
-import { initializeVotes } from "./reducers/votesReducer";
 import { BrowserRouter, Route } from "react-router-dom";
 import { initializeAuth } from "./reducers/userReducer";
-import HeaderMenu from "./components/HeaderMenu";
+import { initializePlaces } from "./reducers/placesReducer";
+import HeaderMenu from "./components/header/HeaderMenu";
 import MainPage from "./pages/MainPage";
 import SinglePlacePage from "./pages/SinglePlacePage";
 import EditPage from "./pages/EditPage";
 import Footer from "./components/Footer";
 import RedirectPage from "./pages/RedirectPage";
+import PrivacyPage from "./pages/PrivacyPage";
 
-const App = ({ initializePlaces, initializeVotes, initializeAuth, places, isAuthenticated }) => {
-
+const App = ({ initializePlaces, initializeAuth, places, isAuthenticated }) => {
   useEffect(() => {
-    initializeAuth();    
+    initializeAuth();
   }, [initializeAuth]);
 
   useEffect(() => {
     initializePlaces();
   }, [initializePlaces]);
 
-  useEffect(() => {
-    initializeVotes();
-  }, [initializeVotes]);
-
   return (
     <>
       <BrowserRouter>
         <HeaderMenu />
+        <Route exact path="/privacy" render={() => <PrivacyPage />} />
         <Route exact path="/" render={() => <MainPage />} />
         <Route exact path="/redirect" render={() => <RedirectPage />} />
         <Route
           exact
           path="/edit/:id"
-          render={isAuthenticated ? ({ match }) => (
-            <EditPage
-              place={places.find(place => place.id === match.params.id)}
-            />
-          ) : null }
+          render={
+            isAuthenticated
+              ? ({ match }) => (
+                  <EditPage
+                    place={places.find(place => place.id === match.params.id)}
+                  />
+                )
+              : null
+          }
         />
         <Route
           exact
@@ -64,7 +64,6 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(
-  mapStateToProps,
-  { initializePlaces, initializeVotes, initializeAuth }
-)(App);
+export default connect(mapStateToProps, { initializePlaces, initializeAuth })(
+  App
+);

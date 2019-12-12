@@ -10,7 +10,8 @@ import {
   setIsAttraction,
   setIsSummerCafe,
   setIsGasStation,
-  setIsGrill
+  setIsGrill,
+  setHasMarketplace
 } from "../../reducers/filterReducer";
 import { showAsList, showOnMap } from "../../reducers/viewOptionsReducer";
 import ChooseServices from "./ChooseServices";
@@ -52,6 +53,7 @@ const FilterBox = ({
               setIsSummerCafe={props.setIsSummerCafe}
               setIsGasStation={props.setIsGasStation}
               setIsGrill={props.setIsGrill}
+              setHasMarketplace={props.setHasMarketplace}
             />
           </Grid.Column>
         </Grid.Row>
@@ -88,6 +90,7 @@ export default connect(
     setIsSummerCafe,
     setIsGasStation,
     setIsGrill,
+    setHasMarketplace,
     showAsList,
     showOnMap
   }

@@ -16,21 +16,17 @@
 *Kirjautuminen
 *Suorien kyselyiden rajoittaminen backendissä
 *Muokkaa paikkaa nappula pienemmäksi
-
-Äänestys
+*Äänestys
+*Oma sijainti production-versiossa ---- vaatii https
+*paikkojen lisäämis ja muokkaus pois
 
 Valtatien valinta korostaa kyseisen tien kartassa
-Oma sijainti production-versiossa ---- vaatii https
 Parhaan paikan ribboni myös SinglePlaceen
-paikkojen lisäämis ja muokkaus pois
+Käyttöehdot kirjautumisiin Google, Facebook
+Kirjautumisnapin saavutettavuus
+Kartan keskitys, kun on näyttänyt väärään
 
+ruokakauppa
+jännä
+leikkipaikka
 
-käytääjänTiedot = find({ authId: user.sub })
-paikka = findById(placeID)
-käytääjänTiedot.likedPlaces.includes
-
-User {
-  id,
-  authId,
-  likedPlaces: []
-}

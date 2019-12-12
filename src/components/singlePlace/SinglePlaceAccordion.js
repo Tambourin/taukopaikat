@@ -31,7 +31,7 @@ const SinglePlaceAccordion = ({ place, activeGoogleData, openingHours }) => {
         </Accordion.Content>        
         <Accordion.Title active={activeIndex === 2} onClick={() => openCloseAccordion(2)}>
           <Icon name="dropdown" color="olive"/>
-          Aukiolo
+          Aukioloajat
         </Accordion.Title>
         <Accordion.Content active={activeIndex === 2}>
           <OpeningHoursList openingHours={openingHours} />          

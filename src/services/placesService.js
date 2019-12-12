@@ -6,7 +6,6 @@ const baseUrl =
     : "http://localhost:3001/api/places/";
 
 const setToken = token => {
-  console.log("set token", token);
   axios.defaults.headers.post["Authorization"] = "bearer " + token;
   axios.defaults.headers.put["Authorization"] = "bearer " + token;
   axios.defaults.headers.delete["Authorization"] = "bearer " + token;
@@ -30,7 +29,6 @@ const getGoogleDataByPlaceId = async id => {
 };
 
 const postPlace = async place => {
-  console.log(axios.defaults.headers.post);
   const response = await axios.post(baseUrl, place);
   return response.data;
 };

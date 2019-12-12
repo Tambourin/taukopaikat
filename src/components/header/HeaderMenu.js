@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { Menu, Dropdown, Responsive } from "semantic-ui-react";
+import { Menu, Responsive } from "semantic-ui-react";
 import LoginLogoutMenuItem from "./LoginLogoutMenuItem";
 
 const HeaderMenu = () => {
@@ -15,14 +15,8 @@ const HeaderMenu = () => {
 
   const MobileMenu = () => {
     return (
-      <Responsive as={Menu.Menu} position="right" maxWidth={Responsive.onlyTablet.minWidth}>
-        <Menu.Item>
-          <Dropdown icon="bars" floating>
-            <Dropdown.Menu>                          
-              <LoginLogoutMenuItem dropdown/>
-            </Dropdown.Menu>
-          </Dropdown>
-        </Menu.Item>
+      <Responsive as={Menu.Menu} position="right" maxWidth={Responsive.onlyTablet.minWidth - 1}>
+        <LoginLogoutMenuItem small/>
       </Responsive>
     );
   }

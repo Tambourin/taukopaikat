@@ -31,7 +31,6 @@ const placesReducer = (state = defaultState, action) => {
     case ADD_PLACE:
       return { ...state, data: [...state.data, action.place] };
     case UPDATE_PLACE:
-      console.log("reducer: ", action.place);
       return {
         ...state,
         data: state.data.map(place =>

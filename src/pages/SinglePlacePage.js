@@ -7,11 +7,11 @@ import VoteButton from "../components/VoteButton";
 import SinglePlaceAccordion from "../components/singlePlace/SinglePlaceAccordion";
 import CommentBox from "../components/singlePlace/CommentBox";
 import NearByPlaces from "../components/singlePlace/NearByPlaces";
-import ShowOnGoogleMapsButton from "../components/ShowOnGoogleMapsButton";
+import ShowOnGoogleMapsButton from "../components/singlePlace/ShowOnGoogleMapsButton";
 import RatingsGroup from "../components/RatingsGroup";
 import OpenToday from "../components/singlePlace/OpenToday";
 import SinglePlacePageImage from "../components/singlePlace/SinglePlacePageImage";
-import EditButton from "../components/EditButton";
+import EditButton from "../components/singlePlace/EditButton";
 import ServiceIcons from "../components/ServiceIcons";
 
 const SinglePlacePage = ({ id, place, activeGoogleData, initActiveGoogleData, isLoading, loadingErrored, clearActiveGoogleData }) => {
@@ -33,9 +33,6 @@ const SinglePlacePage = ({ id, place, activeGoogleData, initActiveGoogleData, is
       <Segment placeholder loading />
     );    
   }    
-  
-  console.log("activeGoogleData", activeGoogleData);
-  console.log("place ", place);
 
   return ( 
     <>      
@@ -50,9 +47,9 @@ const SinglePlacePage = ({ id, place, activeGoogleData, initActiveGoogleData, is
 
       <SinglePlacePageImage place={place} />
         
-      <Container>
-        
+      <Container>        
         <Segment padded vertical textAlign="center">
+          {place.description ? place.description : null}
           <RatingsGroup votes={place.votes} googleRating={activeGoogleData.googleRating} />
           <VoteButton place={place}/>    
         </Segment>

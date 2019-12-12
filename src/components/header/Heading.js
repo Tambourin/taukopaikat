@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Image, Segment, Responsive, Transition} from "semantic-ui-react";
-import backgroundImage from "../static/background.svg";
-
-//"https://previews.123rf.com/images/petovarga/petovarga1701/petovarga170100009/70455786-flat-vector-cartoon-style-illustration-of-urban-landscape-street-with-cars-skyline-city-office-build.jpg"
+import backgroundImage from "../../static/background.svg";
 
 const containerStyle = {
   position: "relative",
@@ -15,7 +13,7 @@ const containerStyle = {
 const textStyle = {
   position: "absolute",  
   minHeight: 200,
-  top: "14%",
+  top: "20%",
   padding: "0px",
   marginTop: "0px",
   marginLeft: "auto",
@@ -27,8 +25,7 @@ const textStyle = {
 
 const textStyleTablet = {
   ...textStyle,
-  top: "14%",
-  
+  top: "14%",  
   fontSize: "normal",
 }
 
@@ -40,8 +37,8 @@ const textStyleMobile = {
 const headingTexts = [
   "Taukopaikat.fi listaa Suomen parhaat taukopaikat valtateiden varsilta. Etsi seuraava pysähdyspaikka tai äänestä omaa suosikkiasi parhaiden joukkoon.",
   "Vaihtelun tarpeessa? Voit rajata tulokset koskemaan vain ketjuihin kuulumattomat paikat.",
-  "Palkitut. Tilausajokuljettajat ry. valitsee vuosittain parhaan taukopaikan. Mm. nämä löydät rajaamalla haun palkittuihin.",
-  "Näytä vain parhaat. Karttanäkymässä voit sliderillä tiputtaa kartasta huonoksi arvioituja paikkoja pois."
+  "Näytä vain parhaat. Voit tiputtaa liukusäätimellä huonoksi arvioituja paikkoja pois kartalta.",
+  "Tilausajokuljettajat ry. valitsee vuosittain parhaan taukopaikan. Mm. nämä löydät rajaamalla haun palkittuihin."  
 ];
 
 const TEXT_SPEED = 800;
@@ -73,8 +70,7 @@ const Heading = () => {
 
 
   return (
-    <header>  
-                      
+    <header>                      
       <div style={containerStyle}>
         <Image style={{ width: "100%" }} src={backgroundImage} />
         <Responsive as={Segment} basic textAlign="center" style={textStyle} minWidth={Responsive.onlyTablet.minWidth}>

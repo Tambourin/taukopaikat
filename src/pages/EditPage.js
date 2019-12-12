@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { Form, Button, Container, Segment } from "semantic-ui-react";
 import { addPlace, updatePlaceSmartAction } from "../reducers/placesReducer";
 import { withRouter } from "react-router-dom";
-import AddImage from "../components/AddImage";
+import AddImage from "../components/singlePlace/AddImage";
 
 const EditPage = ({ history, addPlace, updatePlaceSmartAction, place, errorMessage }) => {
  
@@ -18,6 +18,8 @@ const EditPage = ({ history, addPlace, updatePlaceSmartAction, place, errorMessa
   const [ isSummerCafeField, setIsSummerCafeField ] = useState(false);
   const [ isGasStationField, setIsGasStationField ] = useState(false);
   const [ isGrillField, setIsGrillField ] = useState(false);
+  const [ isBakeryField, setIsBakeryField ] = useState(false);
+  const [ hasMarketplaceField, setHasMarketplaceField ] = useState(false);
 
   useEffect(() => {
     if(place){
@@ -32,6 +34,7 @@ const EditPage = ({ history, addPlace, updatePlaceSmartAction, place, errorMessa
       setIsSummerCafeField(place.services.isSummerCafe);
       setIsGasStationField(place.services.isGasStation);
       setIsGrillField(place.services.isGrill);
+      setHasMarketplaceField(place.services.hasMarketplace);
     }
   }, [place]);
 
@@ -50,7 +53,9 @@ const EditPage = ({ history, addPlace, updatePlaceSmartAction, place, errorMessa
         isAttraction: isAttractionField,
         isSummerCafe: isSummerCafeField,
         isGasStation: isGasStationField,
-        isGrill: isGrillField
+        isGrill: isGrillField,
+        isBakery: isBakeryField,
+        hasMarketplace: hasMarketplaceField
       }
     };
     let result;
@@ -113,7 +118,11 @@ const EditPage = ({ history, addPlace, updatePlaceSmartAction, place, errorMessa
           <label htmlFor="isGasStation">huoltoasema</label>
           <Form.Checkbox name="isGasStation" checked={isGasStationField} onChange={() => setIsGasStationField(!isGasStationField)} />
           <label htmlFor="isGrill">grilli</label>
-          <Form.Checkbox name="isGrill" checked={isGrillField} onChange={() => setIsGrillField(!isGrillField)} /> 
+          <Form.Checkbox name="isGrill" checked={isGrillField} onChange={() => setIsGrillField(!isGrillField)} />
+          <label htmlFor="isBakery">Leipomo/Konditoria</label>
+          <Form.Checkbox name="isBakery" checked={isBakeryField} onChange={() => setIsBakeryField(!isBakeryField)} />
+          <label htmlFor="hasMarketplace">Tuottajatori</label>
+          <Form.Checkbox name="hasMarketplace" checked={hasMarketplaceField} onChange={() => setHasMarketplaceField(!hasMarketplaceField)} /> 
 
           {place ? addImagesSegment() : null}
 

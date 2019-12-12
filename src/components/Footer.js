@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import { Grid, Image, Icon } from "semantic-ui-react";
 
 const footerStyle = {
@@ -15,7 +16,7 @@ const copyrightStyle = {
   padding: "10px 70px"
 }
 
-const mailtoStyle = { 
+const linkStyle = { 
   color: "inherit", 
   textDecoration: "none" 
 };
@@ -32,17 +33,17 @@ const Footer = () => {
           <h3 style={headerStyle}>Taukopaikat.fi:stä</h3>
           <p>Taukopaikat.fi on riippumaton verkkosivu, joka on syntynyt yksinkertaisesta halusta löytää hauskimmat taukopaikat. Sivu listaa Suomen parhaat taukopaikat valtateiden varsilta. Etsi seuraava pysähdyspaikka tai äänestä omaa suosikkiasi parhaiden joukkoon.</p>
           <h4 style={headerStyle}>Mikä on paras taukopaikka?</h4>
-          <p>Taukopaikkojen järjestys määräytyy Taukopaikat.fi:ssä tehtyjen äänestysten ja käyttäjien Google Mapsissä antamien pisteiden perusteella.</p>    
+          <p>Taukopaikkojen järjestys määräytyy Taukopaikat.fi:ssä tehtyjen äänestysten ja käyttäjien Google Mapsissa antamien pisteiden perusteella.</p>    
         </Grid.Column>
         <Grid.Column width={5}>
-          <a style={mailtoStyle} href="mailto:jirka.hartonen@gmail.com?subject=Taukopaikat.fi yhteydenotto">
+          <a style={linkStyle} href="mailto:jirka.hartonen@gmail.com?subject=Taukopaikat.fi yhteydenotto">
             <Icon circular name="mail" />
-            Ota yhteyttä, ehdota muutosta, ehdota taukopaikkaa!
+            Ota yhteyttä. Ehdota muutosta tai uutta taukopaikkaa.
           </a>
+          <p></p>
+          <Link  to="/privacy">Tietosuojakäytäntö</Link>
         </Grid.Column>
       </Grid>
-        
-      
       <div style={copyrightStyle}> 
         © 2019 Olavi Hartonen 
         <Image  src="https://developers.google.com/maps/documentation/images/powered_by_google_on_white.png" />

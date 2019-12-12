@@ -21,7 +21,6 @@ const PlacesView = ({
   percentageOfPlacesToView,
   numberOfPlacesToView
 }) => {
-
   if (isLoading) {
     return (
       <Segment placeholder>
@@ -40,8 +39,7 @@ const PlacesView = ({
         <p>Haku ei tuottanut tuloksia</p>
       </Segment>
     );
-  }    
-
+  }
   return (
     <>
       {showOnMap ? (
@@ -58,10 +56,10 @@ const PlacesView = ({
         <>
           <ChooseArrangeBy />
           <PlacesList
-            places={orderPlaces(
-              limitNumberOfPlacesByNumber(places, numberOfPlacesToView),
-              arrangeBy
-            )}            
+            places={limitNumberOfPlacesByNumber(
+              orderPlaces(places, arrangeBy),
+              numberOfPlacesToView
+            )}
           />
         </>
       )}

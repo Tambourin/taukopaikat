@@ -2,6 +2,7 @@ import React from "react";
 import RatingsGroup from "../RatingsGroup";
 import RoadNumber from "../RoadNumber";
 import PlaceImage from "../PlaceImage";
+import ServiceIcons from "../ServiceIcons";
 
 const InfoWindowContent = ({ activeMarker, history }) => {
   return (
@@ -24,6 +25,7 @@ const InfoWindowContent = ({ activeMarker, history }) => {
         votes={activeMarker.votes}
         googleRating={activeMarker.googleRating}
       />
+      <ServiceIcons size="mini" place={activeMarker} noTitle />
     </div>
   );
 }

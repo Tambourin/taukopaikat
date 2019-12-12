@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef } from "react";
 import { Segment, Checkbox, Icon, Popup, Grid, Form } from "semantic-ui-react";
 
 const ChooseServices = ({
@@ -9,10 +9,20 @@ const ChooseServices = ({
   setIsAttraction,
   setIsSummerCafe,
   setIsGasStation,
-  setIsGrill
+  setIsGrill,
+  setHasMarketplace
 }) => {
+  const ref = useRef();
+
+  const scrollToDiv = () => {
+    ref.current.scrollIntoView({
+      behavior: "smooth"
+    });
+  }
+
   return (
-    <Segment>      
+    <div ref={ref} onClick={scrollToDiv}>
+      <Segment>      
       <Form>
         <Form.Field>
           <label>
@@ -60,7 +70,7 @@ const ChooseServices = ({
             </Grid.Column>
             <Grid.Column>
             <Checkbox
-                label="Huoltoasema"
+                label="Polttoainetta"
                 checked={filter.isGasStation}
                 onClick={setIsGasStation}
               />
@@ -73,14 +83,15 @@ const ChooseServices = ({
             </Grid.Column>
             <Grid.Column>
               <Checkbox 
-                label="Joku vielä" 
-                checked={filter.isGrill} 
-                onClick={setIsGrill} />
+                label="Tuottajatori" 
+                checked={filter.hasMarketplace} 
+                onClick={setHasMarketplace} />
             </Grid.Column>
           </Grid>
         </Form.Field>
       </Form>
     </Segment>
+    </div>    
   );
 };
 

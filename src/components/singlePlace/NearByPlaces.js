@@ -10,17 +10,26 @@ const NearByPlaces = ({ nearByPlaces, place }) => {
   return (
     <div>
       <Header as="h3">
-        Vaihtoehtoja lähellä paikkaa {place.name} (max {MAX_DIST_FOR_NEARBY_PLACES} km)
+        Vaihtoehtoja lähellä paikkaa {place.name} (max{" "}
+        {MAX_DIST_FOR_NEARBY_PLACES} km)
       </Header>
-      {nearByPlaces.lenght > 0 ? <PlacesList places={nearByPlaces} /> : <div>Ei kohteita</div>}
+      {nearByPlaces.length > 0 ? (
+        <PlacesList places={nearByPlaces} hideVoteButtons />
+      ) : (
+        <div>Ei kohteita</div>
+      )}
     </div>
-  )
-}
+  );
+};
 
 const mapStateToProps = (state, ownProps) => {
   return {
-    nearByPlaces: nearbyPlacesSelector(ownProps.place, state.places.data, MAX_DIST_FOR_NEARBY_PLACES)
-  }
-} 
+    nearByPlaces: nearbyPlacesSelector(
+      ownProps.place,
+      state.places.data,
+      MAX_DIST_FOR_NEARBY_PLACES
+    )
+  };
+};
 
 export default connect(mapStateToProps)(NearByPlaces);

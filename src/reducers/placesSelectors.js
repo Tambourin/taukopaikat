@@ -25,14 +25,14 @@ export const placeWithMostVotes = places => {
 };
 
 const orderByVotesAndGoogle = (place1 , place2) => {
-  if(place1.votes.length && place2.votes.length) {
+  if(place1.votes.length > 0 && place2.votes.length > 0) {
     if(place2.votes.length !== place1.votes.length){
       return place2.votes.length - place1.votes.length;
     }
     return place2.googleRating - place1.googleRating;      
-  } else if (place2.votes.length) {
+  } else if (place2.votes.length > 0) {
     return 1;
-  } else if (place1.votes.length) {
+  } else if (place1.votes.length > 0) {
     return -1;
   } else {
     return place2.googleRating - place1.googleRating;
@@ -85,17 +85,19 @@ export const nearbyPlacesSelector = (place, places, maxDistance) => {
   if(!places || !place) {
     return null;    
   }  
+
   return places.filter(p => {
-    if (!p.coordinates || !place.coordinates) {
+    if (!p.coordinates || !place.coordinates) {      
       return null;
     }
+
     const dist = getDistance(
       place.coordinates.lat, 
       place.coordinates.lng, 
       p.coordinates.lat, 
       p.coordinates.lng);
     return dist < maxDistance && dist !== 0;
-    });
+  });
 }
 
 export const limitNumberOfPlacesByPercent = (places, percentage) => {
@@ -108,7 +110,8 @@ export const limitNumberOfPlacesByNumber = (places, numberofPlaces) => {
 }
 
 export const getFilteredPlaces = (places, filter) => {
-  const placesFilter = place => {
+  
+  const placesFilter = place => {    
     if (
       (filter.highway !== place.highway && filter.highway !== "all") ||
       (filter.doesNotBelongToChain === true &&
@@ -121,7 +124,8 @@ export const getFilteredPlaces = (places, filter) => {
         place.services.isAttraction === false) ||
       (filter.isSummerCafe === true && place.services.isSummerCafe === false) ||
       (filter.isGasStation === true && place.services.isGasStation === false) ||
-      (filter.isGrill === true && place.services.isGrill === false)
+      (filter.isGrill === true && place.services.isGrill === false) ||
+      (filter.hasMarketPlace === true && !place.services.hasMarketplace)
     ) {
       return false;
     }
