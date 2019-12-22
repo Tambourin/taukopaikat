@@ -1,7 +1,7 @@
 import React from "react";
 import { Image } from "semantic-ui-react";
-import { BASE_IMAGE_URL } from "../constants/constants";
 
+const BASE_IMAGE_URL = "https://res.cloudinary.com/drugozaqq/image/upload/";
 const DEFAULT_IMAGE = "placeholder.png";
 
 const PlaceImage = ({ imageId, googleImageId, height, big}) => {

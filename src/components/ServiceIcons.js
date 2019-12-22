@@ -18,7 +18,7 @@ const ServiceIcons = ({ place, size, noTitle }) => {
       {place.services.hasBeenAvarded ? <Label><Image spaced="right" src={awardedImage} title="Palkittu" /> {noTitle ? null : "Palkittu"}</Label> : null}
       {place.services.isAttraction ? <Label><Image spaced="right" src={attractionImage} title="Nähtävyys"/> {noTitle ? null : "Nähtävyys"}</Label> : null}
       {place.services.isSummerCafe ? <Label><Image spaced="right" src={coffeeImage} title="Kesäkahvila"/> {noTitle ? null : "Kesäkahvila"}</Label> : null}
-      {place.services.isGasStation ? <Label><Image spaced="right" src={gasStationImage} title="Huoltoasema" /> {noTitle ? null : "Huoltoasema"}</Label>: null}
+      {place.services.isGasStation ? <Label><Image spaced="right" src={gasStationImage} title="Polttoainetta" /> {noTitle ? null : "Polttoainetta"}</Label>: null}
       {place.services.isGrill ? <Label><Image spaced="right" src={grillImage} title="Grilli"/> {noTitle ? null : "Grilli"}</Label> : null}
       {place.services.isBakery ? <Label><Image spaced="right" src={bakeryImage} title="Leipomo/Konditoria"/> {noTitle ? null : "Leipomo"}</Label> : null}
       {place.services.hasMarketplace ? <Label><Image spaced="right" src={marketImage} title="Tuottajatori"/> {noTitle ? null : "Tuottajatori"}</Label> : null}
