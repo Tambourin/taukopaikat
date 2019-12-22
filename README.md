@@ -1,6 +1,10 @@
 ![introductionary image showing screen captures of application](https://res.cloudinary.com/drugozaqq/image/upload/v1577024167/info_kjv5vf.png)
 
+##Introduction
+
 Taukopaikat is a **single page application** that lists gas stations, coffees, grills and other rest places along Finnish motorways. The idea is to offer more effective service for users to find places that really are worth a visit. Places are arranged based on their score in Taukopaikat and Google Maps and can be filtered based on a few criteria. Users can vote, comment and post photos of their favorite places. Users are allowed to vote only one place per highway. This approach is chosen to find the best gems. A slider is used in the map view to filter out not so great places.
+
+##Tech
 
 The app uses **React -library** for frontend while backend runs on **Node.js**. Global state is managed with **Redux**, with the help of Redux-Thunk to make async calls to backend from the action creators. Component-specific state is managed with **useState-hooks** within the components.
 
@@ -17,4 +21,4 @@ Application is running at https://www.taukopaikat.fi/
 This repository has the React-app. Backend repository is named taukopaikat-backend.
 
 ******************************
-Työaikakirjanpito löytyy documents-hakemistosta.
+Taukopaikat on harjoitustyö Full stack Open 2019 -kurssille. Työaikakirjanpito löytyy osoitteesta: https://1drv.ms/b/s!AiOVJy47HbkDjdxZiiqiU0fK-1iPYA?e=5yj0bH
